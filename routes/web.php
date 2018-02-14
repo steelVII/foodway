@@ -11,6 +11,18 @@
 |
 */
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', function () {
-    return view('welcome');
+
+    return view('homepage.mainpage');
+
 });
+
+Route::get('/tasks', 'TasksController@index');
+
+Route::get('/tasks/{task}', 'TasksController@show');
+
+Route::get('/about', 'AboutController@index');

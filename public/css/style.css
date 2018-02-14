@@ -1,0 +1,130 @@
+html, body {
+
+    font-family: 'Roboto', 'Open Sans', sans-serif !important;
+
+}
+
+.row div[class^="col-"] {
+
+    padding: 15px;
+    box-sizing: border-box;
+
+}
+
+nav.navbar.navbar-default.navbar-fixed-top.be-top-header {
+
+    position: relative;
+
+}
+
+.container.margin-top {
+
+margin-top: 5%;
+
+}
+
+.container-fluid {
+
+    padding: 0;
+
+}
+
+.homepage-banner {
+
+    height: 82.5vh;
+    background: url("/assets/img/gallery/foodway-banner-chged-to-fullscreen.jpg");
+    background-size: cover;
+    display: Flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.homepage-banner > .container {
+
+    text-align: center;
+
+}
+
+.homepage-banner h1.banner-title {
+
+    font-size:6.75vmin;
+    color:#fff;
+    margin-bottom: 20px;
+
+}
+
+.container-fluid.find-out-more {
+
+    background: url("/assets/img/gallery/Foodway-Monthly-Meal-Subcription-01.jpg");
+    background-size: cover;
+    
+}
+
+.container-fluid.find-out-more .row {
+
+    height: 65vh;
+    display: Flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.container-fluid.order-step {
+
+    padding: 30px 15px 15px;
+
+}
+
+.container-fluid.order-step .row .col-md-4 {
+
+    padding: 15px;
+    text-align: center;
+
+}
+
+.container-fluid.mobile-app{
+
+    background: url("/assets/img/gallery/mobile-app.jpg");
+    background-size: cover;
+    
+}
+
+
+.container-fluid.mobile-app .row {
+
+    height: 50vh;
+    display: Flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+footer {
+
+    min-height: 40vh;
+    background: url(https://www.foodway.my/wp-content/themes/foodpicky/images/foodpicky/dark-pattern.jpg);
+    background-repeat: repeat;
+    padding: 16px 12px;
+
+}
+
+footer .col-title {
+
+    color:#fff;
+
+}
+
+@media (min-width: 992px) {
+
+.navbar-expand-lg .navbar-collapse{
+
+    justify-content: flex-end;
+
+}
+
+.mr-auto, .mx-auto {
+    margin-right: 5%!important;
+}
+
+}
