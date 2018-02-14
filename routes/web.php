@@ -15,6 +15,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::middleware(['isadmin'])->group(function () {
+
+    Route::get('/admin', 'AdminController@index')->name('admin');
+
+});
+
 Route::get('/', function () {
 
     return view('homepage.mainpage');
