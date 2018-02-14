@@ -10,10 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/util.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <!-- Scripts & Styles -->
+    @yield ('login_logout_head')
+
 </head>
 <body>
     <div id="app">
