@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-sm-6">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-              <div class="panel-heading panel-heading-divider">Registration Form<span class="panel-subtitle">Register a new Restaurant service</span></div>
+              <div class="panel-heading panel-heading-divider">New Restaurant<span class="panel-subtitle">Add a new Restaurant</span></div>
               <div class="panel-body">
                 <form method="POST" action="/admin/restaurants" data-parsley-validate="" novalidate="">
 
