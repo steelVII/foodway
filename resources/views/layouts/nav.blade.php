@@ -5,9 +5,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -31,8 +31,10 @@
           {{ Auth::user()->name }}
             </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
+          @if (Auth::user()->acc_type == '1')
+          <a class="dropdown-item" href="{{ route('admin') }}">Dashboard</a>
           <div class="dropdown-divider"></div>
+          @endif
           <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                   Logout

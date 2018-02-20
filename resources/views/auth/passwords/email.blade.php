@@ -1,4 +1,4 @@
-@extends('backend.backendmaster')
+@extends('backend.login_register_page')
 
 @section('login_logout_head')
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
@@ -10,6 +10,9 @@
 <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                    <div class="row text-center m-b-15">
+                            <img src="/assets/img/logo.png" width="50%" alt="">
+                    </div>
                 <form class="login100-form validate-form" method="POST" action="{{ route('password.email')  }}">
                         {{ csrf_field() }}
                     <span class="login100-form-title p-b-33">
