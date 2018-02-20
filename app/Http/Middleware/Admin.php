@@ -22,6 +22,6 @@ class Admin
             return $next($request);
         }
 
-        abort(404);
+        return redirect('/');
     }
 }

@@ -15,12 +15,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware(['isadmin'])->group(function () {
-
-    Route::get('/admin', 'AdminController@index')->name('admin');
-
-});
-
 Route::get('/', function () {
 
     return view('homepage.mainpage');
@@ -28,3 +22,34 @@ Route::get('/', function () {
 });
 
 Route::get('/about', 'AboutController@index');
+
+//Admin Backend
+Route::middleware(['isadmin'])->group(function () {
+
+    Route::prefix('admin')->group(function () {
+        
+        //Admin Dashboard
+        Route::get('/', 'AdminController@index')->name('admin');
+
+        //Admin Restuarants View
+        Route::get('/restaurants','RestaurantsController@index')->name('restaurants');
+        Route::get('restaurants/add', 'RestaurantsController@add')->name('add_restaurant');
+        Route::get('/restaurants/{id}',function($id) {
+
+            return view('backend.Restaurants.restaurants',[
+
+                'id' => $id
+
+            ]);
+
+        });
+
+        //Admin Food Categories View
+        Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');
+
+        //Admin Registered Users
+        Route::get('users', 'UsersController@index')->name('users');
+
+    });  
+
+});

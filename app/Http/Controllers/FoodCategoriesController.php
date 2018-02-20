@@ -14,7 +14,9 @@ class FoodCategoriesController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('backend.Food_Category.food_categories');
+
     }
 
     /**

@@ -14,7 +14,15 @@ class RestaurantsController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('backend.Restaurants.restaurants');
+        
+    }
+
+    public function add() {
+
+        return view('backend.Restaurants.add_restaurants');
+
     }
 
     /**
