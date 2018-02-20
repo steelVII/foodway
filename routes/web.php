@@ -32,9 +32,10 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('/', 'AdminController@index')->name('admin');
 
         //Admin Restuarants View
-        Route::get('/restaurants','RestaurantsController@index')->name('restaurants');
-        Route::get('restaurants/add', 'RestaurantsController@add')->name('add_restaurant');
-        Route::get('/restaurants/{id}',function($id) {
+        Route::get('restaurants','RestaurantsController@index')->name('restaurants');
+        Route::get('restaurants/add', 'RestaurantsController@create')->name('add_restaurant');
+        Route::post('restaurants', 'RestaurantsController@store');
+        Route::get('restaurants/{id}',function($id) {
 
             return view('backend.Restaurants.restaurants',[
 
@@ -46,9 +47,13 @@ Route::middleware(['isadmin'])->group(function () {
 
         //Admin Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');
+        Route::get('food_categories/add', 'FoodCategoriesController@create')->name('add_foodcategories');
+        Route::post('food_categories/add_category','FoodCategoriesController@store');
 
         //Admin Registered Users
         Route::get('users', 'UsersController@index')->name('users');
+        Route::get('user/{id}','UsersController@edit')->name('user');
+        Route::patch('user/{id}','UsersController@update');
 
     });  
 

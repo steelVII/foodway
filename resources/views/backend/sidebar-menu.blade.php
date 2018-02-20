@@ -15,7 +15,7 @@
                     <li class="parent"><a href="#"><i class="icon mdi mdi-pizza"></i><span>Food Categories</a>
                         <ul class="sub-menu">
                              <li><a href="{{route('foodcategories')}}">View Categories</a></li>
-                            <li><a href="#">Add New Category</a></li>
+                            <li><a href="{{ route('add_foodcategories') }}">Add New Category</a></li>
                         </ul>
                     </li>
                     <li class="divider">Admin Options</li>

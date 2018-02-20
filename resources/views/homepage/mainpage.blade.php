@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="homepage-banner">
             <div class="container">
-                <h1 class="banner-title">Search Restaurants Near Your Location</h1>
+                <h1 class="banner-title">Search Restaurants Near Your Locationsssssss</h1>
                 <img src="http://azexo.com/foodpicky/wp-content/uploads/2016/09/steps.png" alt="steps">
             </div>
         </div>

@@ -1,12 +1,15 @@
 @extends ('backend.backendmaster')
 
+@section('title')
+    Users
+@endsection
+
 @section('content')
-<div class="main-content container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default panel-table">
-                    <div class="panel-heading">Food Categories
-                        <div class="tools dropdown"><span class="icon mdi mdi-download"></span><a href="#" type="button" data-toggle="dropdown" class="dropdown-toggle"><span class="icon mdi mdi-more-vert"></span></a>
+                    <div class="panel-heading">All Users
+                        <div class="tools dropdown"><a href="#" type="button" data-toggle="dropdown" class="dropdown-toggle"><span class="icon mdi mdi-more-vert"></span></a>
                             <ul role="menu" class="dropdown-menu pull-right">
                                 <li><a href="#">Action</a></li>
                                 <li><a href="#">Another action</a></li>
@@ -34,26 +37,32 @@
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1"
                                                     aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 205px;">Rendering engine</th>
+                                                    style="width: 205px;">User ID</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1"
                                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                    style="width: 253px;">Browser</th>
+                                                    style="width: 253px;">Admin</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Platform(s)</th>
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Username</th>    
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 173px;">Engine version</th>
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Email</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 130px;">CSS grade</th>
-                                            </tr>
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Option</th>
+                                                </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 1.0</td>
-                                                <td>Win 98+ / OSX.2+</td>
-                                                <td class="center">1.7</td>
-                                                <td class="center">A</td>
-                                            </tr>
+                                            @foreach ($users as $user)
+                                                <tr class="gradeA odd" role="row">
+                                                    <td class="sorting_1">{{ $user->id }}</td>
+                                                    @if ($user->acc_type == 1)
+                                                        <td>Yes</td>
+                                                    @else
+                                                        <td>-</td>
+                                                    @endif
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td><a href="user/{{ $user->id }}" class="btn btn-primary">Edit</a></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -87,5 +96,4 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection

@@ -1,7 +1,10 @@
 @extends ('backend.backendmaster')
 
+@section('title')
+    Food Categories
+@endsection
+
 @section('content')
-<div class="main-content container-fluid">
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default panel-table">
@@ -34,26 +37,19 @@
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1"
                                                 aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 205px;">Rendering engine</th>
+                                                style="width: 25%;">#</th>
                                             <th class="sorting" tabindex="0" aria-controls="table1"
                                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 253px;">Browser</th>
-                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Platform(s)</th>
-                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 173px;">Engine version</th>
-                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 130px;">CSS grade</th>
+                                                style="width: 75%;">Category</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($food_cat as $cat)
                                         <tr class="gradeA odd" role="row">
-                                            <td class="sorting_1">Gecko</td>
-                                            <td>Firefox 1.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td class="center">1.7</td>
-                                            <td class="center">A</td>
-                                        </tr>
+                                                <td class="sorting_1">{{ $cat->id }}</td>
+                                                <td>{{ $cat->category_name }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -87,5 +83,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

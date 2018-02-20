@@ -1,22 +1,41 @@
 @extends ('backend.backendmaster')
 
-@section('content')
-    
-    <h2>Add Restaurant</h2>
+@section('title')
+    Add Restaurant
+@endsection
 
+@section('content')
+<div class="row">
     <div class="col-sm-6">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
               <div class="panel-heading panel-heading-divider">Registration Form<span class="panel-subtitle">Register a new Restaurant service</span></div>
               <div class="panel-body">
-                <form action="#" data-parsley-validate="" novalidate="">
+                <form method="POST" action="/admin/restaurants" data-parsley-validate="" novalidate="">
+
+                    {{ csrf_field() }}
+
                   <div class="form-group">
                     <label>Restaurant Name</label>
-                    <input type="text" name="nick" parsley-trigger="change" required="" placeholder="Enter user name" autocomplete="off" class="form-control">
+                    <input type="text" name="restaurant_name" parsley-trigger="change" required="" placeholder="Enter Restaurant Name" autocomplete="off" class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Email address</label>
                     <input type="email" name="email" parsley-trigger="change" required="" placeholder="Enter email" autocomplete="off" class="form-control">
                   </div>
+                  <div class="form-group">
+                      <label>Phone Number</label>
+                      <input type="tel" name="phone_number" parsley-trigger="change" required="" placeholder="Enter Phone Number" autocomplete="off" class="form-control">
+                    </div>
+                  <div class="form-group">
+                      <label>Food Categories Served</label>
+                      <select class="form-control js-example-basic-multiple" name="food_categories[]" id="cat_served" multiple="multiple">
+
+                        @foreach ($food_cats as $cat)
+                            <option value="{{ $cat->category_name}}">{{ $cat->category_name}}</option>
+                        @endforeach
+
+                      </select>
+                    </div>
                   <div class="form-group">
                         <label class="col-sm-6 control-label">Custom Button File Input</label>
                         <div class="col-sm-6">
@@ -32,5 +51,5 @@
               </div>
             </div>
           </div>
-
+        </div>
 @endsection

@@ -15,7 +15,9 @@ class FoodCategoriesController extends Controller
     public function index()
     {
 
-        return view('backend.Food_Category.food_categories');
+        $food_cat = FoodCategories::all();
+
+        return view('backend.Food_Category.food_categories',compact('food_cat'));
 
     }
 
@@ -26,7 +28,7 @@ class FoodCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.Food_Category.add_food_category');
     }
 
     /**
@@ -37,7 +39,16 @@ class FoodCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $food = new FoodCategories();
+
+        FoodCategories::create([
+
+            'category_name' => request('food-category')
+
+        ]);
+
+        return back();
+
     }
 
     /**
