@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Restaurants;
 use App\FoodCategories;
+use App\FoodLists;
 use Illuminate\Http\Request;
 
 class RestaurantsController extends Controller
@@ -20,6 +21,16 @@ class RestaurantsController extends Controller
 
         return view('backend.Restaurants.restaurants', compact('restaurants'));
         
+    }
+
+    public function view($id) {
+
+        $restaurant = Restaurants::find($id);
+
+        $menus = FoodLists::select('id','food_name','restaurant_name','food_categories')->where('restaurant_id', $id)->paginate(10);
+
+        return view('backend.Restaurants.view_restaurant', compact('restaurant','menus'));
+
     }
 
     /**

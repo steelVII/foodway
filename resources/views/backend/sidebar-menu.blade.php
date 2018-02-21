@@ -4,9 +4,10 @@
             <div class="left-sidebar-content">
                 <ul class="sidebar-elements">
                     <li class="divider">Menu</li>
-                    <li><a href="{{url('admin')}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
-                    </li>
-                    <li class="parent"><a href="#"><i class="icon mdi mdi-local-dining"></i><span>Restaurants</a>
+                    <li><a href="{{url('admin')}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
+                    <li><a href="#"><i class="icon mdi mdi-plus-circle"></i><span>Orders</span></a></li>
+                    <li class="parent">
+                        <a href="#"><i class="icon mdi mdi-local-dining"></i><span>Restaurants</a>
                         <ul class="sub-menu">
                              <li><a href="{{route('restaurants')}}">View Restaurants</a></li>
                             <li><a href="{{route('add_restaurant')}}">Add New Restaurant</a></li>
@@ -28,6 +29,11 @@
                     <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Users</span></a>
                         <ul class="sub-menu">
                             <li><a href="{{ route('users') }}">View All Users</a></li>
+                        </ul>
+                    </li>
+                    <li class="parent"><a href="#"><i class="icon mdi mdi-local-shipping"></i><span>Vendors</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="#">View All Vendors</a></li>
                         </ul>
                     </li>
                 </ul>

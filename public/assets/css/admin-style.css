@@ -5,6 +5,13 @@
     object-fit: cover;
 }
 
+.single-restaurant.panel-cover-image img {
+    width: 100%;
+    max-height: 225px;
+    min-height: 225px;
+    object-fit: cover;
+}
+
 img#preview {
 
 width:100%;

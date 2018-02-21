@@ -35,6 +35,7 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('restaurants','RestaurantsController@index')->name('restaurants');
         Route::get('restaurants/add', 'RestaurantsController@create')->name('add_restaurant');
         Route::post('restaurants', 'RestaurantsController@store');
+        Route::get('restaurant/{id}', 'RestaurantsController@view')->name('view_restaurant');
 
         //Admin Food Listing
         Route::get('food_list', 'FoodListsController@index')->name('foodlist');

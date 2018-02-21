@@ -16,6 +16,9 @@
                     <div class="panel-body">
                         <p>{{ $restaurant->food_categories }}</p>
                     </div>
+                    <div class="text-right" style="padding:0 12px 12px;">
+                        <a href="restaurant/{{ $restaurant->id }}" class="btn btn-space btn-primary">View</a>
+                    </div>
                 </div>
             </div>
         @endforeach
