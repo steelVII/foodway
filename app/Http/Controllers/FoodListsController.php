@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\FoodLists;
+use App\FoodCategories;
+use App\Restaurants;
 use Illuminate\Http\Request;
 
 class FoodListsController extends Controller
@@ -14,7 +16,9 @@ class FoodListsController extends Controller
      */
     public function index()
     {
-        //
+        $food_lists = FoodLists::paginate(10);
+
+        return view('backend.Food_List.food_list',compact('food_lists'));
     }
 
     /**
@@ -24,7 +28,12 @@ class FoodListsController extends Controller
      */
     public function create()
     {
-        //
+
+        $restaurants = Restaurants::orderBy('restaurant_name', 'ASC')->get();
+        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
+
+        return view('backend.Food_list.add_food_list', compact('restaurants','food_cats'));
+
     }
 
     /**
@@ -35,7 +44,34 @@ class FoodListsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $restaurant_id = Restaurants::select('id')->where('restaurant_name', request('restaurant'))->value('id');
+
+        $cat_list = null;
+        $food_cats = request('food_categories');
+
+        foreach($food_cats as $cat) {
+
+            if ($cat === end($food_cats)) {
+                $cat_list .= $cat;
+                break;
+            }
+
+            $cat_list .= $cat . ", ";
+
+        }
+        
+        FoodLists::create([
+
+            'food_name' => request('food-list-item'),
+            'restaurant_id' => $restaurant_id,
+            'restaurant_name' => request('restaurant'),
+            'food_categories' => $cat_list,
+
+        ]);
+
+        return redirect('admin/food_list');
+
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateRestaurantsTable extends Migration
             $table->text('food_categories');
             $table->string('email')->unique();
             $table->string('phone_num');
+            $table->text('restaurant_image');
             $table->timestamps();
         });
     }

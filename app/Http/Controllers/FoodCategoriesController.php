@@ -15,7 +15,7 @@ class FoodCategoriesController extends Controller
     public function index()
     {
 
-        $food_cat = FoodCategories::all();
+        $food_cat = FoodCategories::paginate(10);
 
         return view('backend.Food_Category.food_categories',compact('food_cat'));
 

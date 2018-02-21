@@ -35,15 +35,11 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('restaurants','RestaurantsController@index')->name('restaurants');
         Route::get('restaurants/add', 'RestaurantsController@create')->name('add_restaurant');
         Route::post('restaurants', 'RestaurantsController@store');
-        Route::get('restaurants/{id}',function($id) {
 
-            return view('backend.Restaurants.restaurants',[
-
-                'id' => $id
-
-            ]);
-
-        });
+        //Admin Food List View
+        Route::get('food_list', 'FoodListsController@index')->name('foodlist');
+        Route::get('food_list/add', 'FoodListsController@create')->name('add_foodlist');
+        Route::post('food_list/add_list', 'FoodListsController@store');
 
         //Admin Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');

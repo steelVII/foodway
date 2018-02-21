@@ -1,5 +1,12 @@
 .col-md-4 .panel-cover-image img {
-
     width: 100%;
+    max-height: 250px;
+    min-height: 250px;
+    object-fit: cover;
+}
+
+img#preview {
+
+width:100%;
 
 }

@@ -10,7 +10,7 @@
             <div class="panel panel-default panel-border-color panel-border-color-primary">
               <div class="panel-heading panel-heading-divider">New Restaurant<span class="panel-subtitle">Add a new Restaurant</span></div>
               <div class="panel-body">
-                <form method="POST" action="/admin/restaurants" data-parsley-validate="" novalidate="">
+                <form method="POST" action="/admin/restaurants" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
 
@@ -37,19 +37,34 @@
                       </select>
                     </div>
                   <div class="form-group">
-                        <label class="col-sm-6 control-label">Custom Button File Input</label>
-                        <div class="col-sm-6">
-                          <input type="file" name="file-2" id="file-2" data-multiple-caption="{count} files selected" multiple="" class="inputfile">
-                          <label for="file-2" class="btn-primary"> <i class="mdi mdi-upload"></i><span>Browse files...</span></label>
-                        </div>
+                      <label class="control-label">Restaurant Image</label>         
+                      <input type="file" name="restaurantimage" accept="image/*" multiple="multiple" onchange="loadFile(event)">
+                      <div class="row">
+                          <div class="col-sm-12"><h5>Preview</h5></div>
+                          <div class="col-sm-8">
+                              <img id="preview"/>
+                          </div>
+                      </div>
                   </div>
                   <p class="text-right">
                     <button type="submit" class="btn btn-space btn-primary">Submit</button>
-                    <button class="btn btn-space btn-default">Cancel</button>
                   </p>
                 </form>
               </div>
             </div>
           </div>
         </div>
+@endsection
+
+@section('page-script')
+    <script>
+        var loadFile = function(event) {
+          var reader = new FileReader();
+          reader.onload = function(){
+            var output = document.getElementById('preview');
+            output.src = reader.result;
+          };
+          reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>
 @endsection

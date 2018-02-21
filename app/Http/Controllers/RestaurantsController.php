@@ -44,6 +44,8 @@ class RestaurantsController extends Controller
     {
         $restaurants = new Restaurants();
 
+        $request->file('restaurantimage')->storeAs('public',$request->file('restaurantimage')->getClientOriginalName());
+
         $cat_list = null;
         $food_cats = request('food_categories');
         
@@ -64,6 +66,7 @@ class RestaurantsController extends Controller
             'food_categories' => $cat_list,
             'email' => request('email'),
             'phone_num' => request('phone_number'),
+            'restaurant_image' => $request->file('restaurantimage')->getClientOriginalName(),
 
         ]);
 

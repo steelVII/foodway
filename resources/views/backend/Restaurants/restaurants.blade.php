@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <div class="panel panel-flat">
                     <div class="panel-cover-image">
-                        <img src="/assets/img/gallery/food1.jpeg" alt="">
+                        <img src="{{ asset('storage/'.$restaurant->restaurant_image) }}" alt="">
                     </div>
                     <div class="panel-heading">{{ $restaurant->restaurant_name }}</div>
                     <div class="panel-body">

@@ -12,6 +12,12 @@
                             <li><a href="{{route('add_restaurant')}}">Add New Restaurant</a></li>
                         </ul>
                     </li>
+                    <li class="parent"><a href="#"><i class="icon mdi mdi-format-list-numbered"></i><span>Food Lists</a>
+                        <ul class="sub-menu">
+                             <li><a href="{{route('foodlist')}}">View List</a></li>
+                            <li><a href="{{ route('add_foodlist') }}">Add To List</a></li>
+                        </ul>
+                    </li>
                     <li class="parent"><a href="#"><i class="icon mdi mdi-pizza"></i><span>Food Categories</a>
                         <ul class="sub-menu">
                              <li><a href="{{route('foodcategories')}}">View Categories</a></li>

@@ -1,14 +1,14 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Food Categories
+    Food List
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default panel-table">
-                <div class="panel-heading">Food Categories
+                <div class="panel-heading">Food Listings
                     <div class="tools dropdown"><a href="#" type="button" data-toggle="dropdown" class="dropdown-toggle"><span class="icon mdi mdi-more-vert"></span></a>
                         <ul role="menu" class="dropdown-menu pull-right">
                             <li><a href="#">Action</a></li>
@@ -35,19 +35,19 @@
                                     role="grid" aria-describedby="table1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 25%;">#</th>
-                                            <th class="sorting" tabindex="0" aria-controls="table1"
-                                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 75%;">Category</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">#</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Food Name</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Restaurant</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($food_cat as $cat)
+                                        @foreach ($food_lists as $list)
                                         <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">{{ $cat->id }}</td>
-                                                <td>{{ $cat->category_name }}</td>
+                                                <td class="sorting_1">{{ $list->id }}</td>
+                                                <td>{{ $list->food_name }}</td>
+                                                <td>{{ $list->restaurant_name }}</td>
+                                                <td>{{ $list->food_categories }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -56,11 +56,11 @@
                         </div>
                         <div class="row be-datatable-footer">
                             <div class="col-sm-5">
-                                <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $food_cat->firstItem() . " to " . $food_cat->lastItem() . " of " . $food_cat->total() . " entries"; ?></div>
+                                <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $food_lists->firstItem() . " to " . $food_lists->lastItem() . " of " . $food_lists->total() . " entries"; ?></div>
                             </div>
                             <div class="col-sm-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="table1_paginate">
-                                    <?php echo $food_cat->render(); ?>
+                                    <?php echo $food_lists->render(); ?>
                                 </div>
                             </div>
                         </div>

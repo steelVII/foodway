@@ -18,8 +18,8 @@ class CreateFoodListsTable extends Migration
             $table->text('food_name');
             $table->integer('restaurant_id')->unsigned();
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('food_categories');
+            $table->text('restaurant_name');
+            $table->text('food_categories');
             $table->timestamps();
         });
     }
