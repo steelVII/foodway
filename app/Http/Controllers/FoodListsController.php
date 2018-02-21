@@ -32,7 +32,7 @@ class FoodListsController extends Controller
         $restaurants = Restaurants::orderBy('restaurant_name', 'ASC')->get();
         $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
 
-        return view('backend.Food_list.add_food_list', compact('restaurants','food_cats'));
+        return view('backend.Food_List.add_food_list', compact('restaurants','food_cats'));
 
     }
 
