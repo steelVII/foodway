@@ -11,4 +11,10 @@ class FoodLists extends Model
         'food_name','restaurant_id','restaurant_name','food_categories'
 
     ];
+
+    public function restaurant() {
+
+        return $this->belongsTo(Restaurants::class,'restaurant_id');
+
+    }
 }

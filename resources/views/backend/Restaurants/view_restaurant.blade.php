@@ -56,11 +56,11 @@
                                         </thead>
                                         <tbody>
                                             @php ($i = 1)
-                                            @foreach ($menus as $menu)
+                                            @foreach ($menu as $menuitem)
                                                 <tr class="gradeA odd" role="row">
                                                     <td>{{ $i++ }}</td>
-                                                    <td>{{ $menu->food_name }}</td>
-                                                    <td>{{ $menu->food_categories }}</td>
+                                                    <td>{{ $menuitem->food_name }}</td>
+                                                    <td>{{ $menuitem->food_categories }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -69,11 +69,11 @@
                             </div>
                             <div class="row be-datatable-footer">
                                 <div class="col-sm-5">
-                                    <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $menus->firstItem() . " to " . $menus->lastItem() . " of " . $menus->total() . " entries"; ?></div>
+                                    <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $menu->firstItem() . " to " . $menu->lastItem() . " of " . $menu->total() . " entries"; ?></div>
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="table1_paginate">
-                                        <?php echo $menus->render(); ?>
+                                        <?php echo $menu->render(); ?>
                                     </div>
                                 </div>
                             </div>

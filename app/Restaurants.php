@@ -11,4 +11,10 @@ class Restaurants extends Model
         'restaurant_name','food_categories','email','phone_num','restaurant_image'
 
     ];
+
+    public function menu() {
+
+        return $this->hasMany(FoodLists::class,'restaurant_id');
+
+    }
 }
