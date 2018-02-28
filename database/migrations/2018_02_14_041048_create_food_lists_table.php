@@ -15,11 +15,11 @@ class CreateFoodListsTable extends Migration
     {
         Schema::create('food_lists', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('food_name');
+            $table->string('food_name');
             $table->integer('restaurant_id')->unsigned();
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
-            $table->text('restaurant_name');
-            $table->text('food_categories');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->string('restaurant_name');
+            $table->string('food_categories');
             $table->timestamps();
         });
     }

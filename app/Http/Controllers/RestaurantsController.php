@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Restaurants;
 use App\FoodCategories;
+use App\Vendor;
 use Illuminate\Http\Request;
 
 class RestaurantsController extends Controller
@@ -22,10 +23,14 @@ class RestaurantsController extends Controller
         
     }
 
-    public function view($id) {
+    public function restaurant(Restaurants $restaurants, Request $request) {
 
-        $restaurant = Restaurants::find($id);
+        $user = $request->user();
 
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+
+        $restaurant = $restaurants::find($restaurant_id);
         $menu = $restaurant->menu()->paginate(10);
 
         return view('backend.Restaurants.view_restaurant', compact('restaurant','menu'));
@@ -89,9 +94,13 @@ class RestaurantsController extends Controller
      * @param  \App\Restaurants  $restaurants
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurants $restaurants)
+    public function show(Restaurants $restaurants, $id)
     {
-        //
+        $restaurant = $restaurants::find($id);
+
+        $menu = $restaurant->menu()->paginate(10);
+
+        return view('backend.Restaurants.view_restaurant', compact('restaurant','menu'));
     }
 
     /**

@@ -17,4 +17,11 @@ class Restaurants extends Model
         return $this->hasMany(FoodLists::class,'restaurant_id');
 
     }
+
+    public function vendor() {
+
+        return $this->belongsTo(Vendor::class,'vendor_id');
+
+    }
+
 }

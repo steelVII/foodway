@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><img src="/assets/img/logo.png" width="150" alt=""></a>
+<a class="navbar-brand" href="{{url('/')}}"><img src="/assets/img/logo.png" width="150" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -33,6 +33,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           @if (Auth::user()->acc_type == '1')
           <a class="dropdown-item" href="{{ route('admin') }}">Dashboard</a>
+          <div class="dropdown-divider"></div>
+          @elseif (Auth::user()->acc_type == '3')
+          <a class="dropdown-item" href="{{ route('main') }}">Dashboard</a>
           <div class="dropdown-divider"></div>
           @endif
           <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

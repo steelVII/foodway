@@ -1,7 +1,7 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Users
+    Vendors
 @endsection
 
 @section('content')
@@ -37,32 +37,22 @@
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1"
                                                     aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 205px;">User ID</th>
-                                                <th class="sorting" tabindex="0" aria-controls="table1"
-                                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                    style="width: 253px;">Account Type</th>
+                                                    style="width: 205px;">Vendor ID</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Username</th>    
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Restaurant</th>    
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Email</th>
-                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Option</th>
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">User ID</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Options</th>
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($users as $user)
+                                            @foreach ($vendors as $vendor)
                                                 <tr class="gradeA odd" role="row">
-                                                    <td class="sorting_1">{{ $user->id }}</td>
-                                                    @if ($user->acc_type == 1)
-                                                        <td>Admin</td>
-                                                    @elseif ($user->acc_type == 3)
-                                                        <td>Vendor</td>
-                                                    @else
-                                                        <td>Customer</td>
-                                                    @endif
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->email }}</td>
-                                                    <td><a href="user/{{ $user->id }}" class="btn btn-primary">Edit</a></td>
+                                                    <td class="sorting_1">{{ $vendor->id }}</td>
+                                                    <td>{{ $vendor->vendor_name }}</td>
+                                                    <td>{{ $vendor->user_id }}</td>
+                                                    <td><a href="vendor/restaurant/{{ $vendor->restaurant_id }}" class="btn btn-primary">Edit</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -71,11 +61,11 @@
                             </div>
                             <div class="row be-datatable-footer">
                                 <div class="col-sm-5">
-                                    <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $users->firstItem() . " to " . $users->lastItem() . " of " . $users->total() . " entries"; ?></div>
+                                    <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $vendors->firstItem() . " to " . $vendors->lastItem() . " of " . $vendors->total() . " entries"; ?></div>
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="table1_paginate">
-                                        <?php echo $users->render(); ?>
+                                        <?php echo $vendors->render(); ?>
                                     </div>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@ class FoodLists extends Model
 
     public function restaurant() {
 
-        return $this->belongsTo(Restaurants::class,'restaurant_id');
+        return $this->belongsTo(Restaurants::class,'reataurant_id');
 
     }
 }

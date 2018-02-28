@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top be-top-header" style="position:relative;">
     <div class="container-fluid">
-      <div class="navbar-header"><a href="{{ route('admin') }}" class="navbar-brand"></a>
+      <div class="navbar-header"><a href="{{ route('main') }}" class="navbar-brand"></a>
       </div>
       <div class="be-right-navbar">
         <ul class="nav navbar-nav navbar-right be-user-nav">
@@ -32,7 +32,11 @@
             </ul>
           </li>
         </ul>
-        <div class="page-title"><span>Admin</span></div>
+        <div class="page-title"><span>
+          @if (Auth::check()) 
+            {{ ucfirst(Auth::user()->name) }}
+          @endif
+        </span></div>
         <ul class="nav navbar-nav navbar-right be-icons-nav">
           <li class="dropdown"><a href="#" role="button" aria-expanded="false" class="be-toggle-right-sidebar"><span class="icon mdi mdi-settings"></span></a></li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon mdi mdi-notifications"></span><span class="indicator"></span></a>

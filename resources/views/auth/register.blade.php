@@ -130,6 +130,14 @@
                     <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
                         <input id="password-confirm" type="password" class="form-control input100" name="password_confirmation" placeholder="Confirm Password" required>
                     </div>
+
+                    <div class="container-login100-form-btn m-t-20">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="apply-vendor" value="application"> Apply as Vendor
+                            </label>
+                        </div>
+                    </div>
     
                     <div class="container-login100-form-btn m-t-20">
                         <button class="login100-form-btn">

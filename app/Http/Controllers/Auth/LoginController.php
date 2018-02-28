@@ -45,7 +45,12 @@ class LoginController extends Controller
 	    if (Auth::user()->acc_type == '1')
 	    {
 	        return '/admin';
-	    }
+        }
+        
+        elseif (Auth::user()->acc_type == '3')
+        {
+            return '/vendor';
+        }
 
     }
 }

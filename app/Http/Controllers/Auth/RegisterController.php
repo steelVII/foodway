@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Vendor;
+use App\Mail\VendorApplication;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -62,10 +65,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+
+        //Send Notification (Email) to Admin for Vendor Application
+        if(isset($data['apply-vendor'])){
+
+            Mail::to($data['email'])->send(new VendorApplication($data['name'],$data['email']));
+
+        }
+
+        return $user;
     }
 }

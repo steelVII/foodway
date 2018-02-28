@@ -42,9 +42,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php ($i = 1)
                                         @foreach ($food_lists as $list)
                                         <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">{{ $list->id }}</td>
+                                                <td class="sorting_1">{{ $i++ }}</td>
                                                 <td>{{ $list->food_name }}</td>
                                                 <td>{{ $list->restaurant_name }}</td>
                                                 <td>{{ $list->food_categories }}</td>
