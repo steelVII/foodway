@@ -73,7 +73,7 @@ class RegisterController extends Controller
         ]);
 
 
-        //Send Notification (Email) to Admin for Vendor Application
+        //Send Notification (Email) to Admin for Vendor Applications
         if(isset($data['apply-vendor'])){
 
             Mail::to($data['email'])->send(new VendorApplication($data['name'],$data['email']));
