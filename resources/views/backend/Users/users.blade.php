@@ -62,7 +62,12 @@
                                                     @endif
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td><a href="user/{{ $user->id }}" class="btn btn-primary">Edit</a></td>
+                                                    <td>
+                                                        <a href="user/{{ $user->id }}" class="btn btn-primary">Edit</a>
+                                                        @if ($user->vendor_appli == 1)
+                                                            <a href="makevendor/{{ $user->id }}" class="btn btn-success">Edit</a>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

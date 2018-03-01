@@ -8,7 +8,7 @@ class Restaurants extends Model
 {
     protected $fillable = [
 
-        'restaurant_name','food_categories','email','phone_num','restaurant_image'
+        'restaurant_name','vendor_id','vendor_name','email'
 
     ];
 

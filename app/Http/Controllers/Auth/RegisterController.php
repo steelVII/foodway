@@ -66,17 +66,27 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-
-
         //Send Notification (Email) to Admin for Vendor Applications
         if(isset($data['apply-vendor'])){
 
+            $user = User::create([
+                'vendor_appli' => 1,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+
             Mail::to($data['email'])->send(new VendorApplication($data['name'],$data['email']));
+
+        }
+
+        else {
+
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
 
         }
 

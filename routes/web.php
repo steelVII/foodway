@@ -50,6 +50,7 @@ Route::middleware(['isadmin'])->group(function () {
         //Admin Vendors View
         Route::get('vendors','VendorController@index')->name('vendors');
         Route::get('vendor/restaurant/{id}','VendorController@show');
+        Route::get('makevendor/{id}','VendorController@store');
 
         //Admin Registered Users
         Route::get('users', 'UsersController@index')->name('users');

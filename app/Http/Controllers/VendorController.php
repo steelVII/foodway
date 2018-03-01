@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Vendor;
 use App\Restaurants;
 use Illuminate\Http\Request;
@@ -42,9 +43,36 @@ class VendorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+
+        $user = User::find($id);
+        
+        Vendor::create([
+
+            'vendor_name' => $user->name,
+            'user_id' => $id,
+
+        ]);
+
+        $user->acc_type = 3;
+        $user->save();
+
+        $vendor = Vendor::where('user_id', $id)->first();
+
+        Restaurants::create([
+
+            'restaurant_name' =>$user->name,
+            'vendor_id' => $vendor->id,
+            'vendor_name' => $vendor->vendor_name,
+            'email' => $user->email,
+
+        ]);
+
+        $user->vendor_appli= 3;
+        $user->save();
+
+        return back();
     }
 
     /**
