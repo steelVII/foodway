@@ -14,6 +14,9 @@
                     <div class="panel-heading">{{ $restaurant->restaurant_name }}</div>
                     <div class="panel-body">
                         <p>{{ $restaurant->food_categories }}</p>
+                        @if (Auth::check() && Auth::user()->acc_type == '3')
+                            <a href="{{ route('edit_restaurant') }}" class="btn btn-success">Edit Restaurant</a>
+                        @endif
                     </div>
                 </div>
             </div>

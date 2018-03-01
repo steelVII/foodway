@@ -70,6 +70,8 @@ Route::middleware(['isvendor'])->group(function () {
 
         //Vendor Restuarants View
         Route::get('restaurant','RestaurantsController@restaurant')->name('restaurant');
+        Route::get('restaurant/edit','RestaurantsController@edit')->name('edit_restaurant');
+        Route::patch('restaurant/edit/{id}','RestaurantsController@update');
 
         //Vendor Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');
@@ -79,7 +81,7 @@ Route::middleware(['isvendor'])->group(function () {
         //Vendor Food Listing
         Route::get('food_list', 'FoodListsController@singlelist')->name('foodlist');
         Route::get('food_list/add', 'FoodListsController@create')->name('add_foodlist');
-        Route::post('food_list/add_list', 'FoodListsController@store');
+        Route::post('food_list/add_list/{id}', 'FoodListsController@store');
 
     });
 

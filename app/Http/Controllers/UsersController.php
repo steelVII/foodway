@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Restaurants;
+use App\Vendor;
 
 use Illuminate\Http\Request;
 
@@ -31,13 +33,20 @@ class UsersController extends Controller
 
     }
 
-    public function update($id) {
+    public function update($id, Request $request, Restaurants $restaurants) {
 
         $user = User::find($id);
 
-        $user->email = request('email');
+        $vendor_id = Vendor::select('id')->where('user_id', $id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
+        $restaurant = $restaurants::find($restaurant_id);
+
+        $user->email = request('email');
         $user->save();
+
+        $restaurant->email = request('email');
+        $restaurant->save();
 
         return back();
 

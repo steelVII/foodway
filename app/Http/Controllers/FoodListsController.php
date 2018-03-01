@@ -41,13 +41,17 @@ class FoodListsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
 
-        $restaurants = Restaurants::orderBy('restaurant_name', 'ASC')->get();
+        $user = $request->user();
+
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+
         $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
 
-        return view('backend.Food_List.add_food_list', compact('restaurants','food_cats'));
+        return view('backend.Food_List.add_food_list', compact('restaurant','food_cats'));
 
     }
 
@@ -57,10 +61,10 @@ class FoodListsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
 
-        $restaurant_id = Restaurants::select('id')->where('restaurant_name', request('restaurant'))->value('id');
+        $restaurant = Restaurants::find($id);
 
         $cat_list = null;
         $food_cats = request('food_categories');
@@ -79,8 +83,8 @@ class FoodListsController extends Controller
         FoodLists::create([
 
             'food_name' => request('food-list-item'),
-            'restaurant_id' => $restaurant_id,
-            'restaurant_name' => request('restaurant'),
+            'restaurant_id' => $restaurant->id,
+            'restaurant_name' => $restaurant->restaurant_name,
             'food_categories' => $cat_list,
 
         ]);

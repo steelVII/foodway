@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Restaurants;
 use App\FoodCategories;
 use App\Vendor;
@@ -109,9 +110,19 @@ class RestaurantsController extends Controller
      * @param  \App\Restaurants  $restaurants
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurants $restaurants)
+    public function edit(Restaurants $restaurants, Request $request)
     {
-        //
+
+        $user = $request->user();
+
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+
+        $restaurant = $restaurants::find($restaurant_id);
+        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
+
+        return view('backend.Restaurants.edit_restaurant', compact('restaurant','food_cats'));
+
     }
 
     /**
@@ -121,9 +132,58 @@ class RestaurantsController extends Controller
      * @param  \App\Restaurants  $restaurants
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurants $restaurants)
+    public function update(Request $request, Restaurants $restaurants, $id)
     {
-        //
+        $restaurant = $restaurants::find($id);
+
+        $restaurant->restaurant_name = request('restaurant_name');
+
+        $user = $request->user();
+
+        if($user->email !== request('email')) {
+
+            $restaurant->email = request('email');
+
+            $user->email = request('email');
+            $user->save();
+
+        }
+
+        $restaurant->phone_num = request('phone_number');
+
+        $cat_list = null;
+
+        if(request('food_categories')) {
+
+        $food_cats = request('food_categories');
+        
+            foreach($food_cats as $cat) {
+
+                if ($cat === end($food_cats)) {
+                    $cat_list .= $cat;
+                    break;
+                }
+
+                $cat_list .= $cat . ", ";
+
+            }
+
+            $restaurant->food_categories = $cat_list;
+
+         }
+
+        if(request('restaurantimage')) {
+
+            $request->file('restaurantimage')->storeAs('public',$request->file('restaurantimage')->getClientOriginalName());
+
+            $restaurant->restaurant_image = $request->file('restaurantimage')->getClientOriginalName();
+
+        }
+
+        $restaurant->save();
+
+        return redirect(route('restaurant'));
+
     }
 
     /**
