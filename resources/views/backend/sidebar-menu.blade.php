@@ -11,7 +11,6 @@
                         <ul class="sub-menu">
                             @if (Auth::check() && Auth::user()->acc_type == '1') 
                                 <li><a href="{{route('restaurants')}}">View Restaurants</a></li>
-                                <li><a href="{{route('add_restaurant')}}">Add New Restaurant</a></li>
                             @elseif (Auth::check() && Auth::user()->acc_type == '3')
                                 <li><a href="{{route('restaurant')}}">View Restaurant</a></li>
                             @endif
