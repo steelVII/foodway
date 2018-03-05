@@ -1,7 +1,9 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Update/Edit User
+    <div class="page-head">
+        <h2 class="page-head-title">Update/Edit User</h2>
+    </div>
 @endsection
 
 @section('content')

@@ -79,15 +79,37 @@ class FoodListsController extends Controller
             $cat_list .= $cat . ", ";
 
         }
-        
-        FoodLists::create([
 
-            'food_name' => request('food-list-item'),
-            'restaurant_id' => $restaurant->id,
-            'restaurant_name' => $restaurant->restaurant_name,
-            'food_categories' => $cat_list,
+        if(request('foodimage')) {
 
-        ]);
+            FoodLists::create([
+
+                'food_name' => request('food-list-item'),
+                'price' => request('price'),
+                'food_image' => $request->file('foodimage')->getClientOriginalName(),
+                'restaurant_id' => $restaurant->id,
+                'restaurant_name' => $restaurant->restaurant_name,
+                'food_categories' => $cat_list,
+    
+            ]);
+
+            $request->file('foodimage')->storeAs('public/foods',$request->file('foodimage')->getClientOriginalName());
+
+        }
+
+        else{
+
+            FoodLists::create([
+
+                'food_name' => request('food-list-item'),
+                'price' => request('price'),
+                'restaurant_id' => $restaurant->id,
+                'restaurant_name' => $restaurant->restaurant_name,
+                'food_categories' => $cat_list,
+    
+            ]);
+
+        }
 
         return redirect(route('restaurant'));
 
@@ -110,9 +132,14 @@ class FoodListsController extends Controller
      * @param  \App\FoodLists  $foodLists
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodLists $foodLists)
+    public function edit(FoodLists $foodLists, $id)
     {
-        //
+
+        $foodlist = $foodLists::find($id);
+        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
+
+        return view('backend.Food_List.edit_food_list',compact('foodlist','food_cats'));
+
     }
 
     /**
@@ -122,9 +149,56 @@ class FoodListsController extends Controller
      * @param  \App\FoodLists  $foodLists
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FoodLists $foodLists)
+    public function update(Request $request, FoodLists $foodLists, $id)
     {
-        //
+
+        $foodlist = $foodLists::find($id);
+
+        $foodlist->food_name = request('food-list-item');
+        $foodlist->price = request('price');
+
+        if(request('salesprice')) {
+
+            $foodlist->sales_price = request('salesprice');
+
+        } else{
+
+            $foodlist->sales_price = null;
+
+        }
+
+        if(request('food_categories')) {
+
+            $cat_list = null;
+            $food_cats = request('food_categories');
+    
+            foreach($food_cats as $cat) {
+    
+                if ($cat === end($food_cats)) {
+                    $cat_list .= $cat;
+                    break;
+                }
+    
+                $cat_list .= $cat . ", ";
+    
+            }
+
+            $foodlist->food_categories = $cat_list;
+
+        }
+
+        if(request('foodimage')) {
+
+            $foodlist->food_image = $request->file('foodimage')->getClientOriginalName();
+
+            $request->file('foodimage')->storeAs('public/foods',$request->file('foodimage')->getClientOriginalName());
+
+        }
+
+        $foodlist->save();
+
+        return redirect(route('restaurant'));
+
     }
 
     /**
@@ -136,5 +210,11 @@ class FoodListsController extends Controller
     public function destroy(FoodLists $foodLists)
     {
         //
+    }
+
+    public function sort($id){
+
+        $position = FoodList::find($id);
+
     }
 }

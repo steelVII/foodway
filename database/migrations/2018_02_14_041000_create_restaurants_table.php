@@ -22,6 +22,10 @@ class CreateRestaurantsTable extends Migration
             $table->string('food_categories')->nullable();
             $table->string('email')->unique();
             $table->string('phone_num')->nullable();
+            $table->char('postcode',5)->nullable();
+            $table->string('address')->nullable();
+            $table->string('opening_hours')->nullable();
+            $table->string('closing_hours')->nullable();
             $table->string('restaurant_image')->nullable();
             $table->timestamps();
         });

@@ -1,7 +1,9 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Food List
+    <div class="page-head">
+        <h2 class="page-head-title">Food List</h2>
+    </div>
 @endsection
 
 @section('content')
@@ -37,20 +39,44 @@
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">#</th>
                                             <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Food Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Restaurant</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Price</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Sales Price</th>
+                                            @if (Auth::check() && Auth::user()->acc_type == '1')
+                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Restaurant</th>
+                                            @endif
                                             <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
+                                            @if (Auth::check() && Auth::user()->acc_type == '3')
+                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Options</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php ($i = 1)
-                                        @foreach ($food_lists as $list)
-                                        <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">{{ $i++ }}</td>
-                                                <td>{{ $list->food_name }}</td>
-                                                <td>{{ $list->restaurant_name }}</td>
-                                                <td>{{ $list->food_categories }}</td>
-                                            </tr>
-                                        @endforeach
+                                        @if (Auth::check() && Auth::user()->acc_type == '1')
+                                            @foreach ($food_lists as $list)
+                                            <tr class="gradeA odd" role="row">
+                                                    <td class="sorting_1">{{ $i++ }}</td>
+                                                    <td>{{ $list->food_name }}</td>
+                                                    <td>{{ $list->price }}</td>
+                                                    <td>{{ $list->sales_price }}</td>
+                                                    <td>{{ $list->restaurant_name }}</td>
+                                                    <td>{{ $list->food_categories }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            @foreach ($food_lists as $list)
+                                            <tr class="gradeA odd" role="row">
+                                                    <td class="sorting_1">{{ $i++ }}</td>
+                                                    <td>{{ $list->food_name }}</td>
+                                                    <td>{{ $list->price }}</td>
+                                                    <td>{{ $list->sales_price }}</td>
+                                                    <td>{{ $list->food_categories }}</td>
+                                                    <td>
+                                                        <a href="food_list/{{ $list->id }}" class="btn btn-primary">Edit</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

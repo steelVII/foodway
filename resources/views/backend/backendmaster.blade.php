@@ -22,8 +22,10 @@
     <link rel="stylesheet" type="text/css" href="/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script>
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/admin-style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-clockpicker.min.css" type="text/css">
 </head>
 <body>
     <div id="app">
@@ -37,9 +39,9 @@
             </div>
 
 	        <div class="be-content">
-                <div class="page-head">
-                    <h2 class="page-head-title">@yield('title')</h2>
-                </div>
+                
+                @yield('title')
+                
                 <div class="main-content container-fluid">
                     @yield('content')
                 </div>
@@ -55,6 +57,35 @@
             $(document).ready(function() {
                 $('.js-example-basic-multiple').select2();
             });
+
+            var el = document.getElementById('testo');
+            var sortable = Sortable.create(el,{ 
+                dataIdAttr: 'data-id',
+                handle: '.my-handle',
+
+                // Element is chosen
+                onUpdate: function (/**Event*/evt) {
+                    alert(evt.newIndex + 1);  // element index within parent
+                    var url = 'food_list/sort/' + evt.item.getAttribute('data-id');
+                    if (url) {
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            method: "POST",
+                            url: url,
+                            data: {
+                            position: evt.newIndex
+                            }
+                        });
+                    }
+                }
+                
+            });
+
     </script>
 </body>
 </html>

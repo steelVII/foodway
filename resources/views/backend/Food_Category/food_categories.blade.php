@@ -1,7 +1,9 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Food Categories
+    <div class="page-head">
+        <h2 class="page-head-title">Food Categories</h2>
+    </div>
 @endsection
 
 @section('content')

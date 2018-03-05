@@ -1,7 +1,9 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Vendors
+<div class="page-head">
+        <h2 class="page-head-title">Vendors</h2>
+    </div>
 @endsection
 
 @section('content')

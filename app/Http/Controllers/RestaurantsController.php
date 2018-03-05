@@ -6,6 +6,7 @@ use App\User;
 use App\Restaurants;
 use App\FoodCategories;
 use App\Vendor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RestaurantsController extends Controller
@@ -138,6 +139,23 @@ class RestaurantsController extends Controller
 
         $restaurant->restaurant_name = request('restaurant_name');
 
+        if(request('opening')){
+
+            $opening = Carbon::parse(request('opening'));
+
+            $restaurant->opening_hours = $opening->format('H:i');
+
+        }
+
+        if(request('closing')){
+
+            $closing = Carbon::parse(request('closing'));
+
+            $restaurant->closing_hours = $closing->format('H:i');
+
+        }
+
+
         $user = $request->user();
 
         if($user->email !== request('email')) {
@@ -149,7 +167,9 @@ class RestaurantsController extends Controller
 
         }
 
-        $restaurant->phone_num = request('phone_number');
+        if(request('phone_number')) { $restaurant->phone_num = request('phone_number'); }
+        if(request('address')) { $restaurant->address = request('address'); }
+        if(request('postcode')) { $restaurant->postcode = request('postcode'); }
 
         $cat_list = null;
 
@@ -174,9 +194,9 @@ class RestaurantsController extends Controller
 
         if(request('restaurantimage')) {
 
-            $request->file('restaurantimage')->storeAs('public',$request->file('restaurantimage')->getClientOriginalName());
-
             $restaurant->restaurant_image = $request->file('restaurantimage')->getClientOriginalName();
+
+            $request->file('restaurantimage')->storeAs('public',$request->file('restaurantimage')->getClientOriginalName());
 
         }
 

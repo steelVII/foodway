@@ -1,9 +1,5 @@
 @extends ('backend.backendmaster') 
 
-@section('title')
-    {{$restaurant->restaurant_name}}
-@endsection
-
 @section('content') 
     <div class="row">
             <div class="col-md-12">
@@ -11,78 +7,118 @@
                     <div class="single-restaurant panel-cover-image">
                         <img src="{{ asset('storage/'.$restaurant->restaurant_image) }}" alt="">
                     </div>
-                    <div class="panel-heading">{{ $restaurant->restaurant_name }}</div>
+
+                    <div class="panel-heading">
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2 class="page-head-title">{{$restaurant->restaurant_name}}</h2>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                @if (Auth::check() && Auth::user()->acc_type == '3')
+                                    <a href="{{ route('edit_restaurant') }}" class="btn btn-success mr-auto">Edit Restaurant</a>
+                                @endif
+                            </div>
+                        </div>
+                        
+                    </div>
+
                     <div class="panel-body">
-                        <p>{{ $restaurant->food_categories }}</p>
-                        @if (Auth::check() && Auth::user()->acc_type == '3')
-                            <a href="{{ route('edit_restaurant') }}" class="btn btn-success">Edit Restaurant</a>
-                        @endif
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4><i class="icon mdi mdi-home"></i> Address</h4>
+                                <span>{{ $restaurant->address }}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <h4><i class="icon mdi mdi-email"></i> Email</h4>
+                                <p>{{ $restaurant->email }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4><i class="icon mdi mdi-phone"></i> Phone number</h4>
+                                <span>{{ $restaurant->phone_num }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4><i class="icon mdi mdi-pizza"></i> Category</h4>
+                                <p>{{ $restaurant->food_categories }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4><i class="icon mdi mdi-time"></i> Opening Hours</h4>
+                                <p>{{ $restaurant->opening_hours }}</p>
+                            </div> 
+                            <div class="col-md-4">
+                                <h4><i class="icon mdi mdi-time"></i> Closing Hours</h4>
+                                <span>{{ $restaurant->closing_hours }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
     </div>
 
-    <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default panel-table">
-                    <div class="panel-heading">Menu
-                        <div class="tools dropdown"><a href="#" type="button" data-toggle="dropdown" class="dropdown-toggle"><span class="icon mdi mdi-more-vert"></span></a>
-                            <ul role="menu" class="dropdown-menu pull-right">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div id="table1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                            <div class="row be-datatable-header">
-                                <div class="col-sm-6">
-                                    <div class="dataTables_length" id="table1_length"><label>Show <select name="table1_length" aria-controls="table1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div id="table1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="table1"></label></div>
-                                </div>
-                            </div>
-                            <div class="row be-datatable-body">
-                                <div class="col-sm-12">
-                                    <table id="table1" class="table table-striped table-hover table-fw-widget dataTable no-footer"
-                                        role="grid" aria-describedby="table1_info">
-                                        <thead>
-                                            <tr role="row">
-                                                    <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">#</th>
-                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Food Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php ($i = 1)
-                                            @foreach ($menu as $menuitem)
-                                                <tr class="gradeA odd" role="row">
-                                                    <td>{{ $i++ }}</td>
-                                                    <td>{{ $menuitem->food_name }}</td>
-                                                    <td>{{ $menuitem->food_categories }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row be-datatable-footer">
-                                <div class="col-sm-5">
-                                    <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $menu->firstItem() . " to " . $menu->lastItem() . " of " . $menu->total() . " entries"; ?></div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="table1_paginate">
-                                        <?php echo $menu->render(); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row">
+
+    <div class="text-center"><h2>Menu</h2></div>
+
+    <div class="menu-items-holder" id="testo">
+                                            @if (Auth::check() && Auth::user()->acc_type == '1')
+                                                @foreach ($menu as $menuitem)
+
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-flat">
+                                                            <div class="item-img" style="background: url({{ asset('storage/'.$menuitem->food_image) }});">
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="panel-heading">{{ $menuitem->food_name }}</div>
+                                                                <p>Quisque gravida aliquam diam at cursus, quisque laoreet ac lectus a rhoncusac tempus odio.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                @endforeach
+                                            @else
+                                                @foreach ($menu as $menuitem)
+
+                                                <div class="col-md-12" data-id="{{ $menuitem->id }}">
+                                                        <div class="panel panel-flat">
+                                                            <div class="row no-margin">
+                                                                @if($menuitem->food_image != null)
+                                                                    <div class="item-img col-md-3" style="background: url({{ asset('storage/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
+                                                                    </div>
+                                                                @endif
+                                                                <div class="panel-body col-md-9">
+                                                                    <div class="row">
+                                                                        <div class="col-md-8"><div class="panel-heading no-margin">{{ $menuitem->food_name }}</div></div>
+                                                                        <div class="col-md-4 text-right"><i class="icon mdi mdi-swap-vertical my-handle"></i></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12"><p>Lorem Ipsum.</p></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                    
+                                                                        @if($menuitem->sales_price != null)
+
+                                                                            <div class="col-md-4"><s>RM {{ $menuitem->price }}</s> <span class="price"> RM {{ $menuitem->sales_price }}</span></div>
+
+                                                                        @else
+
+                                                                            <div class="col-md-4"><p class="price">RM {{ $menuitem->price }}</p></div>
+
+                                                                        @endif
+
+                                                                        <div class="col-md-4"><p>{{ $menuitem->food_categories }}</p></div>
+                                                                        <div class="col-md-4 text-right">
+                                                                                <a href="food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a>
+                                                                        </div>
+
+                                                                    </div>                                                         
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+    </div>
+</div>
 @endsection

@@ -15,7 +15,11 @@ class CreateFoodListsTable extends Migration
     {
         Schema::create('food_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_pos')->default(0);
             $table->string('food_name');
+            $table->decimal('price',5,2)->nullable();
+            $table->decimal('sales_price',5,2)->nullable();
+            $table->string('food_image')->nullable();
             $table->integer('restaurant_id')->unsigned();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->string('restaurant_name');

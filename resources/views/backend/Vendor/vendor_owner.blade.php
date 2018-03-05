@@ -1,7 +1,9 @@
 @extends ('backend.backendmaster')
 
 @section('title')
-    Profile
+<div class="page-head">
+    <h2 class="page-head-title">Profile</h2>
+</div>
 @endsection
 
 @section('content')

@@ -12,6 +12,39 @@
     object-fit: cover;
 }
 
+.menu-items-holder .panel.panel-flat {
+    margin-bottom: 5px;
+}
+
+.menu-items-holder .panel.panel-flat .price {
+
+    font-size: 16px;
+
+}
+
+.my-handle {
+	cursor: move;
+    cursor: -webkit-grabbing;
+    font-size: 25px;
+}
+
+.item-img {
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 13.5%;
+    background-size: cover;
+}
+
+.item-img > img {
+    width: 100%;
+}
+
+.no-margin {
+
+    margin:0;
+
+}
+
 img#preview {
 
 width:100%;
