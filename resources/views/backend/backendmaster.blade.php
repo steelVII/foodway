@@ -79,6 +79,9 @@
                             url: url,
                             data: {
                             position: evt.newIndex
+                            },
+                            success: function(result){
+                                alert(result);
                             }
                         });
                     }

@@ -212,9 +212,12 @@ class FoodListsController extends Controller
         //
     }
 
-    public function sort($id){
+    public function sort($id, Request $request){
 
-        $position = FoodList::find($id);
+        if($request->ajax())
+        {
+        return $request->position;
+        }
 
     }
 }
