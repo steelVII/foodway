@@ -23,6 +23,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/lib/jquery.gritter/css/jquery.gritter.css">
+    <script src="/assets/lib/jquery.gritter/js/jquery.gritter.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/admin-style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/bootstrap-clockpicker.min.css" type="text/css">
@@ -58,15 +60,22 @@
                 $('.js-example-basic-multiple').select2();
             });
 
-            var el = document.getElementById('testo');
+            $(".testo").each(function(i, el) {
+
             var sortable = Sortable.create(el,{ 
                 dataIdAttr: 'data-id',
                 handle: '.my-handle',
 
-                // Element is chosen
-                onUpdate: function (/**Event*/evt) {
-                    alert(evt.newIndex + 1);  // element index within parent
-                    var url = 'food_list/sort/' + evt.item.getAttribute('data-id');
+                onSort: function (e) {
+        var items = e.to.children;
+        var result = [];
+        var ids = [];
+        for (var i = 0; i < items.length; i++) {
+            result.push($(items[i]).data('pos'));
+            ids.push($(items[i]).data('id'));
+        }
+        var cat = e.item.getAttribute('data-cat');
+        var url = 'food_list/sort';
                     if (url) {
 
                         $.ajaxSetup({
@@ -78,17 +87,33 @@
                             method: "POST",
                             url: url,
                             data: {
-                            position: evt.newIndex + 1
+                            position: result,
+                            category: cat,
+                            ids: ids
                             },
                             success: function(result){
-                                alert(result);
+                                $.gritter.add({
+	// (string | mandatory) the heading of the notification
+	title: 'Sorting Saved',
+	// (string | mandatory) the text inside the notification
+	text: 'This will fade out after a certain amount of time.',
+	// (bool | optional) if you want it to fade out on its own or just sit there
+	sticky: false, 
+	// (int | optional) the time you want it to be alive for before fading out (milliseconds)
+	time: 2000,
+	// (string | optional) the class name you want to apply directly to the notification for custom styling
+	class_name: 'gritter-item-wrapper color success'
+});
                             }
                         });
                     }
-                }
-                
+    }
+
             });
 
+    });
+
     </script>
+    
 </body>
 </html>

@@ -84,7 +84,7 @@ Route::middleware(['isvendor'])->group(function () {
         Route::post('food_list/add_list/{id}', 'FoodListsController@store');
         Route::get('food_list/{id}', 'FoodListsController@edit');
         Route::patch('food_list/{id}', 'FoodListsController@update');
-        Route::post('food_list/sort/{id}', 'FoodListsController@sort');
+        Route::post('food_list/sort', 'FoodListsController@sort');
 
     });
 

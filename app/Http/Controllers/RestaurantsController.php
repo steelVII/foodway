@@ -34,7 +34,7 @@ class RestaurantsController extends Controller
 
         $restaurant = $restaurants::find($restaurant_id);
 
-        $cat_menu = $restaurant->menu()->select('food_categories')->get();
+        $cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
 
         $cat_array = array();
 
@@ -46,7 +46,7 @@ class RestaurantsController extends Controller
 
         $menu_cat = array_unique($cat_array);
 
-        $menu = $restaurant->menu()->orderBy('food_name','DESC')->get();
+        $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
 
         return view('backend.Restaurants.view_restaurant', compact('restaurant','menu_cat','menu'));
 
@@ -114,7 +114,7 @@ class RestaurantsController extends Controller
 
         $restaurant = $restaurants::find($id);
 
-        $cat_menu = $restaurant->menu()->select('food_categories')->get();
+        $cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
 
         $cat_array = array();
 
@@ -126,7 +126,7 @@ class RestaurantsController extends Controller
 
         $menu_cat = array_unique($cat_array);
 
-        $menu = $restaurant->menu()->orderBy('food_name','DESC')->get();
+        $menu = $restaurant->menu()->orderBy('food_name','ASC')->get();
 
         return view('backend.Restaurants.view_restaurant', compact('restaurant','menu_cat','menu'));
     }

@@ -39,6 +39,22 @@
     width: 100%;
 }
 
+.menu-items-holder .menu-holder {
+    margin-bottom: 36px;
+}
+
+.cat-title {
+
+    padding: 0 20px 4px 20px;
+
+}
+
+.menu-items-holder .cat-holder.testo {
+
+    overflow: hidden;
+
+}
+
 .no-margin {
 
     margin:0;

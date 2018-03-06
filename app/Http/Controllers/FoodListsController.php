@@ -195,11 +195,42 @@ class FoodListsController extends Controller
         //
     }
 
-    public function sort($id, Request $request){
+    public function sort(Request $request, FoodLists $foodLists, Restaurants $restaurants){
 
         if($request->ajax())
         {
-        return $request->position;
+
+        $user = $request->user();
+
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+
+        $restaurant = $restaurants::find($restaurant_id);
+
+        $menu = $restaurant->menu()->where('food_categories','=',$request->category)->get();
+
+        $test = $request->position;
+        $test2 = $request->ids;
+
+        $position = array_map('intval',  $test );
+
+        $ddd = array_keys($position);
+        $integerIDs = array_map('intval',  $test2 );
+
+        foreach( $integerIDs as $order) {
+
+            $order2 = array_shift($ddd);
+
+            $foodlist = $foodLists::find($order);
+        
+                $foodlist->order_pos = $order2;
+
+                $foodlist->save();
+
+        }
+
+        return 'success';
+
         }
 
     }
