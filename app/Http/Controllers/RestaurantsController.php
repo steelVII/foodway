@@ -33,7 +33,7 @@ class RestaurantsController extends Controller
         $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
         $restaurant = $restaurants::find($restaurant_id);
-        $menu = $restaurant->menu()->paginate(10);
+        $menu = $restaurant->menu()->orderBy('food_name','DESC')->get();
 
         return view('backend.Restaurants.view_restaurant', compact('restaurant','menu'));
 

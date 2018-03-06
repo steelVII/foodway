@@ -78,7 +78,7 @@
                             method: "POST",
                             url: url,
                             data: {
-                            position: evt.newIndex
+                            position: evt.newIndex + 1
                             },
                             success: function(result){
                                 alert(result);
