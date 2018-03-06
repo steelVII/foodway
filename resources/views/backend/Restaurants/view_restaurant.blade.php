@@ -73,7 +73,7 @@
                                                         <div class="panel panel-flat">
                                                             <div class="row no-margin">
                                                                 @if($menuitem->food_image != null)
-                                                                    <div class="item-img col-md-3" style="background: url({{ asset('storage/foods'.$menuitem->food_image) }}) 100%/cover no-repeat;">
+                                                                    <div class="item-img col-md-3" style="background: url({{ asset('storage/foods/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
                                                                     </div>
                                                                 @endif
                                                                 <div class="panel-body col-md-9">
@@ -120,7 +120,7 @@
                                                         <div class="panel panel-flat">
                                                             <div class="row no-margin">
                                                                 @if($menuitem->food_image != null)
-                                                                    <div class="item-img col-md-3" style="background: url({{ asset('storage/foods'.$menuitem->food_image) }}) 100%/cover no-repeat;">
+                                                                    <div class="item-img col-md-3" style="background: url({{ asset('storage/foods/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
                                                                     </div>
                                                                 @endif
                                                                 <div class="panel-body col-md-9">
