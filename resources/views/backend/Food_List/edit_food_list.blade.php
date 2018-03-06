@@ -38,10 +38,18 @@
                     </div>
                     <div class="form-group">
                         <label>Food Category</label>
-                        <select class="form-control js-example-basic-multiple" name="food_categories[]" id="cat_served" multiple="multiple">
+                        <select class="form-control" name="food_category" id="cat_served">
   
                           @foreach ($food_cats as $cat)
-                              <option value="{{ $cat->category_name}}">{{ $cat->category_name}}</option>
+                                @if ($foodlist->food_categories == $cat) 
+
+                                    <option value="{{ $cat }}" selected>{{ $cat }}</option>
+
+                                @else
+
+                                    <option value="{{ $cat }}">{{ $cat }}</option>
+
+                                @endif
                           @endforeach
   
                         </select>

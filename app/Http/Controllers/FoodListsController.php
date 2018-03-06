@@ -49,7 +49,9 @@ class FoodListsController extends Controller
         $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
         $restaurant = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
-        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
+        $food_cats = Restaurants::select('food_categories')->where('vendor_id', $vendor_id)->value('food_categories');
+
+        $food_cats = explode(",", $food_cats);
 
         return view('backend.Food_List.add_food_list', compact('restaurant','food_cats'));
 
@@ -66,19 +68,7 @@ class FoodListsController extends Controller
 
         $restaurant = Restaurants::find($id);
 
-        $cat_list = null;
-        $food_cats = request('food_categories');
-
-        foreach($food_cats as $cat) {
-
-            if ($cat === end($food_cats)) {
-                $cat_list .= $cat;
-                break;
-            }
-
-            $cat_list .= $cat . ", ";
-
-        }
+        //$food_cat = request('food_category');
 
         if(request('foodimage')) {
 
@@ -89,7 +79,7 @@ class FoodListsController extends Controller
                 'food_image' => $request->file('foodimage')->getClientOriginalName(),
                 'restaurant_id' => $restaurant->id,
                 'restaurant_name' => $restaurant->restaurant_name,
-                'food_categories' => $cat_list,
+                'food_categories' => request('food_category'),
     
             ]);
 
@@ -105,7 +95,7 @@ class FoodListsController extends Controller
                 'price' => request('price'),
                 'restaurant_id' => $restaurant->id,
                 'restaurant_name' => $restaurant->restaurant_name,
-                'food_categories' => $cat_list,
+                'food_categories' => request('food_category'),
     
             ]);
 
@@ -132,11 +122,18 @@ class FoodListsController extends Controller
      * @param  \App\FoodLists  $foodLists
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodLists $foodLists, $id)
+    public function edit(FoodLists $foodLists, Request $request, $id)
     {
 
         $foodlist = $foodLists::find($id);
-        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
+
+        $user = $request->user();
+
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+
+        $food_cats = Restaurants::select('food_categories')->where('vendor_id', $vendor_id)->value('food_categories');
+
+        $food_cats = explode(",", $food_cats);
 
         return view('backend.Food_List.edit_food_list',compact('foodlist','food_cats'));
 
@@ -167,23 +164,9 @@ class FoodListsController extends Controller
 
         }
 
-        if(request('food_categories')) {
+        if(request('food_category')) {
 
-            $cat_list = null;
-            $food_cats = request('food_categories');
-    
-            foreach($food_cats as $cat) {
-    
-                if ($cat === end($food_cats)) {
-                    $cat_list .= $cat;
-                    break;
-                }
-    
-                $cat_list .= $cat . ", ";
-    
-            }
-
-            $foodlist->food_categories = $cat_list;
+            $foodlist->food_categories = request('food_category');
 
         }
 

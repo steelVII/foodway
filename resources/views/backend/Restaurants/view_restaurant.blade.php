@@ -61,25 +61,61 @@
 
     <div class="text-center"><h2>Menu</h2></div>
 
-    <div class="menu-items-holder" id="testo">
+    <div class="menu-items-holder">
                                             @if (Auth::check() && Auth::user()->acc_type == '1')
-                                                @foreach ($menu as $menuitem)
 
-                                                    <div class="col-md-12">
+                                            @foreach ($menu_cat as $cat)
+                                            <h3>{{ $cat }}</h3>
+                                            <div class="cat-holder">
+                                                @foreach ($menu as $menuitem)
+                                                @if ($cat == $menuitem->food_categories)
+                                                <div class="col-md-12" data-id="{{ $menuitem->id }}">
                                                         <div class="panel panel-flat">
-                                                            <div class="item-img" style="background: url({{ asset('storage/'.$menuitem->food_image) }});">
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <div class="panel-heading">{{ $menuitem->food_name }}</div>
-                                                                <p>Quisque gravida aliquam diam at cursus, quisque laoreet ac lectus a rhoncusac tempus odio.</p>
+                                                            <div class="row no-margin">
+                                                                @if($menuitem->food_image != null)
+                                                                    <div class="item-img col-md-3" style="background: url({{ asset('storage/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
+                                                                    </div>
+                                                                @endif
+                                                                <div class="panel-body col-md-9">
+                                                                    <div class="row">
+                                                                        <div class="col-md-8"><div class="panel-heading no-margin">{{ $menuitem->food_name }}</div></div>
+                                                                        <div class="col-md-4 text-right"></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12"><p>Lorem Ipsum.</p></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                    
+                                                                        @if($menuitem->sales_price != null)
+
+                                                                            <div class="col-md-4"><s>RM {{ $menuitem->price }}</s> <span class="price"> RM {{ $menuitem->sales_price }}</span></div>
+
+                                                                        @else
+
+                                                                            <div class="col-md-4"><p class="price">RM {{ $menuitem->price }}</p></div>
+
+                                                                        @endif
+
+                                                                        <div class="col-md-4"><p>{{ $menuitem->food_categories }}</p></div>
+                                                                        <div class="col-md-4 text-right">
+                                                                                <a href="food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a>
+                                                                        </div>
+
+                                                                    </div>                                                         
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    </div>
+                                                    @endif
                                                 @endforeach
+                                                </div>
+                                            @endforeach
                                             @else
+                                            @foreach ($menu_cat as $cat)
+                                            <h3>{{ $cat }}</h3>
+                                            <div class="cat-holder" id="testo">
                                                 @foreach ($menu as $menuitem)
-
+                                                @if ($cat == $menuitem->food_categories)
                                                 <div class="col-md-12" data-id="{{ $menuitem->id }}">
                                                         <div class="panel panel-flat">
                                                             <div class="row no-margin">
@@ -117,6 +153,9 @@
                                                         </div>
                                                     </div>
                                                     </div>
+                                                    @endif
+                                                @endforeach
+                                                </div>
                                                 @endforeach
                                             @endif
     </div>

@@ -33,9 +33,22 @@ class RestaurantsController extends Controller
         $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
         $restaurant = $restaurants::find($restaurant_id);
+
+        $cat_menu = $restaurant->menu()->select('food_categories')->get();
+
+        $cat_array = array();
+
+        foreach($cat_menu as $cat) {
+
+            $cat_array[] = $cat->food_categories;
+
+        }
+
+        $menu_cat = array_unique($cat_array);
+
         $menu = $restaurant->menu()->orderBy('food_name','DESC')->get();
 
-        return view('backend.Restaurants.view_restaurant', compact('restaurant','menu'));
+        return view('backend.Restaurants.view_restaurant', compact('restaurant','menu_cat','menu'));
 
     }
 
@@ -73,7 +86,7 @@ class RestaurantsController extends Controller
                 break;
             }
 
-            $cat_list .= $cat . ", ";
+            $cat_list .= $cat . ",";
 
         }
 
@@ -98,11 +111,24 @@ class RestaurantsController extends Controller
      */
     public function show(Restaurants $restaurants, $id)
     {
+
         $restaurant = $restaurants::find($id);
 
-        $menu = $restaurant->menu()->paginate(10);
+        $cat_menu = $restaurant->menu()->select('food_categories')->get();
 
-        return view('backend.Restaurants.view_restaurant', compact('restaurant','menu'));
+        $cat_array = array();
+
+        foreach($cat_menu as $cat) {
+
+            $cat_array[] = $cat->food_categories;
+
+        }
+
+        $menu_cat = array_unique($cat_array);
+
+        $menu = $restaurant->menu()->orderBy('food_name','DESC')->get();
+
+        return view('backend.Restaurants.view_restaurant', compact('restaurant','menu_cat','menu'));
     }
 
     /**
@@ -184,7 +210,7 @@ class RestaurantsController extends Controller
                     break;
                 }
 
-                $cat_list .= $cat . ", ";
+                $cat_list .= $cat . ",";
 
             }
 
