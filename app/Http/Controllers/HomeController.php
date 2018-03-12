@@ -26,4 +26,10 @@ class HomeController extends Controller
         return view('homepage.mainpage');
     }
 
+    public function show() {
+
+        return view('homepage.test');
+
+    }
+
 }

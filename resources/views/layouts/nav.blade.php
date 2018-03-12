@@ -1,59 +1,61 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand" href="{{url('/')}}"><img src="/assets/img/logo.png" width="150" alt=""></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-            Dropdown
+<nav class="navbar is-transparent is-fixed-top">
+
+  <div class="container">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{url('/')}}"><img src="/assets/img/logo.png" alt=""></a>
+      <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  
+    <div id="navbarExampleTransparentExample" class="navbar-menu" v-cloak>
+      <div class="navbar-end">
+        <a class="navbar-item" href="{{url('/')}}">
+          Home
+        </a>
+        @if (Auth::check())
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="/documentation/overview/start/">
+            {{ Auth::user()->name }}
           </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="navbar-dropdown is-boxed">
+              @if (Auth::user()->acc_type == '1')
+              <a class="navbar-item" href="{{ route('admin') }}">Dashboard</a>
+              <div class="dropdown-divider"></div>
+              @elseif (Auth::user()->acc_type == '3')
+              <a class="navbar-item" href="{{ route('main') }}">Dashboard</a>
+              <div class="dropdown-divider"></div>
+              @endif
+              <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                      Logout
+                    </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+              </form>
+          </div>
         </div>
-      </li>
-      @if (Auth::check())
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          {{ Auth::user()->name }}
-            </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          @if (Auth::user()->acc_type == '1')
-          <a class="dropdown-item" href="{{ route('admin') }}">Dashboard</a>
-          <div class="dropdown-divider"></div>
-          @elseif (Auth::user()->acc_type == '3')
-          <a class="dropdown-item" href="{{ route('main') }}">Dashboard</a>
-          <div class="dropdown-divider"></div>
-          @endif
-          <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                  Logout
+
+        @else
+
+        <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="button is-primary" href="{{ route('login') }}">
+                  <span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                  </span>
+                  <span>Login</span>
                 </a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-          </form>
-        </div>
-      </li>
-      @else
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('login') }}">
-            Login
-          </a>
-      </li>
+              </p>
+            </div>
+          </div>
+      </div>
+
       @endif
-    </ul>
+
+    </div>
   </div>
-</nav>
+  </nav>

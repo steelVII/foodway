@@ -1,13 +1,30 @@
 html, body {
 
     font-family: 'Roboto', 'Open Sans', sans-serif !important;
+    margin: 0;
 
 }
 
-.row div[class^="col-"] {
+[v-cloak] {
+    display: none;
+  }
+
+.columns div.column.is-3 {
 
     padding: 15px;
     box-sizing: border-box;
+
+}
+
+.navbar.is-transparent {
+
+    background-color: transparent;
+
+}
+
+.navbar-item img {
+
+max-height: 5rem !important;
 
 }
 
@@ -31,7 +48,8 @@ margin-top: 5%;
 
 .homepage-banner {
 
-    height: 82.5vh;
+    height: 100vh;
+    min-height: 100vmin;
     background: url("/assets/img/gallery/foodway-banner-chged-to-fullscreen.jpg");
     background-size: cover;
     display: Flex;
@@ -40,7 +58,7 @@ margin-top: 5%;
 
 }
 
-.homepage-banner > .container {
+.homepage-banner .content {
 
     text-align: center;
 
@@ -54,15 +72,10 @@ margin-top: 5%;
 
 }
 
-.container-fluid.find-out-more {
+.section.find-out-more {
 
     background: url("/assets/img/gallery/Foodway-Monthly-Meal-Subcription-01.jpg");
     background-size: cover;
-    
-}
-
-.container-fluid.find-out-more .row {
-
     height: 65vh;
     display: Flex;
     align-items: center;
@@ -70,29 +83,23 @@ margin-top: 5%;
     
 }
 
-.container-fluid.order-step {
+.section.order-step {
 
-    padding: 30px 15px 15px;
+    padding: 30px 15px 30px;
 
 }
 
-.container-fluid.order-step .row .col-md-4 {
+.section.order-step .columns .column{
 
     padding: 15px;
     text-align: center;
 
 }
 
-.container-fluid.mobile-app{
+.section.mobile-app{
 
     background: url("/assets/img/gallery/mobile-app.jpg");
     background-size: cover;
-    
-}
-
-
-.container-fluid.mobile-app .row {
-
     height: 50vh;
     display: Flex;
     align-items: center;

@@ -6,8 +6,14 @@
  */
 
 require('./bootstrap');
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
 
 window.Vue = require('vue');
+
+Vue.use(Buefy, {
+    defaultIconPack: 'fas',
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -16,7 +22,11 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component(Buefy.Checkbox.name, Buefy.Checkbox);
+Vue.component(Buefy.Dropdown.name,Buefy.Dropdown);
 
 const app = new Vue({
     el: '#app'
 });
+
+

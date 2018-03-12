@@ -209,21 +209,21 @@ class FoodListsController extends Controller
 
         $menu = $restaurant->menu()->where('food_categories','=',$request->category)->get();
 
-        $test = $request->position;
-        $test2 = $request->ids;
+        $position = $request->position;
+        $ids = $request->ids;
 
-        $position = array_map('intval',  $test );
+        $position = array_map('intval',  $position );
+        $position = array_keys($position);
 
-        $ddd = array_keys($position);
-        $integerIDs = array_map('intval',  $test2 );
+        $integerIDs = array_map('intval',  $ids );
 
         foreach( $integerIDs as $order) {
 
-            $order2 = array_shift($ddd);
+            $order_position = array_shift($position);
 
             $foodlist = $foodLists::find($order);
         
-                $foodlist->order_pos = $order2;
+                $foodlist->order_pos = $order_position;
 
                 $foodlist->save();
 

@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/test','HomeController@show');
+
 Route::get('/', function () {
 
     return view('homepage.mainpage');

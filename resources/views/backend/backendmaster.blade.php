@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-clockpicker.min.css" type="text/css">
 </head>
 <body>
+    
     <div id="app">
 
         @include ('backend.nav-backend')
@@ -51,71 +52,75 @@
 
     </div>
 
-    <!-- Scripts -->
+<!-- Scripts -->
 
-    @include ('layouts.scripts')
-    @yield ('page-script')
-    <script>
-            $(document).ready(function() {
-                $('.js-example-basic-multiple').select2();
-            });
+@include ('layouts.scripts')
+@yield ('page-script')
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
 
-            $(".testo").each(function(i, el) {
+    $(".testo").each(function(i, el) {
 
-            var sortable = Sortable.create(el,{ 
-                dataIdAttr: 'data-id',
-                handle: '.my-handle',
+    var sortable = Sortable.create(el,{ 
 
-                onSort: function (e) {
-        var items = e.to.children;
-        var result = [];
-        var ids = [];
-        for (var i = 0; i < items.length; i++) {
-            result.push($(items[i]).data('pos'));
-            ids.push($(items[i]).data('id'));
-        }
-        var cat = e.item.getAttribute('data-cat');
-        var url = 'food_list/sort';
-                    if (url) {
+        dataIdAttr: 'data-id',
+        handle: '.my-handle',
 
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            method: "POST",
-                            url: url,
-                            data: {
-                            position: result,
-                            category: cat,
-                            ids: ids
-                            },
-                            success: function(result){
-                                $.gritter.add({
-	// (string | mandatory) the heading of the notification
-	title: 'Sorting Saved',
-	// (string | mandatory) the text inside the notification
-	text: 'This will fade out after a certain amount of time.',
-	// (bool | optional) if you want it to fade out on its own or just sit there
-	sticky: false, 
-	// (int | optional) the time you want it to be alive for before fading out (milliseconds)
-	time: 2000,
-	// (string | optional) the class name you want to apply directly to the notification for custom styling
-	class_name: 'gritter-item-wrapper color success'
-});
-                            }
+        onSort: function (e) {
+
+            var items = e.to.children;
+            var result = [];
+            var ids = [];
+
+            for (var i = 0; i < items.length; i++) {
+                result.push($(items[i]).data('pos'));
+                ids.push($(items[i]).data('id'));
+            }
+
+            var cat = e.item.getAttribute('data-cat');
+
+            var url = 'food_list/sort';
+
+            if (url) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: {
+                    position: result,
+                    category: cat,
+                    ids: ids
+                    },
+                    success: function(result){
+                        $.gritter.add({
+                            // (string | mandatory) the heading of the notification
+                            title: 'Sorting Saved',
+                            // (string | mandatory) the text inside the notification
+                            text: 'This will fade out after a certain amount of time.',
+                            // (bool | optional) if you want it to fade out on its own or just sit there
+                            sticky: false, 
+                            // (int | optional) the time you want it to be alive for before fading out (milliseconds)
+                            time: 2000,
+                            // (string | optional) the class name you want to apply directly to the notification for custom styling
+                            class_name: 'gritter-item-wrapper color success'
                         });
                     }
-    }
-
-            });
+                });
+            }
+        }
 
     });
 
-    </script>
+});
 
-<script src="/js/app.js"></script>
+</script>
     
 </body>
 </html>

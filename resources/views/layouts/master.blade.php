@@ -3,13 +3,15 @@
 
 @include('layouts.head')
 
-<body>
+<body class="has-navbar-fixed-top">
 
 @include ('layouts.nav')
 
     @yield('content')
 
 @include ('layouts.footer')
+
+<script src="./js/app.js"></script>  
 
 @include ('layouts.scripts')
 
