@@ -1,4 +1,6 @@
-<nav class="navbar is-transparent is-fixed-top">
+<div class="nav-wrapper @if(Request::is('/'))
+nav-wrapper-fixed @endif">
+<nav class="navbar is-transparent @if(Request::is('/')) is-fixed-top @endif">
 
   <div class="container">
     <div class="navbar-brand">
@@ -15,9 +17,10 @@
         <a class="navbar-item" href="{{url('/')}}">
           Home
         </a>
+        <a href="{{ route('front_restaurants') }}" class="navbar-item">Restaurants</a>
         @if (Auth::check())
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="/documentation/overview/start/">
+          <a class="navbar-link" href="#">
             {{ Auth::user()->name }}
           </a>
           <div class="navbar-dropdown is-boxed">
@@ -59,3 +62,4 @@
     </div>
   </div>
   </nav>
+</div>

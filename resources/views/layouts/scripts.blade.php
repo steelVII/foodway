@@ -11,3 +11,44 @@
       App.formElements();
   });
 </script>
+
+@if (Request::is('/'))
+
+    <script>
+
+    $('nav').addClass('null');
+
+    $(window).scroll(function(){
+        if ($(window).scrollTop() >= 85) {
+            $('nav').addClass('fixed-header');
+            $('nav').removeClass('null');
+        }
+        else {
+            $('nav').removeClass('fixed-header');
+            $('nav').addClass('null');
+        }
+    });
+
+    </script>
+
+@else
+
+<script>
+
+    var navPos = $('nav').offset().top;
+
+    $(window).scroll(function(){ 
+
+        if ( $(window).scrollTop() >= navPos ) {
+            $('nav').addClass('fixed-header');
+            $('nav').addClass('is-fixed-top');
+        }
+        else {
+            $('nav').removeClass('fixed-header');
+            $('nav').removeClass('is-fixed-top');
+        }
+    });
+
+    </script>
+    
+@endif

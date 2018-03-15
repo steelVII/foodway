@@ -5,13 +5,17 @@
 
 <body class="has-navbar-fixed-top">
 
-@include ('layouts.nav')
+@yield ('navi')
 
     @yield('content')
 
 @include ('layouts.footer')
 
-<script src="./js/app.js"></script>  
+<script src="../js/app.js"></script>
+
+@yield ('cart')
+
+@yield ('script')
 
 @include ('layouts.scripts')
 

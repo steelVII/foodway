@@ -1,15 +1,32 @@
-@extends ('layouts.master') 
+@extends ('layouts.master')
+
+@section('navi')
+
+<section class="hero is-fullheight homepage-banner">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+        @include ('layouts.nav')
+    </div>
+  
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+            Search Restaurants Near Your Location
+        </h1>
+        <h2 class="subtitle">
+            Subtitle
+        </h2>
+      </div>
+    </div>
+  
+    <!-- Hero footer: will stick at the bottom -->
+
+  </section>
+    
+@endsection
 
 @section('content')
-
-    <section class="section homepage-banner">
-        <div class="container is-fullhd">
-            <div class="content">
-                <h1 class="banner-title">Search Restaurants Near Your Location</h1>
-                <img src="http://azexo.com/foodpicky/wp-content/uploads/2016/09/steps.png" alt="steps">
-            </div>
-        </div>
-    </section>
 
     <section class="section find-out-more">
         

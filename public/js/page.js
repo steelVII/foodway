@@ -4,6 +4,13 @@
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.use(Buefy, {
+    defaultIconPack: 'fas',
+})
+
+Vue.component(Buefy.Collapse.name, Buefy.Collapse);
+Vue.component(Buefy.Dropdown.name,Buefy.Dropdown);
+
 const app = new Vue({
     el: '#app'
 });

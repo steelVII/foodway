@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
 
 window.Vue = require('vue');
 
@@ -22,11 +21,12 @@ Vue.use(Buefy, {
  */
 
 Vue.component('example', require('./components/Example.vue'));
-Vue.component(Buefy.Checkbox.name, Buefy.Checkbox);
+Vue.component(Buefy.Collapse.name, Buefy.Collapse);
 Vue.component(Buefy.Dropdown.name,Buefy.Dropdown);
+Vue.component(Buefy.Tabs.name,Buefy.Tabs);
 
-const app = new Vue({
-    el: '#app'
-});
+Vue.component('restaurants', require('./components/test.vue'));
+
+
 
 
