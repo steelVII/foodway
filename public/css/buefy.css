@@ -305,7 +305,11 @@ table th {
 }
 
 .is-size-7 {
-  font-size: 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+.is-size-8 {
+  font-size: 0.825rem !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -334,7 +338,11 @@ table th {
   }
 
   .is-size-7-mobile {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .is-size-8-mobile {
+    font-size: 0.825rem !important;
   }
 }
 
@@ -364,7 +372,11 @@ table th {
   }
 
   .is-size-7-tablet {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .is-size-8-tablet {
+    font-size: 0.825rem !important;
   }
 }
 
@@ -394,7 +406,11 @@ table th {
   }
 
   .is-size-7-touch {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .is-size-8-touch {
+    font-size: 0.825rem !important;
   }
 }
 
@@ -424,7 +440,11 @@ table th {
   }
 
   .is-size-7-desktop {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .is-size-8-desktop {
+    font-size: 0.825rem !important;
   }
 }
 
@@ -454,7 +474,11 @@ table th {
   }
 
   .is-size-7-widescreen {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .is-size-8-widescreen {
+    font-size: 0.825rem !important;
   }
 }
 
@@ -484,7 +508,11 @@ table th {
   }
 
   .is-size-7-fullhd {
-    font-size: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .is-size-8-fullhd {
+    font-size: 0.825rem !important;
   }
 }
 
@@ -5647,7 +5675,11 @@ a.tag:hover {
 }
 
 .title.is-7 {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.title.is-8 {
+  font-size: 0.825rem;
 }
 
 .subtitle {
@@ -5691,7 +5723,11 @@ a.tag:hover {
 }
 
 .subtitle.is-7 {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.subtitle.is-8 {
+  font-size: 0.825rem;
 }
 
 .block:not(:last-child) {

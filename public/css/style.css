@@ -220,6 +220,12 @@ margin-top: 5%;
     cursor: pointer;
 }
 
+.subtitle.is-6-5 {
+
+    font-size: 0.825rem;
+
+}
+
 .promo {
 
 text-decoration: line-through;

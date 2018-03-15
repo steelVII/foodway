@@ -20,6 +20,7 @@
     "vue-template-compiler": "^2.5.15"
   },
   "dependencies": {
-    "buefy": "^0.6.3"
+    "buefy": "^0.6.3",
+    "sticky-js": "^1.2.0"
   }
 }

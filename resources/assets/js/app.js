@@ -8,6 +8,7 @@
 require('./bootstrap');
 import Buefy from 'buefy'
 
+window.Sticky = require('sticky-js');
 window.Vue = require('vue');
 
 Vue.use(Buefy, {

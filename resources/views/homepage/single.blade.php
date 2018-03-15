@@ -86,16 +86,25 @@
                             
                     </div>
 
-                    <div class="column is-one-quarter padding-lf-0">
+                    <div class="column is-one-quarter padding-lf-0" data-sticky-container>
 
-                        <div class="container spacing">
+                        <div class="container spacing selector" data-sticky-class="is-sticky" data-margin-top="85">
 
                             <div class="box">
                                 <div id="cart" class="content">
-                                    <h3>Cart</h3>
 
-                                <item-list :orderchit="rows"></item-list>
-                                <total-item :full="rows"></total-item>
+                                    <h3>Order</h3>
+
+                                    <hr>
+
+                                    <item-list :orderchit="rows"></item-list>
+
+                                    <div class="hide" v-if="rows !== 'undefined' && rows.length > 0">
+                                        <hr v-cloak>
+                                    </div>
+
+                                    <total-item :full="rows"></total-item>
+
                                 </div>
                             </div>
 
@@ -113,6 +122,8 @@
 
 <script>
 
+    var sticky = new Sticky('.selector');
+
     Vue.component('item-list',{
 
     props: ['orderchit'],
@@ -122,16 +133,16 @@
 
         <div v-if="orderchit !== 'undefined' && orderchit.length > 0">
             <div class="content columns" v-for="item in orderchit">
-                <span class="column is-8">@{{item.name}} x @{{item.quantity}}</span>
-                <div class="column is-4">
-                    <p class="column is-3">@{{ itemSubtotal(item.price,item.quantity) }}</p>
+                <span class="column is-7">@{{item.name}} x @{{item.quantity}}</span>
+                <div class="column has-text-right">
+                    <p>RM @{{ itemSubtotal(item.price,item.quantity) }}</p>
                     <span class="is-primary is-outlined" v-on:click="minusItem(item)"><i class="fas fa-minus-circle"></i></span>
                     <span class="is-primary" v-on:click="addItem(item)"><i class="fas fa-plus-circle"></i></span>
                 </div>
             </div>
         </div>
 
-        <div v-else>There is nothing in the cart. Start adding your meals now.</div>
+        <div v-else>There is nothing for order. Start adding your meals now.</div>
 
     </div>
 
@@ -167,7 +178,7 @@
 
             sub = Math.round(sub * 100) / 100;
 
-            return sub;
+            return sub.toFixed(2);
 
         }
     },
@@ -182,29 +193,29 @@ Vue.component('total-item',{
     
         <div class="totals content">
             <div class="columns" v-if="subtotals() != 0">
-                <div class="column is-8">
-                    Subtotal
+                <div class="column is-7">
+                    <span class="subtitle is-7 has-text-weight-semibold">Subtotal</span>
                 </div>
-                <div class="column">
-                    RM @{{subtotals(true)}}
+                <div class="column has-text-right">
+                    <span>RM @{{subtotals(true)}}</span>
                 </div>
             </div>
 
             <div class="columns" v-if="gst() != 0">
-                <div class="column is-8">
-                    Inclusive GST (6%)
+                <div class="column is-7">
+                    <span class="subtitle is-8 has-text-weight-semibold">Inclusive GST (6%)</span>
                 </div>
-                <div class="column">
-                    RM @{{gst('',true)}}
+                <div class="column has-text-right">
+                    <span>RM @{{gst('',true)}}</span>
                 </div>
             </div>
 
             <div class="columns" v-if="totals() != 0">
-                <div class="column is-8">
-                    Totals
+                <div class="column is-7">
+                    <span class="subtitle is-6 has-text-weight-semibold">Total</span>
                 </div>
-                <div class="column">
-                   RM @{{totals(true)}}
+                <div class="column has-text-right">
+                    <span>RM @{{totals(true)}}</span>
                 </div>
             </div>
         </div>
