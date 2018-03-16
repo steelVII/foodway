@@ -19,6 +19,11 @@
                             class="form-control">
                     </div>
                     <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" type="text" name="dish_description" rows="3" required="" placeholder="Enter Description" autocomplete="off"
+                            class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label>Price</label>
                         <div class="input-group xs-mb-15">
                             <span class="input-group-addon">RM</span>
@@ -27,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label>Food Category</label>
-                        <select class="form-control" name="food_category" id="cat_served">
+                        <select class="form-control js-example-basic-multiple" name="food_category" id="cat_served">
   
                           @foreach ($food_cats as $cat)
                               <option value="{{ $cat }}">{{ $cat }}</option>

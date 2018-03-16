@@ -8,7 +8,7 @@ class FoodLists extends Model
 {
     protected $fillable = [
 
-        'food_name','price','food_image','restaurant_id','restaurant_name','food_categories'
+        'food_name','description','price','food_image','restaurant_id','restaurant_name','food_categories'
 
     ];
 

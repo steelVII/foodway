@@ -36,6 +36,14 @@
                             @endif
                         </ul>
                     </li>
+
+                    @if (Auth::check() && Auth::user()->acc_type == '1') 
+                    <li class="parent"><a href="#"><i class="icon mdi mdi-globe"></i><span>Locations</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{route('locations')}}">View Locations</a></li>
+                        </ul>
+                    </li>
+                    @endif
                     @if (Auth::check() && Auth::user()->acc_type == '1') 
                         <li class="divider">Admin Options</li>
                         <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Users</span></a>

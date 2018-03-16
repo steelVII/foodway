@@ -11,12 +11,28 @@
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h1 class="title">
-            Search Restaurants Near Your Location
+        <h1 class="title is-3 has-text-weight-normal">
+            Enter your postcode to find local restaurants and takeaways
         </h1>
-        <h2 class="subtitle">
-            Subtitle
-        </h2>
+        <div class="columns">
+            <div class="column is-6 is-offset-3">
+
+            <form action="">
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input is-medium" type="text" placeholder="Search Restaurants">
+                    </div>
+                    <div class="control">
+                            <a class="button is-medium is-primary">
+                              Search
+                            </a>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+        </div>
+
       </div>
     </div>
   
@@ -28,7 +44,7 @@
 
 @section('content')
 
-    <section class="section find-out-more">
+    <!-- <section class="section find-out-more">
         
         <div class="container is-fullhd">
 
@@ -46,38 +62,53 @@
 
         </div>
 
-    </section>
+    </section> -->
 
     <section class="section">
         <div class="container is-fullhd">
-            <div class="content">
+                <h4 class="title is-3 has-text-centered">Recommended Places</h4>
+            <div class="content is-small">
                 <div class="columns">
-                    <div class="column is-3">
-                        <div class="box">
-                            <h2>Test</h2>
-                        </div>
-                    </div>
-                    <div class="column is-3">
-                        <div class="box">
-                            <h2>Test</h2>
-                        </div>
-                    </div>
-                    <div class="column is-3">
-                        <div class="box">
-                            <h2>Test</h2>
-                        </div>
-                    </div>
-                    <div class="column is-3">
-                        <div class="box">
-                            <h2>Test</h2>
-                        </div>
-                    </div>
+                    <div class="column is-8 is-offset-2">
+                <div class="tile is-ancestor">
+                              <div class="tile is-vertical">
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box" style="height: 40vmin;">
+                                        <p class="title is-4 has-text-centered">Setia Alam</p>
+                                    </a>
+                                </div>
+                                <div class="tile">
+                                    <div class="tile is-parent">
+                                        <a class="tile is-child box" style="height: 22vmin;">
+                                            <p class="title is-4 has-text-centered">Puchong</p>
+                                        </a>
+                                    </div>
+                                    <div class="tile is-parent">
+                                            <a class="tile is-child box" style="height: 22vmin;">
+                                                    <p class="title is-4 has-text-centered">Subang</p>
+                                            </a>
+                                        </div>
+                                </div>
+                              </div>
+                              <div class="tile is-5 is-vertical is-parent">
+
+                                    <a class="tile is-child box">
+                                            <p class="title is-4 has-text-centered">Klang</p>
+                                    </a>
+
+                                <a href="{{ route('home') }}" class="tile is-child box">
+                                            <p class="title is-4 has-text-centered">Shah Alam</p>
+                                    </a>
+
+                                  </div>
                 </div>
+            </div>
+            </div>
             </div>
         </div>
     </section>
 
-    <section class="section order-step">
+    <!-- <section class="section order-step">
         <div class="container">
             <div class="content">
                 <div class="align-items-center columns">
@@ -105,7 +136,7 @@
                 </div>
             </div>
     </div>
-    </section>
+    </section> -->
 
     <section class="section mobile-app">
         <div class="container is-fullhd">

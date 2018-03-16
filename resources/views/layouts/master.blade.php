@@ -5,11 +5,15 @@
 
 <body class="has-navbar-fixed-top">
 
+    <div id="app">
+
 @yield ('navi')
 
     @yield('content')
 
 @include ('layouts.footer')
+
+    </div>
 
 <script src="../js/app.js"></script>
 

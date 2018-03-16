@@ -27,6 +27,19 @@ z-index: 999;
     display: none;
 }
 
+.badge {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f05456;
+    color: #fff;
+    margin-left: 6px;
+    border-radius: 50%;
+}
+
 .has-content {
 
     overflow: hidden;
@@ -171,6 +184,57 @@ margin-top: 5%;
     
 }
 
+.tile.is-child.box {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    position: relative;
+    transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background: url("/assets/img/gallery/kl.jpeg");
+    background-size: cover;
+
+}
+
+a.tile.is-child.box:hover {
+
+    box-shadow: none;
+
+}
+
+.tile.is-child.box:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 1.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.tile.is-child.box:hover > p {
+    opacity: 1;
+    z-index: 1;
+    transition: all 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+    pointer-events: none;
+}
+
+.tile.is-child.box:hover:before {
+    background: rgba(255, 158, 158, 0.52);
+    box-shadow: 0;
+
+}
+
+.tile.is-child.box > p {
+    opacity: 0;
+    color:#fff;
+    text-shadow: 0px 0px 10px #000;
+    transition: all 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+    pointer-events: none;
+}
+
 .cover-img {
     padding-bottom: 25%;
     background-size: cover;
@@ -244,6 +308,30 @@ footer {
 
 footer .content h3.col-title {
     color: #fff;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+footer .content ul {
+    margin: 0;
+}
+
+footer .content ul > li {
+    color: #fff;
+    list-style: none;
+    display: block;
+    position: relative;
+    margin: 10px 0;
+}
+
+footer .content a {
+    color: #fff;
+}
+
+footer .content a:hover {
+    color: #f05455;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 @media (min-width: 992px) {

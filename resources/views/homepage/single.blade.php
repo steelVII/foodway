@@ -57,7 +57,7 @@
                                                 </div> -->
                                                     <div class="column">
                                                         <h5>{{$menuitem->food_name}}</h5>
-                                                        <p class="is-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                                        <p class="is-6">{{ $menuitem->description }}</p>
                                                     </div>
                                                     <div class="column is-2 is-offset-2 has-text-centered">
                                                         @if ($menuitem->sales_price)
@@ -86,12 +86,12 @@
                             
                     </div>
 
-                    <div class="column is-one-quarter padding-lf-0" data-sticky-container>
+                    <!-- <div class="column is-one-quarter padding-lf-0">
 
-                        <div class="container spacing selector" data-sticky-class="is-sticky" data-margin-top="85">
+                        <div class="container spacing">
 
                             <div class="box">
-                                <div id="cart" class="content">
+                                <div class="content">
 
                                     <h3>Order</h3>
 
@@ -110,7 +110,7 @@
 
                          </div>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -123,6 +123,42 @@
 <script>
 
     var sticky = new Sticky('.selector');
+
+    Vue.component('badge-quantity',{
+
+        props: ['badge'],
+        template: `
+        
+            <div>
+            
+                <div class="badge">@{{quantity}}</div>
+
+            </div>
+
+        
+        `,
+
+        computed: {
+
+            quantity: function() {
+
+                let quantity = 0;
+
+                for(var index = 0; index < this.badge.length; index++) {
+
+                quantity += this.badge[index].quantity;
+
+                }
+
+                return quantity;
+
+            }
+
+
+        }
+
+
+    });
 
     Vue.component('item-list',{
 

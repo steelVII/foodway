@@ -18,6 +18,12 @@
                         <input type="text" name="food-list-item" parsley-trigger="change" required="" value="{{ $foodlist->food_name }}" placeholder="Enter Food Name"
                             autocomplete="off" class="form-control">
                     </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" type="text" name="dish_description" rows="3" required="" placeholder="Enter Description" autocomplete="off"
+                            class="form-control">{{ $foodlist->description }}</textarea>
+                    </div>
                     <div class="form-group">
                         <label>Price</label>
                         <div class="input-group xs-mb-15">
@@ -27,7 +33,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Sales Price (If no promotion, just leave it empty)</label>
+                        <label>Sales Price (If there is no sales/promotion, leave it empty)</label>
                         <div class="input-group xs-mb-15">
                             <span class="input-group-addon">RM</span>
                             <input type="number" name="salesprice" value="{{ $foodlist->sales_price }}" min="1.00" max="200.00" step="any" class="form-control"
@@ -36,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label>Food Category</label>
-                        <select class="form-control" name="food_category" id="cat_served">
+                        <select class="form-control js-example-basic-multiple" name="food_category" id="cat_served">
   
                           @foreach ($food_cats as $cat)
                                 @if ($foodlist->food_categories == $cat) 

@@ -17,6 +17,7 @@ class CreateFoodListsTable extends Migration
             $table->increments('id');
             $table->integer('order_pos')->default(0);
             $table->string('food_name');
+            $table->string('description')->nullable();
             $table->decimal('price',5,2)->nullable();
             $table->decimal('sales_price',5,2)->nullable();
             $table->string('food_image')->nullable();

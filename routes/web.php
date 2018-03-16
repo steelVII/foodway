@@ -13,8 +13,6 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/show_restaurants','HomeController@show')->name('front_restaurants');
 Route::get('/restaurant/{name}','HomeController@single');
 
@@ -22,7 +20,7 @@ Route::get('/', function () {
 
     return view('homepage.mainpage');
 
-});
+})->name('home');
 
 Route::get('/about', 'AboutController@index');
 
@@ -33,6 +31,10 @@ Route::middleware(['isadmin'])->group(function () {
         
         //Admin Dashboard
         Route::get('/', 'AdminController@index')->name('admin');
+
+        //Admin Locations
+        Route::get('locations','LocationsController@index')->name('locations');
+        Route::get('location/{state}','LocationsController@edit');
 
         //Admin Restuarants View
         Route::get('restaurants','RestaurantsController@index')->name('restaurants');
@@ -75,6 +77,7 @@ Route::middleware(['isvendor'])->group(function () {
         Route::get('restaurant','RestaurantsController@restaurant')->name('restaurant');
         Route::get('restaurant/edit','RestaurantsController@edit')->name('edit_restaurant');
         Route::patch('restaurant/edit/{id}','RestaurantsController@update');
+        Route::post('restaurant/cities','LocationsController@getCities');
 
         //Vendor Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');

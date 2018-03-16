@@ -55,7 +55,8 @@
         <h2>Menu</h2>
     </div>
     <div class="menu-items-holder">
-        @if (Auth::check() && Auth::user()->acc_type == '1') @foreach ($menu_cat as $cat)
+        @if (Auth::check() && Auth::user()->acc_type == '1') 
+        @foreach ($menu_cat as $cat)
         <h3>{{ $cat }}</h3>
         <div class="cat-holder">
             @foreach ($menu as $menuitem) @if ($cat == $menuitem->food_categories)
@@ -75,7 +76,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Lorem Ipsum.</p>
+                                    <p>{{ $menuitem->description }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -122,7 +123,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>Lorem Ipsum.</p>
+                                        <p>{{ $menuitem->description }}</p>
                                     </div>
                                 </div>
                                 <div class="row">

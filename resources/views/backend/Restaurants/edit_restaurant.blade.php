@@ -33,14 +33,32 @@
                     </div>
                   </div>
                   <div class="row">
-                      <div class="form-group col-sm-6">
-                        <label>Address</label>
-                      <textarea name="address" parsley-trigger="change" required="" placeholder="Enter Address" autocomplete="off" class="form-control">{{ $restaurant->address }}</textarea>
+                      <div class="form-group col-sm-4">
+                          <label>State</label>
+                          <select class="form-control js-example-basic-multiple" name="state" id="state">
+                              <option value="0">Select State</option>
+                            @foreach ($locations as $states)
+                                <option value="{{$states->state}}">{{$states->state}}</option>
+                            @endforeach
+    
+                          </select>
                       </div>
-                      <div class="form-group col-sm-6">
+                      <div class="form-group col-sm-4">
+                          <label>City</label>
+                          <select class="form-control js-example-basic-multiple" name="city" id="city">
+    
+                          </select>
+                      </div>
+                      <div class="form-group col-sm-4">
                           <label>Postcode</label>
                           <input type="text" name="postcode" parsley-trigger="change" required="" value="{{ $restaurant->postcode }}" placeholder="Enter Postcode" autocomplete="off" class="form-control">
                       </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-12">
+                      <label>Address</label>
+                    <textarea name="address" parsley-trigger="change" required="" placeholder="Enter Address" autocomplete="off" class="form-control">{{ $restaurant->address }}</textarea>
+                    </div>
                   </div>
                   <div class="row">
                       <div class="form-group clockpicker col-sm-6">
@@ -101,5 +119,57 @@
             donetext: 'Done',
             autoclose: 'true'
         });
+
+        $('#city').prop('disabled', true);
+
+        $('#state').on('select2:select', function (e) {
+          var data = e.params.data;
+    
+          var state = $(this).val();
+
+          var url = 'cities';
+
+            if(state === "0") {
+
+            $('#city').empty();
+            $('#city').prop('disabled', true);
+
+            }
+
+            else {
+
+                if (url) {
+
+                  $.ajaxSetup({ 
+
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } 
+
+                  });
+
+                  $.ajax({
+                            method: "POST",
+                            url: url,
+                            data: {
+                            state: state,
+                            },
+                            success: function(result){
+
+                              var city = JSON.parse(result);
+
+                              $('#city').empty();
+
+                              $('#city').select2({ data: city['city'] });
+
+                              $('#city').prop('disabled', false);
+
+
+                            }
+                  });
+
+                }
+
+            }
+});
+
     </script>
 @endsection

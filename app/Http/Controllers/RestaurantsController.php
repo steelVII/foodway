@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Locations;
 use App\Restaurants;
 use App\FoodCategories;
 use App\Vendor;
@@ -146,9 +147,10 @@ class RestaurantsController extends Controller
         $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
         $restaurant = $restaurants::find($restaurant_id);
+        $locations = Locations::select('state')->orderBy('state','ASC')->get();
         $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
 
-        return view('backend.Restaurants.edit_restaurant', compact('restaurant','food_cats'));
+        return view('backend.Restaurants.edit_restaurant', compact('restaurant','food_cats','locations'));
 
     }
 
@@ -195,6 +197,8 @@ class RestaurantsController extends Controller
 
         if(request('phone_number')) { $restaurant->phone_num = request('phone_number'); }
         if(request('address')) { $restaurant->address = request('address'); }
+        if(request('state')) { $restaurant->state = request('state'); }
+        if(request('city')) { $restaurant->city = request('city'); }
         if(request('postcode')) { $restaurant->postcode = request('postcode'); }
 
         $cat_list = null;

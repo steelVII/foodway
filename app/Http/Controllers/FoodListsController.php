@@ -75,6 +75,7 @@ class FoodListsController extends Controller
             FoodLists::create([
 
                 'food_name' => request('food-list-item'),
+                'description' => request('dish_description'),
                 'price' => request('price'),
                 'food_image' => $request->file('foodimage')->getClientOriginalName(),
                 'restaurant_id' => $restaurant->id,
@@ -92,6 +93,7 @@ class FoodListsController extends Controller
             FoodLists::create([
 
                 'food_name' => request('food-list-item'),
+                'description' => request('dish_description'),
                 'price' => request('price'),
                 'restaurant_id' => $restaurant->id,
                 'restaurant_name' => $restaurant->restaurant_name,
@@ -152,6 +154,7 @@ class FoodListsController extends Controller
         $foodlist = $foodLists::find($id);
 
         $foodlist->food_name = request('food-list-item');
+        $foodlist->description = request('dish_description');
         $foodlist->price = request('price');
 
         if(request('salesprice')) {
