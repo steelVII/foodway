@@ -11,9 +11,13 @@
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h1 class="title is-3 has-text-weight-normal">
-            Enter your postcode to find local restaurants and takeaways
-        </h1>
+          <div class="columns">
+              <div class="column is-6 is-offset-3">
+                    <h1 class="title is-3 has-text-weight-normal search-title">
+                        Enter your postcode to find local restaurants and takeaways
+                    </h1>
+              </div>
+          </div>
         <div class="columns">
             <div class="column is-6 is-offset-3">
 
@@ -22,8 +26,8 @@
                     <div class="control is-expanded">
                         <input class="input is-medium" type="text" placeholder="Search Restaurants">
                     </div>
-                    <div class="control">
-                            <a class="button is-medium is-primary">
+                    <div class="control is-expanded">
+                            <a class="button is-medium is-primary" style="width:100%;">
                               Search
                             </a>
                     </div>

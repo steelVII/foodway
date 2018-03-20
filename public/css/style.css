@@ -152,6 +152,13 @@ margin-top: 5%;
 
 }
 
+.title.is-3.has-text-weight-normal.search-title {
+
+font-size: 2.35rem;
+color: rgb(60, 60, 63);
+
+}
+
 .section.city-bg {
 
     background: url("/assets/img/gallery/city-bg.jpg");
