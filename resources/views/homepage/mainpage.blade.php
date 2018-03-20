@@ -64,7 +64,7 @@
 
     </section> -->
 
-    <section class="section">
+    <section class="section city-bg">
         <div class="container is-fullhd">
                 <h4 class="title is-3 has-text-centered">Recommended Places</h4>
             <div class="content is-small">
@@ -106,6 +106,21 @@
             </div>
             </div>
         </div>
+
+        <section class="section mobile-app">
+                <div class="container is-fullhd margin-pos">
+                    <div class="content">
+                        <div class="columns align-items-center">
+                            <div class="column is-4 app-title">
+                        
+                                <h1>Mobile App Coming Soon</h1>
+                                <h3>Order food with just a few clicks!</h3>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
     </section>
 
     <!-- <section class="section order-step">
@@ -137,20 +152,6 @@
             </div>
     </div>
     </section> -->
-
-    <section class="section mobile-app">
-        <div class="container is-fullhd">
-            <div class="content">
-                <div class="columns align-items-center">
-                    <div class="column is-4 is-offset-8">
-                
-                        <h1>Mobile App Coming Soon</h1>
-                
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 @endsection
 

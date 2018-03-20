@@ -27,6 +27,21 @@ z-index: 999;
     display: none;
 }
 
+#order-column.column.is-one-quarter.padding-lf-0 {
+    position: absolute;
+    background: #fff;
+    height: 100%;
+    right: 0;
+    box-shadow: 1px 1px 10px -1px #000;
+    transform: translateX(100%);
+    transition: transform 0.75s linear;
+}
+
+#order-column.column.is-one-quarter.padding-lf-0.test {
+    transform: translateX(0%);
+    transition: transform 0.75s linear;
+}
+
 .badge {
     width: 24px;
     height: 24px;
@@ -132,8 +147,17 @@ margin-top: 5%;
 
 .homepage-banner {
 
-    background: url("/assets/img/gallery/foodway-banner-chged-to-fullscreen.jpg");
+    background: url("/assets/img/gallery/main-bg.jpg");
     background-size: cover;
+
+}
+
+.section.city-bg {
+
+    background: url("/assets/img/gallery/city-bg.jpg");
+    background-size: contain;
+    background-position: bottom;
+    padding: 75px 0 0 0;
 
 }
 
@@ -175,13 +199,27 @@ margin-top: 5%;
 
 .section.mobile-app{
 
-    background: url("/assets/img/gallery/mobile-app.jpg");
+    margin-top: 36px;
+    background: url("/assets/img/gallery/app-bg-2.png");
     background-size: cover;
-    height: 50vh;
+    height: 87.5vh;
     display: Flex;
     align-items: center;
     justify-content: center;
     
+}
+
+.section.mobile-app .margin-pos {
+
+    margin-top: 20%;
+    margin-left: 5%;
+
+}
+
+.section.mobile-app .app-title h1, .section.mobile-app .app-title h3  {
+
+    color:#fff;
+
 }
 
 .tile.is-child.box {
@@ -288,6 +326,29 @@ a.tile.is-child.box:hover {
 
     font-size: 0.825rem;
 
+}
+
+.cart-button.button {
+
+position: absolute;
+top:32px;
+right:32px;
+
+}
+
+.cart-button.inner.button {
+
+    position: relative;
+    margin-bottom: 16px;
+    top:0;
+    right:0;
+    
+}
+
+.cart-button.button .fas {
+
+margin-right: 8px;
+    
 }
 
 .promo {

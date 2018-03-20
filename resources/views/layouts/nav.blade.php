@@ -19,32 +19,9 @@ nav-wrapper-fixed @endif">
         </a>
         <a href="{{ route('front_restaurants') }}" class="navbar-item">Restaurants</a>
 
-        <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href="#">
+            <a class="navbar-item" href="#">
               Orders <badge-quantity :badge="rows"></badge-quantity>
             </a>
-            <div class="navbar-dropdown is-boxed is-right" style="width:320px;">
-                <div class="container spacing">
-
-                        <div id="cart" class="content">
-
-                            <h3>Order</h3>
-
-                            <hr>
-
-                            <item-list :orderchit="rows"></item-list>
-
-                            <div class="hide" v-if="rows !== 'undefined' && rows.length > 0">
-                                <hr v-cloak>
-                            </div>
-
-                            <total-item :full="rows"></total-item>
-
-                        </div>
-
-                 </div>
-            </div>
-          </div>
 
         @if (Auth::check())
         <div class="navbar-item has-dropdown is-hoverable">

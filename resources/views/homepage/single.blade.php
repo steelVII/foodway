@@ -12,7 +12,7 @@
 <div id="app" class="has-content">
 
             <div class="content">
-                <div class="columns">
+                <div class="columns" style="position:relative;">
                     <div class="column padding-rg-0">
 
                         <div class="card">
@@ -86,9 +86,13 @@
                             
                     </div>
 
-                    <!-- <div class="column is-one-quarter padding-lf-0">
+                    <div class="cart-button button"><i class="fas fa-list"></i> Orders</div>
+
+                    <div id="order-column" class="column is-one-quarter padding-lf-0">
 
                         <div class="container spacing">
+
+                                <div class="cart-button inner button is-primary"><i class="fas fa-times-circle"></i> Close</div>
 
                             <div class="box">
                                 <div class="content">
@@ -110,7 +114,7 @@
 
                          </div>
 
-                    </div> -->
+                    </div>
                 </div>
             </div>
 
@@ -121,6 +125,23 @@
 @section('cart')
 
 <script>
+
+$(document).on('click','.cart-button', function() {
+
+    if( $('#order-column').hasClass('test') ) {
+
+    $('#order-column').removeClass('test');
+
+    }
+
+    else {
+
+    $('#order-column').addClass('test');
+
+    }
+
+});
+
 
     var sticky = new Sticky('.selector');
 
