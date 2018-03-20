@@ -267,7 +267,7 @@ a.tile.is-child.box:hover {
 }
 
 .tile.is-child.box:hover:before {
-    background: rgba(255, 158, 158, 0.52);
+    background: rgba(243, 88, 45,0.78);
     box-shadow: 0;
 
 }
