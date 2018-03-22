@@ -20,7 +20,7 @@
 
 Vue.component('item-list',{
 
-props: ['orderchit','id'],
+props: ['orderchit'],
 template: `
 
 <div>
@@ -106,7 +106,7 @@ methods: {
 
 Vue.component('total-item',{
 
-props: ['full'],
+props: ['full','resId'],
 
 template: `
 
@@ -136,6 +136,10 @@ template: `
             <div class="column has-text-right">
                 <span>RM {{totals(true)}}</span>
             </div>
+        </div>
+
+        <div class="hide has-text-centered" v-if="subtotals() != 0 && gst() != 0 && totals() != 0">
+            <a v-on:click="checkout()" class="checkout-button button is-primary is-outlined is-medium unset">Checkout</a>
         </div>
     </div>
 
@@ -196,6 +200,33 @@ methods: {
             }
 
             return totals;
+
+        },
+
+        checkout: function() {
+
+            //this.full -> List Items Object
+            //this.subtotals(false) -> Get Subtotals
+            //this.gst('',false) -> Get gst and return value
+            //this.totals(false) -> Get Totals
+
+            axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            axios.post('/checkout', {
+                id: this.resId,
+                items: this.full,
+                subtotal: this.subtotals(false),
+                gst: this.gst('',false),
+                total: this.totals(false)
+              })
+              .then(function (response) {
+                window.location.href = '/checkout_payment';
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+
+            //alert(this.full[0].name + ',' + this.subtotals(false) + ',' + this.gst('',false)+ ',' + this.totals(false));
 
         }
 

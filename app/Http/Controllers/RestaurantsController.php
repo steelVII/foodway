@@ -222,11 +222,23 @@ class RestaurantsController extends Controller
 
          }
 
+        if(request('restaurantlogo')) {
+
+            $logo = str_replace("'", '', $request->file('restaurantlogo')->getClientOriginalName());
+
+            $restaurant->restaurant_logo = $logo;
+
+            $request->file('restaurantlogo')->storeAs('public',str_replace("'", '',$request->file('restaurantlogo')->getClientOriginalName()));
+
+        }
+
         if(request('restaurantimage')) {
 
-            $restaurant->restaurant_image = $request->file('restaurantimage')->getClientOriginalName();
+            $image = str_replace("'", '', $request->file('restaurantimage')->getClientOriginalName());
 
-            $request->file('restaurantimage')->storeAs('public',$request->file('restaurantimage')->getClientOriginalName());
+            $restaurant->restaurant_image = $image;
+
+            $request->file('restaurantimage')->storeAs('public',str_replace("'", '',$request->file('restaurantimage')->getClientOriginalName()));
 
         }
 

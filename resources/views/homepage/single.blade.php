@@ -24,10 +24,11 @@
                             <div class="card-content">
 
                                     <div class="columns">
-                                        <div class="column is-2" style="background:#000;"></div>
+                                        <div class="column is-2 res-logo" style="background-image:url({{ asset('storage/'.$single->restaurant_logo) }});"></div>
                                         <div class="column">
                                             <h3>{{ $single->restaurant_name }}</h3>
-                                            <span>{{ $single->address }}</span>
+                                            <h5>{{ $single->address }}</h5>
+                                            <h6>{{ $single->city }}, {{ $single->state }}</h6>
                                         </div>
                                         <div class="column is-6">
                                             <restaurants :res-info="{{ $single }}"></restaurants>
@@ -112,11 +113,7 @@
                                         <hr v-cloak>
                                     </div>
 
-                                    <total-item :full="rows"></total-item>
-
-                                    <div class="hide has-text-centered" v-if="rows !== 'undefined' && rows.length > 0">
-                                        <a href="" class="checkout-button button is-primary is-outlined is-medium unset">Checkout</a>
-                                    </div>
+                                    <total-item :full="rows" res-id="{{$single->id}}"></total-item>
 
                                 </div>
                             </div>

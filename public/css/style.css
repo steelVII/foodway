@@ -316,8 +316,15 @@ a.tile.is-child.box:hover {
 .card-image .image {
 
     min-height: 200px;
-    background-size: cover;
 
+}
+
+.res-logo {
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 .rm-margin nav.tabs >ul {

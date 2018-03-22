@@ -80,16 +80,28 @@
 
                       </select>
                     </div>
-                  <div class="form-group">
-                      <label class="control-label">Restaurant Image</label>         
-                      <input type="file" name="restaurantimage" accept="image/*" multiple="multiple" onchange="loadFile(event)">
-                      <div class="row">
-                          <div class="col-sm-12"><h5>Preview</h5></div>
-                          <div class="col-sm-6">
-                          <img id="preview" src="{{ asset('storage/'.$restaurant->restaurant_image) }}"/>
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label class="control-label">Restaurant Logo</label>         
+                          <input type="file" name="restaurantlogo" accept="image/*" onchange="loadFileLogo(event)">
+                          <div class="row">
+                              <div class="col-sm-12"><h5>Preview Logo</h5></div>
+                              <div class="col-sm-4">
+                              <img id="previewlogo" src="{{ asset('storage/'.$restaurant->restaurant_logo) }}"/>
+                              </div>
                           </div>
                       </div>
-                  </div>
+                      <div class="form-group col-sm-6">
+                          <label class="control-label">Restaurant Image</label>         
+                          <input type="file" name="restaurantimage" accept="image/*" onchange="loadFile(event)">
+                          <div class="row">
+                              <div class="col-sm-12"><h5>Preview</h5></div>
+                              <div class="col-sm-8">
+                              <img id="preview" src="{{ asset('storage/'.$restaurant->restaurant_image) }}"/>
+                              </div>
+                          </div>
+                      </div>
+                </div>
                   <p class="text-right">
                     <button type="submit" class="btn btn-space btn-primary">Submit</button>
                   </p>
@@ -107,6 +119,15 @@
           var reader = new FileReader();
           reader.onload = function(){
             var output = document.getElementById('preview');
+            output.src = reader.result;
+          };
+          reader.readAsDataURL(event.target.files[0]);
+        };
+
+        var loadFileLogo = function(event) {
+          var reader = new FileReader();
+          reader.onload = function(){
+            var output = document.getElementById('previewlogo');
             output.src = reader.result;
           };
           reader.readAsDataURL(event.target.files[0]);
@@ -161,7 +182,6 @@
                               $('#city').select2({ data: city['city'] });
 
                               $('#city').prop('disabled', false);
-
 
                             }
                   });

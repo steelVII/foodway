@@ -30,7 +30,7 @@
                         <a href="/restaurant/{{$restaurant->restaurant_name}}">
                             <div class="card">
                                     <div class="card-image">
-                                        <div class="image" style="background-image: url({{ asset('storage/'.$restaurant->restaurant_image) }})"></div>
+                                        <div class="image res-logo" style="background-image: url({{ asset('storage/'.$restaurant->restaurant_logo) }})"></div>
                                     </div>
                                     <div class="card-content">
                                         <div class="media">

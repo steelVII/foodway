@@ -6,7 +6,8 @@
  */
 
 require('./bootstrap');
-import Buefy from 'buefy'
+import Buefy from 'buefy';
+import axios from 'axios';
 
 window.Sticky = require('sticky-js');
 window.Vue = require('vue');

@@ -28,6 +28,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('address')->nullable();
             $table->string('opening_hours')->nullable();
             $table->string('closing_hours')->nullable();
+            $table->string('restaurant_logo')->nullable();
             $table->string('restaurant_image')->nullable();
             $table->timestamps();
         });

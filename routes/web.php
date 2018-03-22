@@ -24,6 +24,9 @@ Route::get('/', function () {
 
 Route::get('/about', 'AboutController@index');
 
+Route::get('/checkout_payment','CheckoutController@index');
+Route::post('/checkout','CheckoutController@checkout');
+
 //Admin Backend
 Route::middleware(['isadmin'])->group(function () {
 
