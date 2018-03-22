@@ -19,9 +19,17 @@ nav-wrapper-fixed @endif">
         </a>
         <a href="{{ route('front_restaurants') }}" class="navbar-item">Restaurants</a>
 
-            <a class="navbar-item" href="#">
-              Orders <badge-quantity :badge="rows"></badge-quantity>
-            </a>
+        @if (!Request::is('restaurant/*')) 
+
+        <link-restaurant></link-restaurant>
+
+        @else
+
+          <a v-cloak v-on:click="show = !show" class="navbar-item" href="#">
+              <i class="fas fa-shopping-basket"></i> <badge-quantity :badge="rows"></badge-quantity>
+          </a>
+
+        @endif
 
         @if (Auth::check())
         <div class="navbar-item has-dropdown is-hoverable">

@@ -42,11 +42,11 @@
 
 <script>
     export default {
-        props: ['test'],
+        props: ['resInfo'],
         data() {
             return {
                 activeTab: 0,
-                info: this.test
+                info: this.resInfo
             }
         }
     }

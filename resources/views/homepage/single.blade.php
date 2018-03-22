@@ -23,13 +23,16 @@
 
                             <div class="card-content">
 
-                                <div class="content rm-margin">
-
-                                    <h3>{{ $single->restaurant_name }}</h3>
-
-                                    <restaurants :test="{{ $single }}"></restaurants>
-
-                                </div>
+                                    <div class="columns">
+                                        <div class="column is-2" style="background:#000;"></div>
+                                        <div class="column">
+                                            <h3>{{ $single->restaurant_name }}</h3>
+                                            <span>{{ $single->address }}</span>
+                                        </div>
+                                        <div class="column is-6">
+                                            <restaurants :res-info="{{ $single }}"></restaurants>
+                                        </div>
+                                    </div>
 
                             </div>
 
@@ -38,6 +41,8 @@
                         <hr>
 
                         <div class="container is-fluid">
+
+                        <h2>Menu</h2>
 
                         @foreach ($menu_cat as $cat)
                         
@@ -68,7 +73,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="column is-2 has-text-centered">
-                                                    <i v-on:click="addDish({{$menuitem}})" class="far fa-plus-square"></i>
+                                                    <i v-on:click="addDish({{$menuitem}},{{ $single->id }})" class="far fa-plus-square"></i>
                                                     </div>
                                                 </div>                
 
@@ -86,16 +91,16 @@
                             
                     </div>
 
-                    <div class="cart-button button"><i class="fas fa-list"></i> Orders</div>
-
-                    <div id="order-column" class="column is-one-quarter padding-lf-0">
+                    <div class="cart-button button" v-on:click="show = !show"><i class="fas fa-shopping-basket"></i> Orders <badge-quantity :badge="rows"></badge-quantity></div>
+                    <transition name="slide" v-cloak>
+                    <div v-if="show" id="order-column" class="column is-3 padding-lf-0">
 
                         <div class="container spacing">
 
-                                <div class="cart-button inner button is-primary"><i class="fas fa-times-circle"></i> Close</div>
+                                <div v-on:click="show = !show" class="cart-button inner button is-primary"><i class="fas fa-times-circle"></i> Close</div>
 
-                            <div class="box">
-                                <div class="content">
+                            <div class="">
+                                <div class="content hold">
 
                                     <h3>Order</h3>
 
@@ -109,12 +114,17 @@
 
                                     <total-item :full="rows"></total-item>
 
+                                    <div class="hide has-text-centered" v-if="rows !== 'undefined' && rows.length > 0">
+                                        <a href="" class="checkout-button button is-primary is-outlined is-medium unset">Checkout</a>
+                                    </div>
+
                                 </div>
                             </div>
 
                          </div>
 
                     </div>
+                </transition>
                 </div>
             </div>
 
@@ -126,265 +136,11 @@
 
 <script>
 
-$(document).on('click','.cart-button', function() {
-
-    if( $('#order-column').hasClass('test') ) {
-
-    $('#order-column').removeClass('test');
-
-    }
-
-    else {
-
-    $('#order-column').addClass('test');
-
-    }
-
-});
-
-
-    var sticky = new Sticky('.selector');
-
-    Vue.component('badge-quantity',{
-
-        props: ['badge'],
-        template: `
-        
-            <div>
-            
-                <div class="badge">@{{quantity}}</div>
-
-            </div>
-
-        
-        `,
-
-        computed: {
-
-            quantity: function() {
-
-                let quantity = 0;
-
-                for(var index = 0; index < this.badge.length; index++) {
-
-                quantity += this.badge[index].quantity;
-
-                }
-
-                return quantity;
-
-            }
-
-
-        }
-
-
-    });
-
-    Vue.component('item-list',{
-
-    props: ['orderchit'],
-    template: `
-
-    <div>
-
-        <div v-if="orderchit !== 'undefined' && orderchit.length > 0">
-            <div class="content columns" v-for="item in orderchit">
-                <span class="column is-7">@{{item.name}} x @{{item.quantity}}</span>
-                <div class="column has-text-right">
-                    <p>RM @{{ itemSubtotal(item.price,item.quantity) }}</p>
-                    <span class="is-primary is-outlined" v-on:click="minusItem(item)"><i class="fas fa-minus-circle"></i></span>
-                    <span class="is-primary" v-on:click="addItem(item)"><i class="fas fa-plus-circle"></i></span>
-                </div>
-            </div>
-        </div>
-
-        <div v-else>There is nothing for order. Start adding your meals now.</div>
-
-    </div>
-
-    `,
-
-    methods: {
-
-        addItem: function(add){
-
-            add.quantity = add.quantity + 1;
-
-        },
-
-        minusItem: function(minus){
-
-            minus.quantity = minus.quantity - 1;
-
-            var index = this.orderchit.indexOf(minus);
-
-            if(minus.quantity === 0) {
-
-                this.orderchit.splice(index, 1);
-
-            }
-
-        },
-
-        itemSubtotal: function(price,quantity){
-
-            let sub = 0;
-
-            sub = price * quantity;
-
-            sub = Math.round(sub * 100) / 100;
-
-            return sub.toFixed(2);
-
-        }
-    },
-
-});
-
-Vue.component('total-item',{
-
-    props: ['full'],
-
-    template: `
-    
-        <div class="totals content">
-            <div class="columns" v-if="subtotals() != 0">
-                <div class="column is-7">
-                    <span class="subtitle is-7 has-text-weight-semibold">Subtotal</span>
-                </div>
-                <div class="column has-text-right">
-                    <span>RM @{{subtotals(true)}}</span>
-                </div>
-            </div>
-
-            <div class="columns" v-if="gst() != 0">
-                <div class="column is-7">
-                    <span class="subtitle is-8 has-text-weight-semibold">Inclusive GST (6%)</span>
-                </div>
-                <div class="column has-text-right">
-                    <span>RM @{{gst('',true)}}</span>
-                </div>
-            </div>
-
-            <div class="columns" v-if="totals() != 0">
-                <div class="column is-7">
-                    <span class="subtitle is-6 has-text-weight-semibold">Total</span>
-                </div>
-                <div class="column has-text-right">
-                    <span>RM @{{totals(true)}}</span>
-                </div>
-            </div>
-        </div>
-    
-    `,
-
-    methods: {
-
-            subtotals: function(isDisplay) {
-
-                var subtotals = 0;
-
-                for(var index = 0; index < this.full.length; index++) {
-
-                    subtotals += this.full[index].price * this.full[index].quantity;
-
-                    subtotals = Math.round(subtotals * 100) / 100;
-                    
-                }
-
-                if(isDisplay == true) {
-
-                    return subtotals.toFixed(2);
-
-                }
-
-                return subtotals;
-
-                },
-
-            gst: function(calsub,isDisplay){
-
-                 let gst = this.subtotals(false) * 0.06;
-
-                 gst = Math.round(gst * 100) / 100;
-
-                 if(isDisplay == true) {
-
-                    return gst.toFixed(2);
-
-                 }
-
-                 return gst;
-
-            },
-
-            totals: function(isDisplay) {
-
-                var totals = 0;
-
-                totals = this.subtotals(false) + this.gst(this.subtotals(false), false);
-
-                totals = Math.round(totals * 100) / 100;
-
-                if(isDisplay == true) {
-
-                    return totals.toFixed(2);
-
-                }
-
-                return totals;
-
-            }
-
-    }
-
-});
-
-new Vue ({
-
-    el: '#app',
-    data: {
-        rows: []
-    },
-    methods: {
-        addDish: function (item) {
-        // `this` inside methods points to the Vue instance
-        var found = false;
-
-            for (var i = 0; i < this.rows.length; i++) {
-
-                if (this.rows[i].sku === item.id) {
-
-                    this.rows[i].quantity = this.rows[i].quantity + 1;
-                    console.log(this.rows)
-
-                    found = true;
-                    break;
-
-                }
-
-            }
-
-            if(!found){
-
-                if(item.sales_price != null) {
-
-                    this.rows.push({sku: item.id, name: item.food_name, price: item.sales_price, quantity: 1})
-
-                }
-
-                else {
-
-                    this.rows.push({sku: item.id, name: item.food_name, price: item.price, quantity: 1})
-
-                }
-            }
-        }
-    }
-
-});
+var singleInfo = {!! json_encode($single->toArray()) !!};
+var thisID = singleInfo.id;
 
 </script>
+
+<script src="/js/cart.js" type="text/javascript"></script>
     
 @endsection

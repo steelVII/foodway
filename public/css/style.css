@@ -27,19 +27,57 @@ z-index: 999;
     display: none;
 }
 
-#order-column.column.is-one-quarter.padding-lf-0 {
+ #order-column.column.is-3 {
     position: absolute;
     background: #fff;
     height: 100%;
+    top: 0;
     right: 0;
     box-shadow: 1px 1px 10px -1px #000;
-    transform: translateX(100%);
-    transition: transform 0.75s linear;
+    
 }
 
-#order-column.column.is-one-quarter.padding-lf-0.test {
-    transform: translateX(0%);
-    transition: transform 0.75s linear;
+/*
+#order-column.column.is-one-quarter.padding-lf-0.slide {
+    transform: translateX(0);
+    transition: transform 0.175s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+} 
+*/
+
+.slide-enter-active {
+    transform: translateX(0);
+    transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+}
+
+.slide-leave-active {
+    transition: all 0.15s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+}
+
+.slide-enter,
+.slide-leave-to
+/* .slide-leave-active below version 2.1.8 */
+
+{
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.content.hold {
+    pointer-events: none;
+    user-select: none;
+}
+
+.content.hold .unset{
+    pointer-events: initial;
+}
+
+.minus-button, .plus-button {
+
+cursor: pointer;
+
 }
 
 .badge {
@@ -115,17 +153,6 @@ nav.navbar.navbar-default.navbar-fixed-top.be-top-header {
 
 }
 
-.column.padding-rg-0 {
-
-padding-right: 0;
-
-}
-
-.column.padding-lf-0 {
-
-    padding-left: 0;
-    
-}
 
 .container.spacing {
     margin: 16px 16px 0;
@@ -413,5 +440,22 @@ footer .content a:hover {
 .ml-auto, .mx-auto {
     margin-right: 5%!important;
 }
+
+.column.padding-rg-0 {
+
+    padding-right: 0;
+    
+    }
+    
+    .column.padding-lf-0 {
+    
+    padding-left: 0 !important;
+        
+    }
+
+}
+
+@media only screen and (max-width:540px) {
+
 
 }

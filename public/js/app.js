@@ -1178,6 +1178,7 @@ Vue.component('example', __webpack_require__(42));
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Collapse.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Collapse);
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Dropdown.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Dropdown);
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tabs.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tabs);
+Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tooltip.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tooltip);
 
 Vue.component('restaurants', __webpack_require__(45));
 
@@ -43800,7 +43801,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\test.vue"
+Component.options.__file = "resources\\assets\\js\\components\\RestaurantInfo.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43809,9 +43810,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-dc63952e", Component.options)
+    hotAPI.createRecord("data-v-52b70342", Component.options)
   } else {
-    hotAPI.reload("data-v-dc63952e", Component.options)
+    hotAPI.reload("data-v-52b70342", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43871,11 +43872,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['test'],
+    props: ['resInfo'],
     data: function data() {
         return {
             activeTab: 0,
-            info: this.test
+            info: this.resInfo
         };
     }
 });
@@ -43966,7 +43967,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-dc63952e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-52b70342", module.exports)
   }
 }
 

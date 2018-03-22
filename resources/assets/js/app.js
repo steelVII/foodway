@@ -25,8 +25,9 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component(Buefy.Collapse.name, Buefy.Collapse);
 Vue.component(Buefy.Dropdown.name,Buefy.Dropdown);
 Vue.component(Buefy.Tabs.name,Buefy.Tabs);
+Vue.component(Buefy.Tooltip.name,Buefy.Tooltip);
 
-Vue.component('restaurants', require('./components/test.vue'));
+Vue.component('restaurants', require('./components/RestaurantInfo.vue'));
 
 
 
