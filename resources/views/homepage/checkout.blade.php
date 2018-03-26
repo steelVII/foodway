@@ -21,155 +21,95 @@
 <section class="section">
     <div class="container is-fullhd">
 
-<div class="columns">
-    <div class="column is-7">
-            <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                      <label class="label">From</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <p class="control is-expanded has-icons-left">
-                          <input class="input" type="text" placeholder="Name">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
-                          </span>
-                        </p>
-                      </div>
-                      <div class="field">
-                        <p class="control is-expanded has-icons-left has-icons-right">
-                          <input class="input is-success" type="email" placeholder="Email" value="alex@smith.com">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                          </span>
-                          <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                    <div class="field-label"></div>
-                    <div class="field-body">
-                      <div class="field is-expanded">
-                        <div class="field has-addons">
-                          <p class="control">
-                            <a class="button is-static">
-                              +44
-                            </a>
-                          </p>
-                          <p class="control is-expanded">
-                            <input class="input" type="tel" placeholder="Your phone number">
-                          </p>
-                        </div>
-                        <p class="help">Do not enter the first zero</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                      <label class="label">Department</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field is-narrow">
-                        <div class="control">
-                          <div class="select is-fullwidth">
-                            <select>
-                              <option>Business development</option>
-                              <option>Marketing</option>
-                              <option>Sales</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                    <div class="field-label">
-                      <label class="label">Already a member?</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field is-narrow">
-                        <div class="control">
-                          <label class="radio">
-                            <input type="radio" name="member">
-                            Yes
-                          </label>
-                          <label class="radio">
-                            <input type="radio" name="member">
-                            No
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                      <label class="label">Subject</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input is-danger" type="text" placeholder="e.g. Partnership opportunity">
-                        </div>
-                        <p class="help is-danger">
-                          This field is required
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                      <label class="label">Question</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                    <div class="field-label">
-                      <!-- Left empty for spacing -->
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <button class="button is-primary">
-                            Send message
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-    </div>
-    <div class="column box">
-            <div class="content">
+        <form action="/checkout_gateway" class="form columns is-variable is-8">
 
-                    <h3>{{$res_name}}</h3>
+            <div class="column is-7">
 
-                    <ul>
-                        @foreach ($items as $item)
-                           <li> {{$item['name']}} : {{$item['price']}} x {{$item['quantity']}} = {{$item['price'] * $item['quantity'] }} </li>
-                        @endforeach
-                    </ul>
+                <checkout-form></checkout-form>
 
-                    <h4>Subtotal: {{$subtotal}}</h4>
-                    <h4>Gst: {{$gst}}</h4>
-                    <h4>Total: {{$total}}</h4>
-        
+                <div class="content" style="margin-top:32px;">
+                    <h3 class="title is-4 has-text-weight-semibold">Payment</h3>
                 </div>
-    </div>
-</div>
+            
+            </div>
+
+            <div class="column box">
+                    <div class="content">
+
+                            <h3 class="title is-4 has-text-weight-semibold">{{$res_name}}</h3>
+
+                            <table class="table is-striped">
+                                <thead>
+                                    <tr>
+                                    <th style="width:50%;">Dish</th>
+                                    <th>Price</th>
+                                    <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach ($items as $item)
+                                        <tr>
+                                            <td>{{$item['name']}} x {{$item['quantity']}}</td>
+                                            <td>RM{{$item['price']}}</td>
+                                            <td>RM{{ number_format((float)$item['price'] * $item['quantity'], 2, '.', '')}}</td>
+                                        </tr>
+
+                                        @endforeach
+                                </tbody>
+                            </table>
+
+                            <hr>
+
+                            <div class="columns is-mobile">
+                                <div class="column is-7">
+
+                                    <h4>Subtotal:</h4>
+
+                                </div>
+                                
+                                <div class="column has-text-right">
+
+                                    <h4>RM{{$subtotal}}</h4>
+
+                                </div>
+                            </div>
+
+                            <div class="columns is-mobile">
+                                <div class="column is-7">
+
+                                    <h4>GST:</h4>
+
+                                </div>
+                                
+                                <div class="column has-text-right">
+
+                                    <h4>RM{{$gst}}</h4>
+
+                                </div>
+                            </div>
+
+                            <div class="columns is-mobile">
+                                <div class="column is-7">
+
+                                    <h4>Total:</h4>
+
+                                </div>
+                                
+                                <div class="column has-text-right">
+
+                                    <h4>RM{{$total}}</h4>
+
+                                </div>
+                            </div>
+
+                            <div class="control has-text-right">
+                                <button class="button is-primary is-medium">Submit</button>
+                            </div>
+                
+                    </div>
+            </div>
+
+        </form>
 
     </div>
 </section>

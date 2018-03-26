@@ -12560,7 +12560,6 @@ label.panel-block:hover {
       -ms-flex-pack: center;
           justify-content: center;
   overflow: hidden;
-  position: fixed;
   z-index: 999;
 }
 
@@ -12568,6 +12567,17 @@ label.panel-block:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.loading-overlay.is-full-page {
+  position: fixed;
+}
+
+.loading-overlay.is-full-page .loading-icon:after {
+  top: calc(50% - 2.5em);
+  left: calc(50% - 2.5em);
+  width: 5em;
+  height: 5em;
 }
 
 .loading-overlay .loading-background {
@@ -12597,10 +12607,10 @@ label.panel-block:hover {
   position: relative;
   width: 1em;
   position: absolute;
-  top: 0;
-  left: calc(50% - 2.5em);
-  width: 5em;
-  height: 5em;
+  top: calc(50% - 1.5em);
+  left: calc(50% - 1.5em);
+  width: 3em;
+  height: 3em;
   border-width: 0.25em;
 }
 
@@ -12803,27 +12813,27 @@ label.panel-block:hover {
 }
 
 .notices .toast.is-top,
-.notices .snackbar.is-top {
-  -ms-flex-item-align: center;
-      align-self: center;
-}
-
-.notices .toast.is-top-right,
-.notices .snackbar.is-top-right {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-
 .notices .toast.is-bottom,
+.notices .snackbar.is-top,
 .notices .snackbar.is-bottom {
   -ms-flex-item-align: center;
       align-self: center;
 }
 
+.notices .toast.is-top-right,
 .notices .toast.is-bottom-right,
+.notices .snackbar.is-top-right,
 .notices .snackbar.is-bottom-right {
   -ms-flex-item-align: end;
       align-self: flex-end;
+}
+
+.notices .toast.is-top-left,
+.notices .toast.is-bottom-left,
+.notices .snackbar.is-top-left,
+.notices .snackbar.is-bottom-left {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .notices .toast.is-toast,
@@ -13439,11 +13449,11 @@ label.panel-block:hover {
     margin-bottom: 1rem;
   }
 
-  .b-table .table.has-mobile-cards tr:not(.is-selected) {
+  .b-table .table.has-mobile-cards tr:not([class*="is-"]) {
     background: inherit;
   }
 
-  .b-table .table.has-mobile-cards tr:not(.is-selected):hover {
+  .b-table .table.has-mobile-cards tr:not([class*="is-"]):hover {
     background-color: inherit;
   }
 
@@ -13530,8 +13540,8 @@ label.panel-block:hover {
 .b-tabs .tab-content .tab-item {
   -ms-flex-negative: 0;
       flex-shrink: 0;
-  -ms-flex-preferred-size: 100%;
-      flex-basis: 100%;
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
 }
 
 .b-tabs:not(:last-child) {
@@ -13601,6 +13611,7 @@ label.panel-block:hover {
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
+  min-width: 10em;
 }
 
 .taginput .taginput-container .autocomplete input:focus {

@@ -74,7 +74,7 @@ z-index: 999;
     pointer-events: initial;
 }
 
-.minus-button, .plus-button {
+.minus-button, .plus-button, .remove-button {
 
 cursor: pointer;
 

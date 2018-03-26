@@ -57,7 +57,7 @@
 
                                         @if ($cat == $menuitem->food_categories)
 
-                                                <div class="columns box">
+                                                <div class="columns box is-mobile">
                                                 <!-- <div class="column is-3">
                                                     <img src="{{ asset('storage/foods/'.$menuitem->food_image) }}" alt="">
                                                 </div> -->
@@ -94,7 +94,7 @@
 
                     <div class="cart-button button" v-on:click="show = !show"><i class="fas fa-shopping-basket"></i> Orders <badge-quantity :badge="rows"></badge-quantity></div>
                     <transition name="slide" v-cloak>
-                    <div v-if="show" id="order-column" class="column is-3 padding-lf-0">
+                    <div v-if="show" id="order-column" class="column is-3 padding-lf-0 is-mobile">
 
                         <div class="container spacing">
 

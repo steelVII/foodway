@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFoodListsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateFoodListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('food_lists', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_pos')->default(0);
-            $table->string('food_name');
-            $table->string('description')->nullable();
-            $table->decimal('price',5,2);
-            $table->decimal('sales_price',5,2)->nullable();
-            $table->string('food_image')->nullable();
             $table->integer('restaurant_id')->unsigned();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->string('restaurant_name');
-            $table->string('food_categories');
+            $table->text('dish_items'); // ID and Food name
+            $table->integer('total');
+            $table->text('shipping_details');
+            $table->text('billing_details')->nullable();
+            $table->string('delivery_time');
+            $table->string('payment_method');
+            $table->string('order_id');
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ class CreateFoodListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food_lists');
+        Schema::dropIfExists('orders');
     }
 }

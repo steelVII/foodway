@@ -26,7 +26,7 @@ template: `
 <div>
 
     <div v-if="orderchit !== 'undefined' && orderchit.length > 0">
-        <div class="content columns" v-for="item in orderchit">
+        <div class="content columns is-mobile" v-for="item in orderchit">
             <span class="column is-7">{{item.name}} x {{item.quantity}}</span>
             <div class="column has-text-right">
 
@@ -41,7 +41,7 @@ template: `
                 </b-tooltip>
 
                 <b-tooltip type="is-dark" label="Remove Item" position="is-left">
-                    <span class="plus-button is-primary unset" v-on:click="removeItem(item)"><i class="fas fa-times-circle"></i></span>
+                    <span class="remove-button is-primary unset" v-on:click="removeItem(item)"><i class="fas fa-times-circle"></i></span>
                 </b-tooltip>
 
             </div>
@@ -111,7 +111,7 @@ props: ['full','resId'],
 template: `
 
     <div class="totals content">
-        <div class="columns" v-if="subtotals() != 0">
+        <div class="columns is-mobile" v-if="subtotals() != 0">
             <div class="column is-7">
                 <span class="subtitle is-7 has-text-weight-semibold">Subtotal</span>
             </div>
@@ -120,7 +120,7 @@ template: `
             </div>
         </div>
 
-        <div class="columns" v-if="gst() != 0">
+        <div class="columns is-mobile" v-if="gst() != 0">
             <div class="column is-7">
                 <span class="subtitle is-8 has-text-weight-semibold">Inclusive GST (6%)</span>
             </div>
@@ -129,7 +129,7 @@ template: `
             </div>
         </div>
 
-        <div class="columns" v-if="totals() != 0">
+        <div class="columns is-mobile" v-if="totals() != 0">
             <div class="column is-7">
                 <span class="subtitle is-6 has-text-weight-semibold">Total</span>
             </div>

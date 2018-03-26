@@ -13,13 +13,13 @@ class CheckoutController extends Controller
 
         $id = session('id');
         $items = session('items');
-        $subtotal = session('subtotal');
-        $gst = session('gst');
-        $total = session('total');
+        $subtotal = number_format((float)session('subtotal'), 2, '.', '');
+        $gst = number_format((float)session('gst'), 2, '.', '');
+        $total = number_format((float)session('total'), 2, '.', '');
 
         $res_name = Restaurants::select('restaurant_name')->where('id', $id)->value('restaurant_name');
 
-        return view('homepage.checkout', compact('res_name','items','subtotal','gst','total'));
+        return view('homepage.checkout', compact('id','res_name','items','subtotal','gst','total'));
 
     }
 
