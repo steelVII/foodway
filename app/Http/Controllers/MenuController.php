@@ -35,9 +35,9 @@ class MenuController extends Controller
 
         $menu_category = $request->food_category;
 
-        dd($menu_category);
+        //dd($menu_category);
 
-        foreach($menu_category as $key => $value) {
+        /* foreach($menu_category as $key => $value) {
 
             if($value['name'] == null) {
 
@@ -45,7 +45,7 @@ class MenuController extends Controller
 
             }
 
-        }
+        } */
 
         if(!empty($menu_category) || $menu_category != null) {
 
