@@ -60,9 +60,7 @@ class RestaurantsController extends Controller
      */
     public function create()
     {
-        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
-
-        return view('backend.Restaurants.add_restaurants', compact('food_cats'));
+        return view('backend.Restaurants.add_restaurants');
     }
 
     /**
@@ -76,20 +74,6 @@ class RestaurantsController extends Controller
         $restaurants = new Restaurants();
 
         $request->file('restaurantimage')->storeAs('public',$request->file('restaurantimage')->getClientOriginalName());
-
-        $cat_list = null;
-        $food_cats = request('food_categories');
-        
-        foreach($food_cats as $cat) {
-
-            if ($cat === end($food_cats)) {
-                $cat_list .= $cat;
-                break;
-            }
-
-            $cat_list .= $cat . ",";
-
-        }
 
         Restaurants::create([
 
@@ -148,9 +132,8 @@ class RestaurantsController extends Controller
 
         $restaurant = $restaurants::find($restaurant_id);
         $locations = Locations::select('state')->orderBy('state','ASC')->get();
-        $food_cats = FoodCategories::orderBy('category_name', 'ASC')->get();
 
-        return view('backend.Restaurants.edit_restaurant', compact('restaurant','food_cats','locations'));
+        return view('backend.Restaurants.edit_restaurant', compact('restaurant','locations'));
 
     }
 
@@ -202,25 +185,6 @@ class RestaurantsController extends Controller
         if(request('postcode')) { $restaurant->postcode = request('postcode'); }
 
         $cat_list = null;
-
-        if(request('food_categories')) {
-
-        $food_cats = request('food_categories');
-        
-            foreach($food_cats as $cat) {
-
-                if ($cat === end($food_cats)) {
-                    $cat_list .= $cat;
-                    break;
-                }
-
-                $cat_list .= $cat . ",";
-
-            }
-
-            $restaurant->food_categories = $cat_list;
-
-         }
 
         if(request('restaurantlogo')) {
 

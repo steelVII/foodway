@@ -51,7 +51,7 @@ class FoodListsController extends Controller
 
         $food_cats = Restaurants::select('food_categories')->where('vendor_id', $vendor_id)->value('food_categories');
 
-        $food_cats = explode(",", $food_cats);
+        $food_cats = json_decode($food_cats);
 
         return view('backend.Food_List.add_food_list', compact('restaurant','food_cats'));
 
@@ -135,7 +135,7 @@ class FoodListsController extends Controller
 
         $food_cats = Restaurants::select('food_categories')->where('vendor_id', $vendor_id)->value('food_categories');
 
-        $food_cats = explode(",", $food_cats);
+        $food_cats = json_decode($food_cats);
 
         return view('backend.Food_List.edit_food_list',compact('foodlist','food_cats'));
 

@@ -35,7 +35,7 @@
                         <select class="form-control js-example-basic-multiple" name="food_category" id="cat_served">
   
                           @foreach ($food_cats as $cat)
-                              <option value="{{ $cat }}">{{ $cat }}</option>
+                              <option value="{{ $cat->name }}">{{ $cat->name }}</option>
                           @endforeach
   
                         </select>

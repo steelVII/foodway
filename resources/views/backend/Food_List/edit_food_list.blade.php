@@ -45,10 +45,10 @@
                         <select class="form-control js-example-basic-multiple" name="food_category" id="cat_served">
   
                           @foreach ($food_cats as $cat)
-                                @if ($foodlist->food_categories == $cat) 
-                                    <option value="{{ $cat }}" selected>{{ $cat }}</option>
+                                @if ($foodlist->food_categories == $cat->name) 
+                                    <option value="{{ $cat->name }}" selected>{{ $cat->name }}</option>
                                 @else
-                                    <option value="{{ $cat }}">{{ $cat }}</option>
+                                    <option value="{{ $cat->name }}">{{ $cat->name }}</option>
                                 @endif
                           @endforeach
   

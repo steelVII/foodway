@@ -35,7 +35,20 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h4><i class="icon mdi mdi-pizza"></i> Category</h4>
-                        <p>{{ $restaurant->food_categories }}</p>
+                            @php
+                                $full_cat = json_decode($restaurant->food_categories);
+                            @endphp
+                        <p>
+                            @if ($full_cat !== null || !empty($full_cat))
+                                @foreach ($full_cat as $cat)
+                                    @if ( $cat === end($full_cat))
+                                        {{ $cat->name}}
+                                    @else
+                                        {{ $cat->name}},
+                                    @endif
+                                @endforeach
+                            @endif
+                         </p>
                     </div>
                     <div class="col-md-4">
                         <h4><i class="icon mdi mdi-time"></i> Opening Hours</h4>

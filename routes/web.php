@@ -82,6 +82,11 @@ Route::middleware(['isvendor'])->group(function () {
         Route::patch('restaurant/edit/{id}','RestaurantsController@update');
         Route::post('restaurant/cities','LocationsController@getCities');
 
+        //Vendor Menu View
+        Route::get('menu','MenuController@index')->name('menu');
+        Route::get('add_menu','MenuController@show')->name('add_menu');
+        Route::post('add_menu_category','MenuController@store');
+
         //Vendor Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');
         Route::get('food_categories/add', 'FoodCategoriesController@create')->name('add_foodcategories');

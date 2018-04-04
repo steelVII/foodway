@@ -41,12 +41,13 @@ class LoginController extends Controller
 
     protected function redirectTo() {
 
-       // Determines where to send the user if admin
+        // Determines where to send the user logs in and is admin
 	    if (Auth::user()->acc_type == '1')
 	    {
 	        return '/admin';
         }
         
+        // Determines where to send the user logs in and is vendor
         elseif (Auth::user()->acc_type == '3')
         {
             return '/vendor';

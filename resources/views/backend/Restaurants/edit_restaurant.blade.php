@@ -38,15 +38,20 @@
                           <select class="form-control js-example-basic-multiple" name="state" id="state">
                               <option value="0">Select State</option>
                             @foreach ($locations as $states)
+                              @if ($restaurant->state == $states->state)
+                                <option value="{{$states->state}}" selected>{{$states->state}}</option>
+                              @else
                                 <option value="{{$states->state}}">{{$states->state}}</option>
+                              @endif
                             @endforeach
-    
                           </select>
                       </div>
                       <div class="form-group col-sm-4">
                           <label>City</label>
-                          <select class="form-control js-example-basic-multiple" name="city" id="city">
-    
+                          <select disabled="disabled" class="form-control js-example-basic-multiple" name="city" id="city">
+                              @if ($restaurant->city !== null)
+                                <option value="{{$restaurant->city}}">{{$restaurant->city}}</option>
+                              @endif
                           </select>
                       </div>
                       <div class="form-group col-sm-4">
@@ -69,16 +74,6 @@
                           <label>Closing Time</label>
                           <input type="time" name="closing" value="{{ $restaurant->closing_hours }}" parsley-trigger="change" required="" autocomplete="off" class="form-control">
                       </div>
-                    </div>
-                  <div class="form-group">
-                      <label>Food Categories Served</label>
-                      <select class="form-control js-example-basic-multiple" name="food_categories[]" id="cat_served" multiple="multiple">
-
-                        @foreach ($food_cats as $cat)
-                            <option value="{{ $cat->category_name}}">{{ $cat->category_name}}</option>
-                        @endforeach
-
-                      </select>
                     </div>
                     <div class="row">
                       <div class="form-group col-sm-6">
@@ -143,6 +138,21 @@
 
         $('#city').prop('disabled', true);
 
+          $('#state').ready( function () {
+    
+          var state = $('#state').val();
+
+          var url = 'cities';
+
+            if(state === "0") {
+
+            $('#city').empty();
+            $('#city').prop('disabled', true);
+
+            }
+
+        });
+
         $('#state').on('select2:select', function (e) {
           var data = e.params.data;
     
@@ -189,7 +199,7 @@
                 }
 
             }
-});
+        });
 
     </script>
 @endsection

@@ -19,7 +19,7 @@ class CreateRestaurantsTable extends Migration
             $table->integer('vendor_id')->unsigned();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->string('vendor_name');
-            $table->string('food_categories')->nullable();
+            $table->text('food_categories')->nullable();
             $table->string('email')->unique();
             $table->string('phone_num')->nullable();
             $table->string('state')->nullable();

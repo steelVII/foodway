@@ -29,6 +29,23 @@
 
                 <div class="content" style="margin-top:32px;">
                     <h3 class="title is-4 has-text-weight-semibold">Payment</h3>
+                    <div class="block">
+                            <div class="field">
+                                <b-radio v-model="radio" native-value="default">
+                                    Default
+                                </b-radio>
+                            </div>
+                            <div class="field">
+                                <b-radio v-model="radio" native-value="default">
+                                    Default
+                                </b-radio>
+                            </div>
+                            <div class="field">
+                                <b-radio v-model="radio" native-value="default">
+                                    Default
+                                </b-radio>
+                            </div>
+                        </div>
                 </div>
             
             </div>
@@ -77,7 +94,7 @@
                             <div class="columns is-mobile">
                                 <div class="column is-7">
 
-                                    <h4>GST:</h4>
+                                    <h4>GST(6%):</h4>
 
                                 </div>
                                 
@@ -91,7 +108,7 @@
                             <div class="columns is-mobile">
                                 <div class="column is-7">
 
-                                    <h4>Total:</h4>
+                                    <h4 class="has-text-weight-bold">Total:</h4>
 
                                 </div>
                                 

@@ -16,6 +16,15 @@
                             @endif
                         </ul>
                     </li>
+                    @if (Auth::check() && Auth::user()->acc_type == '3')
+                    <li class="parent">
+                        <a href="{{route('menu')}}"><i class="icon mdi mdi-pizza"></i><span>Menu</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{route('menu')}}">View Menu</a></li>
+                            <li><a href="{{route('add_menu')}}">Add New Category</a></li>
+                        </ul>
+                    </li>
+                    @endif
                     <li class="parent"><a href="#"><i class="icon mdi mdi-format-list-numbered"></i><span>Food Lists</a>
                         <ul class="sub-menu">
                             @if (Auth::check() && Auth::user()->acc_type == '1') 
@@ -23,16 +32,6 @@
                             @elseif (Auth::check() && Auth::user()->acc_type == '3')
                             <li><a href="{{route('foodlist')}}">View List</a></li>
                             <li><a href="{{ route('add_foodlist') }}">Add To List</a></li>
-                            @endif
-                        </ul>
-                    </li>
-                    <li class="parent"><a href="#"><i class="icon mdi mdi-pizza"></i><span>Food Categories</a>
-                        <ul class="sub-menu">
-                            @if (Auth::check() && Auth::user()->acc_type == '1') 
-                            <li><a href="{{route('admin_foodcategories')}}">View Categories</a></li>
-                            @elseif (Auth::check() && Auth::user()->acc_type == '3')
-                            <li><a href="{{route('foodcategories')}}">View Categories</a></li>
-                            <li><a href="{{ route('add_foodcategories') }}">Add New Category</a></li>
                             @endif
                         </ul>
                     </li>
