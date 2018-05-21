@@ -35,17 +35,31 @@ class RestaurantsController extends Controller
 
         $restaurant = $restaurants::find($restaurant_id);
 
-        $cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
+        $cat_menu = Restaurants::select('food_categories')->where('id', $restaurant_id)->value('food_categories');
 
-        $cat_array = array();
+        /* $cat_array = array();
 
         foreach($cat_menu as $cat) {
 
             $cat_array[] = $cat->food_categories;
 
+        } */
+
+        if( !empty($cat_menu) || $cat_menu != null ) {
+
+            $menu_cat = json_decode($cat_menu);
+
+            usort($menu_cat, function($a, $b) { //Sort the array using a user defined function
+                return $a->order < $b->order ? -1 : 1; //Compare the scores
+            });
+
         }
 
-        $menu_cat = array_unique($cat_array);
+        else {
+
+            $menu_cat = null;
+
+        }
 
         $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
 
@@ -101,19 +115,36 @@ class RestaurantsController extends Controller
 
         $cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
 
-        $cat_array = array();
+        $cat_menu = Restaurants::select('food_categories')->where('id', $id)->value('food_categories');
+
+        /* $cat_array = array();
 
         foreach($cat_menu as $cat) {
 
             $cat_array[] = $cat->food_categories;
 
+        } */
+
+        if( !empty($cat_menu) || $cat_menu != null ) {
+
+            $menu_cat = json_decode($cat_menu);
+
+            usort($menu_cat, function($a, $b) { //Sort the array using a user defined function
+                return $a->order < $b->order ? -1 : 1; //Compare the scores
+            }); 
+
         }
 
-        $menu_cat = array_unique($cat_array);
+        else {
 
-        $menu = $restaurant->menu()->orderBy('food_name','ASC')->get();
+            $menu_cat = null;
+
+        }
+
+        $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
 
         return view('backend.Restaurants.view_restaurant', compact('restaurant','menu_cat','menu'));
+
     }
 
     /**
@@ -209,6 +240,102 @@ class RestaurantsController extends Controller
         $restaurant->save();
 
         return redirect(route('restaurant'));
+
+    }
+
+        /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Restaurants  $restaurants
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_edit(Restaurants $restaurants, Request $request, $res_id)
+    {
+
+        //$user = $request->user();
+
+        //$vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $res_id)->value('id');
+
+        $restaurant = $restaurants::find($restaurant_id);
+        $locations = Locations::select('state')->orderBy('state','ASC')->get();
+
+        return view('backend.Restaurants.edit_restaurant', compact('restaurant','locations'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Restaurants  $restaurants
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_update(Request $request, Restaurants $restaurants, $res_id)
+    {
+        $restaurant = $restaurants::find($res_id);
+
+        $restaurant->restaurant_name = request('restaurant_name');
+
+        if(request('opening')){
+
+            $opening = Carbon::parse(request('opening'));
+
+            $restaurant->opening_hours = $opening->format('H:i');
+
+        }
+
+        if(request('closing')){
+
+            $closing = Carbon::parse(request('closing'));
+
+            $restaurant->closing_hours = $closing->format('H:i');
+
+        }
+
+
+        /*$user = $request->user();
+
+        if($user->email !== request('email')) {
+
+            $restaurant->email = request('email');
+
+            $user->email = request('email');
+            $user->save();
+
+        } */
+
+        if(request('phone_number')) { $restaurant->phone_num = request('phone_number'); }
+        if(request('address')) { $restaurant->address = request('address'); }
+        if(request('state')) { $restaurant->state = request('state'); }
+        if(request('city')) { $restaurant->city = request('city'); }
+        if(request('postcode')) { $restaurant->postcode = request('postcode'); }
+
+        $cat_list = null;
+
+        if(request('restaurantlogo')) {
+
+            $logo = str_replace("'", '', $request->file('restaurantlogo')->getClientOriginalName());
+
+            $restaurant->restaurant_logo = $logo;
+
+            $request->file('restaurantlogo')->storeAs('public',str_replace("'", '',$request->file('restaurantlogo')->getClientOriginalName()));
+
+        }
+
+        if(request('restaurantimage')) {
+
+            $image = str_replace("'", '', $request->file('restaurantimage')->getClientOriginalName());
+
+            $restaurant->restaurant_image = $image;
+
+            $request->file('restaurantimage')->storeAs('public',str_replace("'", '',$request->file('restaurantimage')->getClientOriginalName()));
+
+        }
+
+        $restaurant->save();
+
+        return redirect(route('single_restaurant', $res_id));
 
     }
 

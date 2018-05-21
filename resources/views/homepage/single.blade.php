@@ -45,48 +45,56 @@
 
                         <h2>Menu</h2>
 
-                        @foreach ($menu_cat as $cat)
-                        
-                        <div class="category-holder">
+                        @if ( !empty($menu_cat) || $menu_cat != null)
 
-                            <div class="content">
+                            @foreach ($menu_cat as $cat)
+                            
+                            <div class="category-holder">
 
-                                <h3>{{$cat}}</h3>
+                                <div class="content">
 
-                                @foreach ($menu as $menuitem)
+                                    <h3>{{$cat->name}}</h3>
 
-                                        @if ($cat == $menuitem->food_categories)
+                                    @foreach ($menu as $menuitem)
 
-                                                <div class="columns box is-mobile">
-                                                <!-- <div class="column is-3">
-                                                    <img src="{{ asset('storage/foods/'.$menuitem->food_image) }}" alt="">
-                                                </div> -->
-                                                    <div class="column">
-                                                        <h5>{{$menuitem->food_name}}</h5>
-                                                        <p class="is-6">{{ $menuitem->description }}</p>
-                                                    </div>
-                                                    <div class="column is-2 is-offset-2 has-text-centered">
-                                                        @if ($menuitem->sales_price)
-                                                            <span class="is-4 promo">RM {{$menuitem->price}}</span>
-                                                            <span class="is-4">RM {{$menuitem->sales_price}}</span>
-                                                        @else
-                                                            <span class="is-4">RM {{$menuitem->price}}</span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="column is-2 has-text-centered">
-                                                    <i v-on:click="addDish({{$menuitem}},{{ $single->id }})" class="far fa-plus-square"></i>
-                                                    </div>
-                                                </div>                
+                                            @if ($cat->name == $menuitem->food_categories)
 
-                                        @endif
-                                    
-                                @endforeach
+                                                    <div class="columns box is-mobile">
+                                                    <!-- <div class="column is-3">
+                                                        <img src="{{ asset('storage/foods/'.$menuitem->food_image) }}" alt="">
+                                                    </div> -->
+                                                        <div class="column">
+                                                            <h5>{{$menuitem->food_name}}</h5>
+                                                            <p class="is-6">{{ $menuitem->description }}</p>
+                                                        </div>
+                                                        <div class="column is-2 is-offset-2 has-text-centered">
+                                                            @if ($menuitem->sales_price)
+                                                                <span class="is-4 promo">RM {{$menuitem->price}}</span>
+                                                                <span class="is-4">RM {{$menuitem->sales_price}}</span>
+                                                            @else
+                                                                <span class="is-4">RM {{$menuitem->price}}</span>
+                                                            @endif
+                                                        </div>
+                                                        <div class="column is-2 has-text-centered">
+                                                        <i v-on:click="addDish({{$menuitem}},{{ $single->id }})" class="far fa-plus-square"></i>
+                                                        </div>
+                                                    </div>                
+
+                                            @endif
+                                        
+                                    @endforeach
+
+                                </div>
 
                             </div>
+                            
+                            @endforeach
 
-                        </div>
-                        
-                        @endforeach
+                        @else 
+
+                            <h5 class="row text-center">Sorry we currently have no dishes available at the moment. Please visit our restaurant again shortly.</h5>
+
+                        @endif
 
                     </div>
                             
@@ -94,34 +102,34 @@
 
                     <div class="cart-button button" v-on:click="show = !show"><i class="fas fa-shopping-basket"></i> Orders <badge-quantity :badge="rows"></badge-quantity></div>
                     <transition name="slide" v-cloak>
-                    <div v-if="show" id="order-column" class="column is-3 padding-lf-0 is-mobile">
+                        <div v-if="show" id="order-column" class="column is-3 padding-lf-0 is-mobile">
 
-                        <div class="container spacing">
+                            <div class="container spacing">
 
-                                <div v-on:click="show = !show" class="cart-button inner button is-primary"><i class="fas fa-times-circle"></i> Close</div>
+                                    <div v-on:click="show = !show" class="cart-button inner button is-primary"><i class="fas fa-times-circle"></i> Close</div>
 
-                            <div class="">
-                                <div class="content hold">
+                                <div class="">
+                                    <div class="content hold">
 
-                                    <h3>Order</h3>
+                                        <h3>Order</h3>
 
-                                    <hr>
+                                        <hr>
 
-                                    <item-list :orderchit="rows"></item-list>
+                                        <item-list :orderchit="rows"></item-list>
 
-                                    <div class="hide" v-if="rows !== 'undefined' && rows.length > 0">
-                                        <hr v-cloak>
+                                        <div class="hide" v-if="rows !== 'undefined' && rows.length > 0">
+                                            <hr v-cloak>
+                                        </div>
+
+                                        <total-item :full="rows" res-id="{{$single->id}}"></total-item>
+
                                     </div>
-
-                                    <total-item :full="rows" res-id="{{$single->id}}"></total-item>
-
                                 </div>
+
                             </div>
 
-                         </div>
-
-                    </div>
-                </transition>
+                        </div>
+                    </transition>
                 </div>
             </div>
 

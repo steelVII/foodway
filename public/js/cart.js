@@ -60,6 +60,7 @@ methods: {
 
         add.quantity = add.quantity + 1;
         sessionStorage.setItem('rows', JSON.stringify(this.orderchit));
+        //alert(add.name + "x" + add.quantity ); Using alert as notification
 
     },
 

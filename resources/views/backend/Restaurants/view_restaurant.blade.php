@@ -12,8 +12,11 @@
                         <h2 class="page-head-title">{{$restaurant->restaurant_name}}</h2>
                     </div>
                     <div class="col-md-8 text-right">
-                        @if (Auth::check() && Auth::user()->acc_type == '3')
-                        <a href="{{ route('edit_restaurant') }}" class="btn btn-success mr-auto">Edit Restaurant</a> @endif
+                        @if (Auth::check() && Auth::user()->acc_type == '1') 
+                            <a href="{{ route('admin_edit_restaurant',$restaurant->id) }}" class="btn btn-success mr-auto">Edit Restaurant</a> 
+                        @else
+                            <a href="{{ route('edit_restaurant',$restaurant->id) }}" class="btn btn-success mr-auto">Edit Restaurant</a> 
+                        @endif
                     </div>
                 </div>
             </div>
@@ -68,100 +71,198 @@
         <h2>Menu</h2>
     </div>
     <div class="menu-items-holder">
+    @if( !empty($menu_cat) || $menu_cat != null )
         @if (Auth::check() && Auth::user()->acc_type == '1') 
         @foreach ($menu_cat as $cat)
-        <h3>{{ $cat }}</h3>
+        <h3>{{ $cat->name }}</h3>
         <div class="cat-holder">
-            @foreach ($menu as $menuitem) @if ($cat == $menuitem->food_categories)
-            <div class="col-md-12" data-id="{{ $menuitem->id }}">
-                <div class="panel panel-flat">
-                    <div class="row no-margin">
-                        @if($menuitem->food_image != null)
-                        <div class="item-img col-md-3" style="background: url({{ asset('storage/foods/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
-                        </div>
-                        @endif
-                        <div class="panel-body col-md-9">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="panel-heading no-margin">{{ $menuitem->food_name }}</div>
-                                </div>
-                                <div class="col-md-4 text-right"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>{{ $menuitem->description }}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                @if($menuitem->sales_price != null)
-                                <div class="col-md-4"><s>RM {{ $menuitem->price }}</s> <span class="price"> RM {{ $menuitem->sales_price }}</span></div>
-                                @else
-                                <div class="col-md-4">
-                                    <p class="price">RM {{ $menuitem->price }}</p>
+            @foreach ($menu as $menuitem) 
+                @if ($cat->name == $menuitem->food_categories)
+                    <div class="col-md-12" data-id="{{ $menuitem->id }}">
+                        <div class="panel panel-flat">
+                            <div class="row no-margin">
+                                @if($menuitem->food_image != null)
+                                <div class="item-img col-md-3" style="background: url({{ asset('storage/foods/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
                                 </div>
                                 @endif
-                                <div class="col-md-4">
-                                    <p>{{ $menuitem->food_categories }}</p>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <a href="food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a>
+                                <div class="panel-body col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="panel-heading no-margin">{{ $menuitem->food_name }}</div>
+                                        </div>
+                                        <div class="col-md-4 text-right"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>{{ $menuitem->description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @if($menuitem->sales_price != null)
+                                        <div class="col-md-4"><s>RM {{ $menuitem->price }}</s> <span class="price"> RM {{ $menuitem->sales_price }}</span></div>
+                                        @else
+                                        <div class="col-md-4">
+                                            <p class="price">RM {{ $menuitem->price }}</p>
+                                        </div>
+                                        @endif
+                                        <div class="col-md-4">
+                                            <p>{{ $menuitem->food_categories }}</p>
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <!-- <a href="food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a> -->
+                                            <a href="{{ $restaurant->id }}/food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            @endif @endforeach
+                @endif 
+            @endforeach
         </div>
-        @endforeach @else @foreach ($menu_cat as $cat)
+        @endforeach 
+
+        @else
+        
+        @foreach ($menu_cat as $cat)
         <div class="menu-holder">
             <div class="cat-title">
-                <h3 class="page-head-title">{{ $cat }}</h3>
+                <h3 class="page-head-title">{{ $cat->name }}</h3>
             </div>
             <div class="cat-holder testo">
-                @foreach ($menu as $menuitem) @if ($cat == $menuitem->food_categories)
-                <div class="col-md-12" data-id="{{ $menuitem->id }}" data-cat="{{ $menuitem->food_categories }}" data-pos="{{ $menuitem->order_pos }}">
-                    <div class="panel panel-flat">
-                        <div class="row no-margin">
-                            @if($menuitem->food_image != null)
-                            <div class="item-img col-md-3" style="background: url({{ asset('storage/foods/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
-                            </div>
-                            @endif
-                            <div class="panel-body col-md-9">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="panel-heading no-margin">{{ $menuitem->food_name }}</div>
-                                    </div>
-                                    <div class="col-md-4 text-right"><i class="icon mdi mdi-swap-vertical my-handle"></i></div>
+                @foreach ($menu as $menuitem) 
+                @if ($cat->name == $menuitem->food_categories)
+                    <div class="col-md-12" data-id="{{ $menuitem->id }}" data-cat="{{ $menuitem->food_categories }}" data-pos="{{ $menuitem->order_pos }}">
+                        <div class="panel panel-flat">
+                            <div class="row no-margin">
+                                @if($menuitem->food_image != null)
+                                <div class="item-img col-md-3" style="background: url({{ asset('storage/foods/'.$menuitem->food_image) }}) 100%/cover no-repeat;">
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>{{ $menuitem->description }}</p>
+                                @endif
+                                <div class="panel-body col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="panel-heading no-margin">{{ $menuitem->food_name }}</div>
+                                        </div>
+                                        <div class="col-md-4 text-right"><i class="icon mdi mdi-swap-vertical my-handle"></i></div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    @if($menuitem->sales_price != null)
-                                    <div class="col-md-4"><s>RM {{ $menuitem->price }}</s> <span class="price"> RM {{ $menuitem->sales_price }}</span></div>
-                                    @else
-                                    <div class="col-md-4">
-                                        <p class="price">RM {{ $menuitem->price }}</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>{{ $menuitem->description }}</p>
+                                        </div>
                                     </div>
-                                    @endif
-                                    <div class="col-md-4">
-                                        <p>{{ $menuitem->food_categories }}</p>
-                                    </div>
-                                    <div class="col-md-4 text-right">
-                                        <a href="food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a>
+                                    <div class="row">
+                                        @if($menuitem->sales_price != null)
+                                        <div class="col-md-4"><s>RM {{ $menuitem->price }}</s> <span class="price"> RM {{ $menuitem->sales_price }}</span></div>
+                                        @else
+                                        <div class="col-md-4">
+                                            <p class="price">RM {{ $menuitem->price }}</p>
+                                        </div>
+                                        @endif
+                                        <div class="col-md-4">
+                                            <p>{{ $menuitem->food_categories }}</p>
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <a href="food_list/{{ $menuitem->id }}" class="btn btn-primary">Edit</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                @endif @endforeach
+                @endif 
+            @endforeach
             </div>
         </div>
-        @endforeach @endif
+        @endforeach 
+        @endif
+    @else
+        <div class="text-center">
+            <h4>There are currently no dishes available. Please add some new dishes.</h4>
+        </div>
+    @endif
+
     </div>
 </div>
+@endsection
+
+@section('page-script')
+
+<script>
+
+    var i =6;
+
+    while(i >= 1) {
+
+        console.log(i*i);
+
+        i--;
+
+    }
+
+    console.log(i);
+
+
+    
+        $(".testo").each(function(i, el) {
+    
+        var sortable = Sortable.create(el,{ 
+    
+            dataIdAttr: 'data-id',
+            handle: '.my-handle',
+    
+            onSort: function (e) {
+    
+                var items = e.to.children;
+                var result = [];
+                var ids = [];
+    
+                for (var i = 0; i < items.length; i++) {
+                    result.push($(items[i]).data('pos'));
+                    ids.push($(items[i]).data('id'));
+                }
+    
+                var cat = e.item.getAttribute('data-cat');
+    
+                var url = 'food_list/sort';
+    
+                if (url) {
+    
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        method: "POST",
+                        url: url,
+                        data: {
+                        position: result,
+                        category: cat,
+                        ids: ids
+                        },
+                        success: function(result){
+                            $.gritter.add({
+                                // (string | mandatory) the heading of the notification
+                                title: 'Sorting Saved',
+                                // (string | mandatory) the text inside the notification
+                                text: 'This will fade out after a certain amount of time.',
+                                // (bool | optional) if you want it to fade out on its own or just sit there
+                                sticky: false, 
+                                // (int | optional) the time you want it to be alive for before fading out (milliseconds)
+                                time: 2000,
+                                // (string | optional) the class name you want to apply directly to the notification for custom styling
+                                class_name: 'gritter-item-wrapper color success'
+                            });
+                        }
+                    });
+                }
+            }
+    
+        });
+    
+    });
+    
+    </script>
+    
 @endsection

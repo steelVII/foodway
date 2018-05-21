@@ -12,7 +12,7 @@
             <div class="panel panel-default panel-border-color panel-border-color-primary">
               <div class="panel-heading panel-heading-divider">Edit Restaurant<span class="panel-subtitle">Edit Restaurant Profile</span></div>
               <div class="panel-body">
-                <form method="POST" action="edit/{{ $restaurant->id }}" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
+                <form method="POST" action="{{ $restaurant->id }}" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
 

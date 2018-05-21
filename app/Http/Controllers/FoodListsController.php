@@ -124,8 +124,7 @@ class FoodListsController extends Controller
      * @param  \App\FoodLists  $foodLists
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodLists $foodLists, Request $request, $id)
-    {
+    public function edit(FoodLists $foodLists, Request $request, $id) {
 
         $foodlist = $foodLists::find($id);
 
@@ -148,8 +147,7 @@ class FoodListsController extends Controller
      * @param  \App\FoodLists  $foodLists
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FoodLists $foodLists, $id)
-    {
+    public function update(Request $request, FoodLists $foodLists, $id) {
 
         $foodlist = $foodLists::find($id);
 
@@ -184,6 +182,73 @@ class FoodListsController extends Controller
         $foodlist->save();
 
         return redirect(route('restaurant'));
+
+    }
+
+        /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\FoodLists  $foodLists
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_edit(FoodLists $foodLists, Request $request, $res_id , $id) {
+
+        $foodlist = $foodLists::find($id);
+
+        $user = $request->user();
+
+        //$vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+
+        $food_cats = Restaurants::select('food_categories')->where('vendor_id', $res_id)->value('food_categories');
+
+        $food_cats = json_decode($food_cats);
+
+        return view('backend.Food_List.edit_food_list',compact('foodlist','food_cats'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\FoodLists  $foodLists
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_update(Request $request, FoodLists $foodLists, $res_id, $id) {
+
+        $foodlist = $foodLists::find($id);
+
+        $foodlist->food_name = request('food-list-item');
+        $foodlist->description = request('dish_description');
+        $foodlist->price = request('price');
+
+        if(request('salesprice')) {
+
+            $foodlist->sales_price = request('salesprice');
+
+        } else{
+
+            $foodlist->sales_price = null;
+
+        }
+
+        if(request('food_category')) {
+
+            $foodlist->food_categories = request('food_category');
+
+        }
+
+        if(request('foodimage')) {
+
+            $foodlist->food_image = $request->file('foodimage')->getClientOriginalName();
+
+            $request->file('foodimage')->storeAs('public/foods',$request->file('foodimage')->getClientOriginalName());
+
+        }
+
+        $foodlist->save();
+
+        return redirect(route('single_restaurant',$res_id));
 
     }
 

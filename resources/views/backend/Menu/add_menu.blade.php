@@ -18,8 +18,8 @@
                     <div id="new_menu" class="form-group">
                         <label>Menu Category</label>
                         <div class="input-container">
-                        <input type="text" name="food_category[0][name]" parsley-trigger="change" required="" placeholder="Enter Category Name" autocomplete="off" class="form-control new-cat">
-                        <input type="hidden" name="food_category[0][order]">
+                            <input type="text" name="food_category[0][name]" parsley-trigger="change" required="" placeholder="Enter Category Name" autocomplete="off" class="form-control new-cat">
+                            <input type="hidden" name="food_category[0][order]">
                         </div>
                     </div>
                     <a id="addInput" class="btn btn-space btn-success">Add Category</a>
@@ -44,7 +44,7 @@
 
         var input = "<div class='input-container input-group'>" +
         "<input type='text' name='food_category[" + i + "][name]' parsley-trigger='change' placeholder='Enter Category Name' autocomplete='off' class='form-control new-cat' required>" +
-        "<input type='hidden' name='food_category[" + i + "][order]'>"+
+        "<input type='hidden' name='food_category[" + i + "][order]'>" +
         "<span class='remove input-group-btn'>" +
         "<a href='#' class='btn btn-danger'>Remove</a>" + 
         "</span></div>";

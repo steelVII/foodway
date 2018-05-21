@@ -43,12 +43,16 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('restaurants','RestaurantsController@index')->name('restaurants');
         //Route::get('restaurants/add', 'RestaurantsController@create')->name('add_restaurant');
         //Route::post('restaurants', 'RestaurantsController@store');
-        Route::get('restaurant/{id}', 'RestaurantsController@show');
+        Route::get('restaurant/{id}', 'RestaurantsController@show')->name('single_restaurant');
+        Route::get('restaurant/edit/{res_id}','RestaurantsController@admin_edit')->name('admin_edit_restaurant');
+        Route::patch('restaurant/edit/{res_id}','RestaurantsController@admin_update');
 
         //Admin Food Listing
         Route::get('food_list', 'FoodListsController@index')->name('admin_foodlist');
         //Route::get('food_list/add', 'FoodListsController@create')->name('add_foodlist');
         //Route::post('food_list/add_list', 'FoodListsController@store');
+        Route::get('restaurant/{res_id}/food_list/{id}', 'FoodListsController@admin_edit');
+        Route::patch('restaurant/{res_id}/food_list/{id}', 'FoodListsController@admin_update');
 
         //Admin Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('admin_foodcategories');
@@ -79,13 +83,14 @@ Route::middleware(['isvendor'])->group(function () {
         //Vendor Restuarants View
         Route::get('restaurant','RestaurantsController@restaurant')->name('restaurant');
         Route::get('restaurant/edit','RestaurantsController@edit')->name('edit_restaurant');
-        Route::patch('restaurant/edit/{id}','RestaurantsController@update');
+        Route::patch('restaurant/{id}','RestaurantsController@update');
         Route::post('restaurant/cities','LocationsController@getCities');
 
         //Vendor Menu View
         Route::get('menu','MenuController@index')->name('menu');
         Route::get('add_menu','MenuController@show')->name('add_menu');
         Route::post('add_menu_category','MenuController@store');
+        Route::post('menu_sort/sort', 'MenuController@sort');
 
         //Vendor Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('foodcategories');

@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function show(Restaurants $restaurants) {
 
-        $restaurants = $restaurants::all();
+        $restaurants = Restaurants::all()->where('food_categories', '!=', null);
 
         return view('homepage.restaurants', compact('restaurants'));
 
@@ -44,17 +44,23 @@ class HomeController extends Controller
 
         $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
 
-        $cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
+        $cat_menu = Restaurants::select('food_categories')->where('id', $single->id)->value('food_categories');
 
-        $cat_array = array();
+        if( !empty($cat_menu) || $cat_menu != null) {
 
-        foreach($cat_menu as $cat) {
+            $menu_cat = json_decode($cat_menu);
 
-            $cat_array[] = $cat->food_categories;
+            usort($menu_cat, function($a, $b) { //Sort the array using a user defined function
+                return $a->order < $b->order ? -1 : 1; //Compare the scores
+            }); 
 
         }
 
-        $menu_cat = array_unique($cat_array);
+        else {
+
+            $menu_cat = null;
+
+        }
 
         return view('homepage.single', compact('single','menu_cat','menu'));
 
