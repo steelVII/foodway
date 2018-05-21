@@ -26,9 +26,9 @@ class MenuController extends Controller
         
         $restaurant_category = json_decode($restaurant_category);
 
-        usort($restaurant_category, function($a, $b) { //Sort the array using a user defined function
-            return $a->order < $b->order ? -1 : 1; //Compare the scores
-        }); 
+            usort($restaurant_category, function($a, $b) { //Sort the array using a user defined function
+                return $a->order < $b->order ? -1 : 1; //Compare the scores
+            }); 
 
         }
 
