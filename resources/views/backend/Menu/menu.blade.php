@@ -14,12 +14,12 @@
       <div class="panel-heading panel-heading-divider">Menu Order<span class="panel-subtitle">Drag &amp; drop hierarchical list to change the order of the menu (Order is from Top to Bottom)</span></div>
       <div class="panel-body">
         <div id="list2" class="dd">
-            @if( !empty($restaurant_category) || $restaurant_category != null )
+            @if( !$restaurant_category->isEmpty() || $restaurant_category->first() )
                 <ol class="dd-list menu-holder"> 
                     @foreach ($restaurant_category as $cat)
-                    <li data-id="{{ $cat->id }}" data-order="{{ $cat->order }}" class="dd-item dd3-item"><button data-action="collapse" type="button">Collapse</button><button data-action="expand" type="button" style="display: none;">Expand</button>
+                    <li data-id="{{ $cat->id }}" data-order="{{ $cat->order_pos }}" class="dd-item dd3-item"><button data-action="collapse" type="button">Collapse</button><button data-action="expand" type="button" style="display: none;">Expand</button>
                         <div class="dd-handle dd3-handle my-handle"></div>
-                        <div class="dd3-content">{{ $cat->name }}</div>
+                        <div class="dd3-content">{{ $cat->category_name }}</div>
                     </li>
                     @endforeach
                 </ol>
@@ -54,8 +54,8 @@
             var ids = [];
 
             for (var i = 0; i < items.length; i++) {
-                order.push($(items[i]).data('order'));
                 ids.push($(items[i]).data('id'));
+                order.push($(items[i]).data('order'));
             }
 
             var url = 'menu_sort/sort';
@@ -71,8 +71,8 @@
                     method: "POST",
                     url: url,
                     data: {
+                        id : ids,
                     orders : order,
-                    id : ids,
                     },
                     success: function(result){
                         $.gritter.add({

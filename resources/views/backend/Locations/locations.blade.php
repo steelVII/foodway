@@ -41,44 +41,15 @@
                                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                                     style="width: 253px;">State</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Cities</th>    
-                                                </tr>
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Options</th> 
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($locations as $location)
                                                 <tr class="gradeA odd" role="row">
                                                     <td>{{ $location->state }}</td>
                                                     <td>
-
-                                                        @php
-                                                            $city = json_decode($location->city);
-                                                        @endphp
-
-                                                        @foreach ( $city as $ct)
-
-                                                            @php
-
-                                                                $numItems = count($ct);
-                                                                $i = 0;
-
-                                                            @endphp
-
-                                                            @foreach ($ct as $key => $val)
-
-                                                                @if (++$i === $numItems) 
-
-                                                                    {{$val}}
-
-                                                                @else
-                                                                    
-                                                                    {{$val}},
-
-                                                                @endif
-
-                                                            @endforeach
-                                                            
-                                                        @endforeach
-
+                                                        <a href="location/{{ $location->state }}" class="btn btn-primary">Edit</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

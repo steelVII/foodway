@@ -18,9 +18,10 @@
                     </li>
                     @if (Auth::check() && Auth::user()->acc_type == '3')
                     <li class="parent">
-                        <a href="{{route('menu')}}"><i class="icon mdi mdi-pizza"></i><span>Menu</a>
+                        <a href="{{route('sort_menu')}}"><i class="icon mdi mdi-pizza"></i><span>Menu</a>
                         <ul class="sub-menu">
-                            <li><a href="{{route('menu')}}">View Menu</a></li>
+                            <li><a href="{{route('foodcategories')}}">View Menu</a></li>
+                            <li><a href="{{route('sort_menu')}}">Sort Menu</a></li>
                             <li><a href="{{route('add_menu')}}">Add New Category</a></li>
                         </ul>
                     </li>
@@ -53,6 +54,7 @@
                         <li class="parent"><a href="#"><i class="icon mdi mdi-local-shipping"></i><span>Vendors</span></a>
                             <ul class="sub-menu">
                                 <li><a href="{{ route('vendors') }}">View All Vendors</a></li>
+                                <li><a href="{{ route('admin_add_vendor') }}">Add New Vendor</a></li>
                             </ul>
                         </li>
                     @endif

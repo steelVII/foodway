@@ -68,16 +68,23 @@
 </div>
 <div class="row">
     <div class="text-center">
-        <h2>Menu</h2>
+        <h2>
+            Menu
+            @if (Auth::check() && Auth::user()->acc_type == '1') 
+                <a href="{{ route('admin_add_dish', $restaurant->id) }}" class="btn btn-primary">Add New Dish</a>
+            @else
+                <a href="{{ route('add_foodlist') }}" class="btn btn-primary">Add New Dish</a>
+            @endif
+        </h2>
     </div>
     <div class="menu-items-holder">
     @if( !empty($menu_cat) || $menu_cat != null )
         @if (Auth::check() && Auth::user()->acc_type == '1') 
         @foreach ($menu_cat as $cat)
-        <h3>{{ $cat->name }}</h3>
+        <h3>{{ $cat->category_name }}</h3>
         <div class="cat-holder">
             @foreach ($menu as $menuitem) 
-                @if ($cat->name == $menuitem->food_categories)
+                @if ($cat->category_name == $menuitem->food_categories)
                     <div class="col-md-12" data-id="{{ $menuitem->id }}">
                         <div class="panel panel-flat">
                             <div class="row no-margin">
@@ -127,11 +134,11 @@
         @foreach ($menu_cat as $cat)
         <div class="menu-holder">
             <div class="cat-title">
-                <h3 class="page-head-title">{{ $cat->name }}</h3>
+                <h3 class="page-head-title">{{ $cat->category_name }}</h3>
             </div>
             <div class="cat-holder testo">
                 @foreach ($menu as $menuitem) 
-                @if ($cat->name == $menuitem->food_categories)
+                @if ($cat->category_name == $menuitem->food_categories)
                     <div class="col-md-12" data-id="{{ $menuitem->id }}" data-cat="{{ $menuitem->food_categories }}" data-pos="{{ $menuitem->order_pos }}">
                         <div class="panel panel-flat">
                             <div class="row no-margin">
@@ -144,7 +151,7 @@
                                         <div class="col-md-8">
                                             <div class="panel-heading no-margin">{{ $menuitem->food_name }}</div>
                                         </div>
-                                        <div class="col-md-4 text-right"><i class="icon mdi mdi-swap-vertical my-handle"></i></div>
+                                        <div class="col-md-4 text-right"><i class="icon-handle-grip-2 my-handle"></i></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">

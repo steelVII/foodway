@@ -9,17 +9,16 @@
 @section('content')
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
         <div class="panel panel-default panel-border-color panel-border-color-primary">
             <div class="panel-heading panel-heading-divider">Add/New Category<span class="panel-subtitle">Register a new category (If menu already exists, this will add the new categories to the current one)</span></div>
             <div class="panel-body">
-                <form method="POST" action="add_menu_category">
+                <form method="POST" action="{{ $restaurant_id }}/food_categories/add_category">
                         {{ csrf_field() }}
                     <div id="new_menu" class="form-group">
                         <label>Menu Category</label>
                         <div class="input-container">
                             <input type="text" name="food_category[0][name]" parsley-trigger="change" required="" placeholder="Enter Category Name" autocomplete="off" class="form-control new-cat">
-                            <input type="hidden" name="food_category[0][order]">
                         </div>
                     </div>
                     <a id="addInput" class="btn btn-space btn-success">Add Category</a>
@@ -44,7 +43,6 @@
 
         var input = "<div class='input-container input-group'>" +
         "<input type='text' name='food_category[" + i + "][name]' parsley-trigger='change' placeholder='Enter Category Name' autocomplete='off' class='form-control new-cat' required>" +
-        "<input type='hidden' name='food_category[" + i + "][order]'>" +
         "<span class='remove input-group-btn'>" +
         "<a href='#' class='btn btn-danger'>Remove</a>" + 
         "</span></div>";

@@ -13,18 +13,17 @@ class LocationsSeeder extends Seeder
     public function run()
     {
 
-        Locations::create([
+        $states = ['Johor','Kelantan','Kedah','Kuala Lumpur','Melacca','Negeri Sembilan','Pahang','Penang','Perak','Perlis','Sabah','Sarawak','Selangor','Terengganu'];
+        
+        foreach( $states as $state) {
 
-            'state' => 'Selangor',
-            'city' => '{"city":["Klang","Setia Alam","Shah Alam","Subang","Puchong"]}'
+            Locations::create([
 
-        ]);
+                'state' => $state,
 
-        Locations::create([
+            ]);
 
-            'state' => 'Perak',
-            'city' => '{"city":["Ipoh","Bidor"]}'
+        }
 
-        ]);
     }
 }

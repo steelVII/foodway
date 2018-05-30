@@ -17,6 +17,7 @@ class DishSeeder extends Seeder
 
             'food_name' => 'Grilled Chicken',
             'description' => 'Grilled Chicken',
+            'is_available' => 1,
             'price' => 12.50,
             'food_image' => 'food3.jpeg',
             'restaurant_id' => 1,
@@ -29,6 +30,7 @@ class DishSeeder extends Seeder
 
             'food_name' => 'Steamed Chicken',
             'description' => 'Steamed Chicken',
+            'is_available' => 0,
             'price' => 14.50,
             'food_image' => 'food2.jpeg',
             'restaurant_id' => 1,

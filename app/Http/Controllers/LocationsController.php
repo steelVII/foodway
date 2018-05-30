@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Locations;
+use App\City;
 use Illuminate\Http\Request;
 
 class LocationsController extends Controller
@@ -15,6 +16,24 @@ class LocationsController extends Controller
         return view('backend.Locations.locations', compact('locations'));
 
     }
+
+    public function add_city(Locations $location, $state) {
+
+        $state_id = Locations::select('id')->where('state', $state)->value('id');
+
+        $state_ope = Locations::find($state_id);
+
+        City::create([
+
+            'city_name' => request('city'),
+            'state_id' => $state_id,
+            'state' => $state
+
+        ]);
+        
+        return back();
+
+    }
     
     public function getCities(Request $request, Locations $locations) {
 
@@ -22,7 +41,11 @@ class LocationsController extends Controller
 
             $state = $request->state;
 
-            $cities = $locations::select('city')->where('state','=',$state)->value('city');
+            $state_id = Locations::select('id')->where('state', $state)->value('id');
+
+            $state_ope = Locations::find($state_id);
+    
+            $cities = $state_ope->cities()->where('state',$state)->get()->toJson();
 
         }
 
@@ -32,7 +55,15 @@ class LocationsController extends Controller
 
     public function edit($state) {
 
-        return view('backend.Locations.edit_locations');        
+        $state = $state;
+
+        $state_id = Locations::select('id')->where('state', $state)->value('id');
+
+        $state_ope = Locations::find($state_id);
+
+        $cities = $state_ope->cities()->where('state',$state)->get();
+
+        return view('backend.Locations.edit_locations', compact('state','cities'));        
 
     }
 

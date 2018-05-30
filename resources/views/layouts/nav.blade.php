@@ -17,7 +17,7 @@ nav-wrapper-fixed @endif">
         <a class="navbar-item" href="{{url('/')}}">
           Home
         </a>
-        <a href="{{ route('front_restaurants') }}" class="navbar-item">Restaurants</a>
+        <!-- <a href="{{ route('front_restaurants') }}" class="navbar-item">Restaurants</a> -->
 
         @if (!Request::is('restaurant/*')) 
 

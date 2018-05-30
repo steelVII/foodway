@@ -15,7 +15,12 @@ class CreateFoodCategoriesTable extends Migration
     {
         Schema::create('food_categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('is_available')->default(1);
+            $table->integer('order_pos')->default(0);
             $table->string('category_name');
+            $table->integer('restaurant_id')->unsigned();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->string('restaurant_name');
             $table->timestamps();
         });
     }

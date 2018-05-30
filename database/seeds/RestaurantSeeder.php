@@ -18,7 +18,6 @@ class RestaurantSeeder extends Seeder
             'restaurant_name' => 'Foodway',
             'vendor_id' => '1',
             'vendor_name' => 'Foodway',
-            'food_categories' => '[{"name":"Chicken","order":1,"id":0},{"name":"Beef","order":0,"id":1},{"name":"Lamb","order":2,"id":2}]',
             'email' => 'foodway2@foodway.com',
             'phone_num' => '01234567890',
             'state' => 'Selangor',

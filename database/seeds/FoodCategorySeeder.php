@@ -30,7 +30,9 @@ class FoodCategorySeeder extends Seeder
 
         FoodCategories::create([
 
-            'category_name' => $cat[$i - 1]
+            'category_name' => $cat[$i - 1],
+            'restaurant_id' => 1,
+            'restaurant_name' => 'Foodway'
 
         ]);
 

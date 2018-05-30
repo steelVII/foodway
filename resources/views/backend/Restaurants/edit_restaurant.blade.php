@@ -187,9 +187,15 @@
 
                               var city = JSON.parse(result);
 
+                              var city_arr = [];
+
+                              city.forEach(function(element) {
+                                city_arr.push(element.city_name);
+                              });
+
                               $('#city').empty();
 
-                              $('#city').select2({ data: city['city'] });
+                              $('#city').select2({ data: city_arr });
 
                               $('#city').prop('disabled', false);
 

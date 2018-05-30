@@ -43,9 +43,11 @@
                                             <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Sales Price</th>
                                             @if (Auth::check() && Auth::user()->acc_type == '1')
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Restaurant</th>
+                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
+                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Options</th>
                                             @endif
-                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
                                             @if (Auth::check() && Auth::user()->acc_type == '3')
+                                                <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Options</th>
                                             @endif
                                         </tr>
@@ -61,6 +63,14 @@
                                                     <td>{{ $list->sales_price }}</td>
                                                     <td>{{ $list->restaurant_name }}</td>
                                                     <td>{{ $list->food_categories }}</td>
+                                                    <td>
+                                                        <a href="restaurant/{{ $list->restaurant_id }}/food_list/{{ $list->id }}" class="btn btn-primary">Edit</a>
+                                                        @if ($list->is_available === 1)
+                                                            <input class="is_available" type="checkbox" data-id="{{ $list->id }}" checked data-toggle="toggle" data-size="small">
+                                                        @else
+                                                            <input class="is_available" type="checkbox" data-id="{{ $list->id }}" data-toggle="toggle" data-size="small">
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @else
@@ -73,6 +83,11 @@
                                                     <td>{{ $list->food_categories }}</td>
                                                     <td>
                                                         <a href="food_list/{{ $list->id }}" class="btn btn-primary">Edit</a>
+                                                        @if ($list->is_available === 1)
+                                                            <input class="is_available" type="checkbox" data-id="{{ $list->id }}" checked data-toggle="toggle" data-size="small">
+                                                        @else
+                                                            <input class="is_available" type="checkbox" data-id="{{ $list->id }}" data-toggle="toggle" data-size="small">
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -96,4 +111,52 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('page-script')
+
+<script>
+
+    $('.is_available').change(function() {
+
+        var dish_id = $(this).data('id');
+
+        //alert(id);
+
+        var url = 'food_list/is_available';
+
+        if (url) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                id : dish_id,
+                },
+                success: function(result){
+                    $.gritter.add({
+                        // (string | mandatory) the heading of the notification
+                        title: 'Setting Saved',
+                        // (string | mandatory) the text inside the notification
+                        text: 'This will fade out after a certain amount of time.',
+                        // (bool | optional) if you want it to fade out on its own or just sit there
+                        sticky: false, 
+                        // (int | optional) the time you want it to be alive for before fading out (milliseconds)
+                        time: 2000,
+                        // (string | optional) the class name you want to apply directly to the notification for custom styling
+                        class_name: 'gritter-item-wrapper color success'
+                    });
+                }
+            });
+        }
+
+    });
+
+</script>
+    
 @endsection

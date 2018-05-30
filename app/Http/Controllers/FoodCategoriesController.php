@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Vendor;
 use App\FoodCategories;
+use App\Restaurants;
 use Illuminate\Http\Request;
 
 class FoodCategoriesController extends Controller
@@ -12,12 +14,18 @@ class FoodCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Restaurants $restaurants)
     {
 
-        $food_cat = FoodCategories::paginate(10);
+        $user = $request->user();
 
-        return view('backend.Food_Category.food_categories',compact('food_cat'));
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+
+        $restaurant = $restaurants::find($restaurant_id);
+        $restaurant_category = $restaurant->menu_category()->paginate(10);
+
+        return view('backend.Food_Category.food_categories', compact('restaurant_category'));
 
     }
 
@@ -37,17 +45,53 @@ class FoodCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $res_id)
     {
-        $food = new FoodCategories();
+
+        $restaurant_name = Restaurants::select('restaurant_name')->where('id', $res_id)->value('restaurant_name');
+
+        $food_cat = request('food_category');
+
+        foreach ($food_cat as $cat) {
 
         FoodCategories::create([
 
-            'category_name' => request('food-category')
+            'category_name' => $cat['name'],
+            'restaurant_id' => $res_id,
+            'restaurant_name' => $restaurant_name
 
         ]);
 
-        return back();
+        }
+
+        return redirect(route('sort_menu'));
+
+    }
+
+    public function availability(Request $request){
+
+        if($request->ajax())
+        {
+
+            $food_cat = FoodCategories::find($request->id);
+
+            if($food_cat->is_available === 1){
+
+                $food_cat->is_available= 0;
+
+            }
+
+            else {
+
+                $food_cat->is_available = 1;
+
+            }
+
+            $food_cat->save();
+
+            return 'success';
+
+        }
 
     }
 

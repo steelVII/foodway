@@ -66,9 +66,6 @@
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <a href="user/{{ $user->id }}" class="btn btn-primary">Edit</a>
-                                                        @if ($user->vendor_appli == 1)
-                                                            <a href="makevendor/{{ $user->id }}" class="btn btn-success">Set Vendor</a>
-                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -34,6 +34,7 @@ class FoodListsController extends Controller
         $food_lists = $restaurant->menu()->paginate(10);
 
         return view('backend.Food_List.food_list',compact('food_lists'));
+        
     }
 
     /**
@@ -47,13 +48,27 @@ class FoodListsController extends Controller
         $user = $request->user();
 
         $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
-        $restaurant = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
-        $food_cats = Restaurants::select('food_categories')->where('vendor_id', $vendor_id)->value('food_categories');
+        $food_cats = FoodCategories::all()->where('restaurant_id', $restaurant_id);
 
-        $food_cats = json_decode($food_cats);
+        return view('backend.Food_List.add_food_list', compact('restaurant_id','food_cats'));
 
-        return view('backend.Food_List.add_food_list', compact('restaurant','food_cats'));
+    }
+
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_create_dish(Request $request, $res_id)
+    {
+
+        $restaurant_id = $res_id;
+
+        $food_cats = FoodCategories::all()->where('restaurant_id', $res_id);
+
+        return view('backend.Food_List.add_food_list', compact('restaurant_id','food_cats'));
 
     }
 
@@ -131,10 +146,11 @@ class FoodListsController extends Controller
         $user = $request->user();
 
         $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
-        $food_cats = Restaurants::select('food_categories')->where('vendor_id', $vendor_id)->value('food_categories');
+        $food_cats = FoodCategories::all()->where('restaurant_id', $restaurant_id);
 
-        $food_cats = json_decode($food_cats);
+        //$food_cats = json_decode($food_cats);
 
         return view('backend.Food_List.edit_food_list',compact('foodlist','food_cats'));
 
@@ -186,6 +202,56 @@ class FoodListsController extends Controller
     }
 
         /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_store_dish(Request $request, $res_id)
+    {
+
+        $restaurant = Restaurants::find($res_id);
+
+        //$food_cat = request('food_category');
+
+        if(request('foodimage')) {
+
+            FoodLists::create([
+
+                'food_name' => request('food-list-item'),
+                'description' => request('dish_description'),
+                'price' => request('price'),
+                'food_image' => $request->file('foodimage')->getClientOriginalName(),
+                'restaurant_id' => $restaurant->id,
+                'restaurant_name' => $restaurant->restaurant_name,
+                'food_categories' => request('food_category'),
+    
+            ]);
+
+            $request->file('foodimage')->storeAs('public/foods',$request->file('foodimage')->getClientOriginalName());
+
+        }
+
+        else{
+
+            FoodLists::create([
+
+                'food_name' => request('food-list-item'),
+                'description' => request('dish_description'),
+                'price' => request('price'),
+                'restaurant_id' => $restaurant->id,
+                'restaurant_name' => $restaurant->restaurant_name,
+                'food_categories' => request('food_category'),
+    
+            ]);
+
+        }
+
+        return redirect(route('single_restaurant', $restaurant->id));
+
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\FoodLists  $foodLists
@@ -195,13 +261,7 @@ class FoodListsController extends Controller
 
         $foodlist = $foodLists::find($id);
 
-        $user = $request->user();
-
-        //$vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
-
-        $food_cats = Restaurants::select('food_categories')->where('vendor_id', $res_id)->value('food_categories');
-
-        $food_cats = json_decode($food_cats);
+        $food_cats = FoodCategories::all()->where('restaurant_id', $res_id);
 
         return view('backend.Food_List.edit_food_list',compact('foodlist','food_cats'));
 
@@ -302,4 +362,32 @@ class FoodListsController extends Controller
         }
 
     }
+
+    public function availability(Request $request, FoodLists $foodLists){
+
+        if($request->ajax())
+        {
+
+            $foodlist = $foodLists::find($request->id);
+
+            if($foodlist->is_available === 1){
+
+                $foodlist->is_available= 0;
+
+            }
+
+            else {
+
+                $foodlist->is_available = 1;
+
+            }
+
+            $foodlist->save();
+
+            return 'success';
+
+        }
+
+    }
+
 }

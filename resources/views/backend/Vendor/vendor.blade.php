@@ -41,7 +41,7 @@
                                                     aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                                                     style="width: 205px;">Vendor ID</th>
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Restaurant</th>    
+                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">Vendor Name</th>    
                                                 <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"
                                                     colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 231px;">User ID</th>
                                                     <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1"

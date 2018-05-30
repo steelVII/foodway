@@ -30,7 +30,6 @@ class UsersTableSeeder extends Seeder
         User::create([
             'acc_type' => 0,
             'name' => 'test',
-            'vendor_appli' => 1,
             'email' => 'test@test.com',
             'password' => bcrypt('foodway123')
         ]);

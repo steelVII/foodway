@@ -23,6 +23,8 @@
 
 <section class="section">
     <div class="container is-fullhd">
+
+         @if (!$restaurants->isEmpty())
             <div class="columns is-multiline" v-cloak>
                 @foreach ($restaurants as $restaurant)
 
@@ -47,7 +49,23 @@
                     </div>
                     
                 @endforeach
-        </div>
+
+            </div>
+
+        @else 
+
+        <section class="hero is-medium is-transparent">
+            <div class="hero-body">
+                <div class="container">
+                    <h3 class="subtitle has-text-centered">
+                        We currently do not have any restaurant in your selected area. Please check back again soon for updates in this area.
+                    </h3>
+                </div>
+            </div>
+        </section>
+
+        @endif
+
     </div>
 </section>
     

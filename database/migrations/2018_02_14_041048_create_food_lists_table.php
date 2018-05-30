@@ -15,6 +15,7 @@ class CreateFoodListsTable extends Migration
     {
         Schema::create('food_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('is_available')->default(1);
             $table->integer('order_pos')->default(0);
             $table->string('food_name');
             $table->string('description')->nullable();

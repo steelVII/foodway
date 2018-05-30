@@ -35,31 +35,7 @@ class RestaurantsController extends Controller
 
         $restaurant = $restaurants::find($restaurant_id);
 
-        $cat_menu = Restaurants::select('food_categories')->where('id', $restaurant_id)->value('food_categories');
-
-        /* $cat_array = array();
-
-        foreach($cat_menu as $cat) {
-
-            $cat_array[] = $cat->food_categories;
-
-        } */
-
-        if( !empty($cat_menu) || $cat_menu != null ) {
-
-            $menu_cat = json_decode($cat_menu);
-
-            usort($menu_cat, function($a, $b) { //Sort the array using a user defined function
-                return $a->order < $b->order ? -1 : 1; //Compare the scores
-            });
-
-        }
-
-        else {
-
-            $menu_cat = null;
-
-        }
+        $menu_cat = FoodCategories::all()->where('restaurant_id', $restaurant_id)->sortBy('order_pos');
 
         $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
 
@@ -113,33 +89,9 @@ class RestaurantsController extends Controller
 
         $restaurant = $restaurants::find($id);
 
-        $cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
+        //$cat_menu = $restaurant->menu()->select('food_categories')->orderBy('food_categories','ASC')->get();
 
-        $cat_menu = Restaurants::select('food_categories')->where('id', $id)->value('food_categories');
-
-        /* $cat_array = array();
-
-        foreach($cat_menu as $cat) {
-
-            $cat_array[] = $cat->food_categories;
-
-        } */
-
-        if( !empty($cat_menu) || $cat_menu != null ) {
-
-            $menu_cat = json_decode($cat_menu);
-
-            usort($menu_cat, function($a, $b) { //Sort the array using a user defined function
-                return $a->order < $b->order ? -1 : 1; //Compare the scores
-            }); 
-
-        }
-
-        else {
-
-            $menu_cat = null;
-
-        }
+        $menu_cat = FoodCategories::all()->where('restaurant_id', $id)->sortBy('order_pos');
 
         $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
 

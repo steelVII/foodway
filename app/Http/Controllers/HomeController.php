@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Restaurants;
 use App\FoodLists;
+use App\FoodCategories;
+use App\Locations;
+use App\City;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,12 +28,46 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('homepage.mainpage');
+
+        $cities = City::all()->where('is_available',1);
+
+        $random_place = [];
+
+        foreach ($cities as $city) {
+            
+            array_push($random_place, $city->city_name);
+
+        }
+
+        shuffle($random_place);
+
+        return view('homepage.mainpage', compact('cities','random_place'));
+        
     }
 
     public function show(Restaurants $restaurants) {
 
         $restaurants = Restaurants::all()->where('food_categories', '!=', null);
+
+        return view('homepage.restaurants', compact('restaurants'));
+
+    }
+
+    public function restaurants_place(Restaurants $restaurants) {
+
+        $location = request('places');
+
+        $restaurants = Restaurants::all()->where('city', '=', $location);
+
+        return view('homepage.restaurants', compact('restaurants'));
+
+    }
+
+    public function restaurants_by_link(Restaurants $restaurants, $location_link) {
+
+        $location = $location_link;
+
+        $restaurants = Restaurants::all()->where('city', '=', $location);
 
         return view('homepage.restaurants', compact('restaurants'));
 
@@ -42,25 +79,9 @@ class HomeController extends Controller
 
         $restaurant = $restaurants::find($single->id);
 
-        $menu = $restaurant->menu()->orderBy('order_pos','ASC')->get();
+        $menu = $restaurant->menu()->where('is_available', 1)->orderBy('order_pos','ASC')->get();
 
-        $cat_menu = Restaurants::select('food_categories')->where('id', $single->id)->value('food_categories');
-
-        if( !empty($cat_menu) || $cat_menu != null) {
-
-            $menu_cat = json_decode($cat_menu);
-
-            usort($menu_cat, function($a, $b) { //Sort the array using a user defined function
-                return $a->order < $b->order ? -1 : 1; //Compare the scores
-            }); 
-
-        }
-
-        else {
-
-            $menu_cat = null;
-
-        }
+        $menu_cat = FoodCategories::all()->where('restaurant_id', $single->id)->sortBy('order_pos');
 
         return view('homepage.single', compact('single','menu_cat','menu'));
 

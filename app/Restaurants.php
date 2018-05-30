@@ -18,6 +18,12 @@ class Restaurants extends Model
 
     }
 
+    public function menu_category() {
+
+        return $this->hasMany(FoodCategories::class,'restaurant_id');
+
+    }
+
     public function vendor() {
 
         return $this->belongsTo(Vendor::class,'vendor_id');

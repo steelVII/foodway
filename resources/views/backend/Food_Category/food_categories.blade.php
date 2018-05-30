@@ -37,19 +37,21 @@
                                     role="grid" aria-describedby="table1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 25%;">#</th>
-                                            <th class="sorting" tabindex="0" aria-controls="table1"
-                                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 75%;">Category</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Category</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($food_cat as $cat)
-                                        <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">{{ $cat->id }}</td>
+                                        @foreach ($restaurant_category as $cat)
+                                            <tr class="gradeA odd" role="row">
                                                 <td>{{ $cat->category_name }}</td>
+                                                <td>
+                                                    @if ($cat->is_available === 1)
+                                                    <input class="is_available" type="checkbox" data-id="{{ $cat->id }}" checked data-toggle="toggle" data-size="small">
+                                                    @else
+                                                     <input class="is_available" type="checkbox" data-id="{{ $cat->id }}" data-toggle="toggle" data-size="small">
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -58,11 +60,11 @@
                         </div>
                         <div class="row be-datatable-footer">
                             <div class="col-sm-5">
-                                <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $food_cat->firstItem() . " to " . $food_cat->lastItem() . " of " . $food_cat->total() . " entries"; ?></div>
+                                <div class="dataTables_info" id="table1_info" role="status" aria-live="polite"><?php echo "Showing " . $restaurant_category->firstItem() . " to " . $restaurant_category->lastItem() . " of " . $restaurant_category->total() . " entries"; ?></div>
                             </div>
                             <div class="col-sm-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="table1_paginate">
-                                    <?php echo $food_cat->render(); ?>
+                                    <?php echo $restaurant_category->render(); ?>
                                 </div>
                             </div>
                         </div>
@@ -71,4 +73,52 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('page-script')
+
+<script>
+
+    $('.is_available').change(function() {
+
+        var category_id = $(this).data('id');
+
+        //alert(id);
+
+        var url = 'food_categories/is_available';
+
+        if (url) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                id : category_id,
+                },
+                success: function(result){
+                    $.gritter.add({
+                        // (string | mandatory) the heading of the notification
+                        title: 'Setting Saved',
+                        // (string | mandatory) the text inside the notification
+                        text: 'This will fade out after a certain amount of time.',
+                        // (bool | optional) if you want it to fade out on its own or just sit there
+                        sticky: false, 
+                        // (int | optional) the time you want it to be alive for before fading out (milliseconds)
+                        time: 2000,
+                        // (string | optional) the class name you want to apply directly to the notification for custom styling
+                        class_name: 'gritter-item-wrapper color success'
+                    });
+                }
+            });
+        }
+
+    });
+
+</script>
+    
 @endsection

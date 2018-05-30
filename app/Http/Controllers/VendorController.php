@@ -32,9 +32,9 @@ class VendorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function admin_vendor_creation()
     {
-        //
+        return view('backend.Vendor.add_new_vendor');
     }
 
     /**
@@ -43,22 +43,28 @@ class VendorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
 
-        $user = User::find($id);
+        $user = User::create([
+            'name' => request('vendor_username'),
+            'email' => request('vendor_email'),
+            'password' => bcrypt(request('vendor_password')),
+        ]);
+
+        //$user = User::find($id);
         
         Vendor::create([
 
             'vendor_name' => $user->name,
-            'user_id' => $id,
+            'user_id' => $user->id,
 
         ]);
 
         $user->acc_type = 3;
         $user->save();
 
-        $vendor = Vendor::where('user_id', $id)->first();
+        $vendor = Vendor::where('user_id', $user->id)->first();
 
         Restaurants::create([
 
@@ -72,7 +78,7 @@ class VendorController extends Controller
         $user->vendor_appli= 3;
         $user->save();
 
-        return back();
+        return redirect(route('vendors'));
     }
 
     /**

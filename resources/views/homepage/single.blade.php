@@ -53,11 +53,11 @@
 
                                 <div class="content">
 
-                                    <h3>{{$cat->name}}</h3>
+                                    <h3>{{$cat->category_name}}</h3>
 
                                     @foreach ($menu as $menuitem)
 
-                                            @if ($cat->name == $menuitem->food_categories)
+                                            @if ($cat->category_name == $menuitem->food_categories)
 
                                                     <div class="columns box is-mobile">
                                                     <!-- <div class="column is-3">

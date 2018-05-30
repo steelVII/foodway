@@ -266,6 +266,7 @@ color: rgb(60, 60, 63);
     transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
     background: url("/assets/img/gallery/kl.jpeg");
     background-size: cover;
+    height: 23.5vmin;
 
 }
 
@@ -436,6 +437,42 @@ footer .content a:hover {
     text-decoration: none;
 }
 
+span.select2.select2-container span.selection span.select2-selection.select2-selection--single {
+    height: 100%;
+    border-bottom-left-radius: 300px;
+    outline: 0;
+    border-top-left-radius: 300px;
+}
+
+button#home-search {
+    display: inline-block;
+    border-bottom-right-radius: 300px;
+    border-top-right-radius: 300px;
+    padding: 0 1.5em;
+}
+
+span.select2.select2-container span.selection span.select2-selection.select2-selection--single span#select2-places-container {
+    height: 100%;
+    line-height: 42px;
+    padding-left: 20px;
+}
+
+.select:not(.is-multiple)::after {
+    display: none !important;
+}
+
+.select .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 45px;
+    position: absolute;
+    top: 1px;
+    right: 12px;
+    width: 20px;
+}
+
+#home-search {
+    display: none;
+}
+
 @media (min-width: 992px) {
 
 .navbar-expand-lg .navbar-collapse{
@@ -464,5 +501,12 @@ footer .content a:hover {
 
 @media only screen and (max-width:540px) {
 
+    .tile.is-child.box {
+        height: 45vmin;
+    }
+
+    .columns.recommended {
+        padding: 0.75rem 2.5rem;
+    }
 
 }
