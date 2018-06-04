@@ -65,7 +65,7 @@
                                                 <td>{{ $list->restaurant_name }}</td>
                                                 <td>{{ $list->total }}</td>
                                                 <td>{{ $list->order_status }}</td>
-                                                <td><h1>Test</h1>
+                                                <td>
                                                     <a href="{{ route('view_order_details', $list->id) }}" class="btn btn-primary">Edit</a>
                                                 </td>
                                             </tr>
