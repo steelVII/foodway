@@ -16,7 +16,7 @@ class SocialAuthFacebookController extends Controller
    */
     public function redirect()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->stateless()->redirect();
     }
 
   /**
