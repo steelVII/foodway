@@ -59,6 +59,7 @@
                         <button class="login100-form-btn">
                             Sign in
                         </button>
+                        <a href="{{url('/facebook-redirect')}}" class="btn btn-primary">Login with Facebook</a>
                     </div>
     
                     <div class="text-center p-t-45 p-b-4">

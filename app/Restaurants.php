@@ -24,6 +24,12 @@ class Restaurants extends Model
 
     }
 
+    public function orders() {
+
+        return $this->hasMany(Orders::class,'restaurant_id');
+
+    }
+
     public function vendor() {
 
         return $this->belongsTo(Vendor::class,'vendor_id');

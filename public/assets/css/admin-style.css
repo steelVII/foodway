@@ -113,4 +113,20 @@ span.remove.input-group-btn > a.btn {
     color: #474747;
   }
   
+  p.full-button-width > a {
+
+    display: block;
+    width:100%;
+    padding: 2.5%;
+    margin:2.5vmin 0;
+
+}
+
+h1.order_chart {
+
+    font-size:7.5vm;
+    font-size:7.5vmin;
+
+}
+
   

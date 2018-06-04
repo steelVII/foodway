@@ -31,7 +31,9 @@ class UsersTableSeeder extends Seeder
             'acc_type' => 0,
             'name' => 'test',
             'email' => 'test@test.com',
-            'password' => bcrypt('foodway123')
+            'password' => bcrypt('foodway123'),
+            'phone_number' => '0123456789',
+            'address' => '25, Jalan Setia 2, 41200 Setia Alam Selangor'
         ]);
         
     }

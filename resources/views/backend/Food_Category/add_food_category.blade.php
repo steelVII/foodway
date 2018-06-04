@@ -13,7 +13,7 @@
             <div class="panel-heading panel-heading-divider">New Category<span class="panel-subtitle">Register a new category</span></div>
             <div class="panel-body">
                 <form method="POST" action="add_category" data-parsley-validate="" novalidate="">
-                        {{ csrf_field() }}
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label>Category Name</label>
                         <input type="text" name="food-category" parsley-trigger="change" required="" placeholder="Enter Category Name" autocomplete="off" class="form-control">

@@ -121,14 +121,14 @@ template: `
             </div>
         </div>
 
-        <div class="columns is-mobile" v-if="gst() != 0">
+        <!-- <div class="columns is-mobile" v-if="gst() != 0">
             <div class="column is-7">
                 <span class="subtitle is-8 has-text-weight-semibold">Inclusive GST (6%)</span>
             </div>
             <div class="column has-text-right">
                 <span>RM {{gst('',true)}}</span>
             </div>
-        </div>
+        </div> -->
 
         <div class="columns is-mobile" v-if="totals() != 0">
             <div class="column is-7">
@@ -138,8 +138,8 @@ template: `
                 <span>RM {{totals(true)}}</span>
             </div>
         </div>
-
-        <div class="hide has-text-centered" v-if="subtotals() != 0 && gst() != 0 && totals() != 0">
+        <!-- && gst() != 0 -->
+        <div class="hide has-text-centered" v-if="subtotals() != 0 && totals() != 0">
             <a v-on:click="checkout()" class="checkout-button button is-primary is-outlined is-medium unset">Checkout</a>
         </div>
     </div>
@@ -170,7 +170,7 @@ methods: {
 
             },
 
-        gst: function(calsub,isDisplay){
+        /* gst: function(calsub,isDisplay){
 
              let gst = this.subtotals(false) * 0.06;
 
@@ -184,13 +184,13 @@ methods: {
 
              return gst;
 
-        },
+        },*/
 
         totals: function(isDisplay) {
 
             var totals = 0;
 
-            totals = this.subtotals(false) + this.gst(this.subtotals(false), false);
+            totals = this.subtotals(false) /*+ this.gst(this.subtotals(false), false)*/;
 
             totals = Math.round(totals * 100) / 100;
 
@@ -217,7 +217,7 @@ methods: {
                 id: this.resId,
                 items: this.full,
                 subtotal: this.subtotals(false),
-                gst: this.gst('',false),
+                /*gst: this.gst('',false),*/
                 total: this.totals(false)
               })
               .then(function (response) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Restaurants;
 use App\FoodLists;
 use App\FoodCategories;
+use App\Orders;
 use App\Locations;
 use App\City;
 use Illuminate\Http\Request;
@@ -81,9 +82,23 @@ class HomeController extends Controller
 
         $menu = $restaurant->menu()->where('is_available', 1)->orderBy('order_pos','ASC')->get();
 
-        $menu_cat = FoodCategories::all()->where('restaurant_id', $single->id)->sortBy('order_pos');
+        //Where SQL multiple queries
+        $available_cat = ['restaurant_id' => $single->id, 'is_available' => 1];
+
+        $menu_cat = FoodCategories::where($available_cat)->orderBy('order_pos','ASC')->get();
 
         return view('homepage.single', compact('single','menu_cat','menu'));
+
+    }
+
+    public function customer_dashboard(Request $request) {
+
+        $user = $request->user();
+        $orders = Orders::where('user_id',$user->id)->get();
+
+        //dd($user);
+
+        return view('homepage.customer_dashboard', compact('user','orders'));
 
     }
 

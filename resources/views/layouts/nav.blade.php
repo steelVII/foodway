@@ -43,6 +43,9 @@ nav-wrapper-fixed @endif">
               @elseif (Auth::user()->acc_type == '3')
               <a class="navbar-item" href="{{ route('main') }}">Dashboard</a>
               <div class="dropdown-divider"></div>
+              @else
+              <a class="navbar-item" href="{{ route('customer_dashboard') }}">Dashboard</a>
+              <div class="dropdown-divider"></div>
               @endif
               <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -57,17 +60,17 @@ nav-wrapper-fixed @endif">
         @else
 
         <div class="navbar-item">
-            <div class="field is-grouped">
-              <p class="control">
-                <a class="button is-primary" href="{{ route('login') }}">
-                  <span class="icon">
-                    <i class="fas fa-sign-in-alt"></i>
-                  </span>
-                  <span>Login</span>
-                </a>
-              </p>
-            </div>
+          <div class="field is-grouped">
+            <p class="control">
+              <a class="button is-primary" href="{{ route('login') }}">
+                <span class="icon">
+                  <i class="fas fa-sign-in-alt"></i>
+                </span>
+                <span>Login</span>
+              </a>
+            </p>
           </div>
+        </div>
       </div>
 
       @endif

@@ -32,27 +32,30 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-clockpicker.min.css" type="text/css">
 </head>
 <body>
-    
-    <div id="app">
+
+	<div class="be-wrapper">
 
         @include ('backend.nav-backend')
 
-            <div class="be-left-sidebar">
+        <div class="be-left-sidebar">
 
-                @include ('backend.sidebar-menu')
+            @include ('backend.sidebar-menu')
 
-            </div>
+        </div>
 
-	        <div class="be-content">
+        <div id="app">
+
+            <div class="be-content">
                 
                 @yield('title')
                 
                 <div class="main-content container-fluid">
                     @yield('content')
                 </div>
+
             </div>
 
-    </div>
+        </div>
 
 <!-- Scripts -->
 
@@ -63,6 +66,8 @@
         $('.js-example-basic-multiple').select2();
     });
 </script>
+
+</div>
     
 </body>
 </html>

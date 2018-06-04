@@ -109,6 +109,16 @@ computed: {
 
 @if (!Request::is('restaurant/*'))
 
+    @if (session('clear_status'))
+
+        <script>
+                sessionStorage.removeItem('currentID');
+                sessionStorage.removeItem('resURL');
+                sessionStorage.removeItem('rows');
+        </script>
+
+    @endif
+
     <script>
 
         new Vue ({

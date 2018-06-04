@@ -19,11 +19,18 @@ Route::get('/restaurants_{location_link}','HomeController@restaurants_by_link');
 Route::get('/restaurant/{name}','HomeController@single');
 
 Route::get('/', 'HomeController@index')->name('home');
-
 Route::get('/about', 'AboutController@index');
+
+Route::get('/facebook-redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/facebook-callback', 'SocialAuthFacebookController@callback');
+
+//Customer Dashboard
+Route::get('/customer_dashboard', 'HomeController@customer_dashboard')->name('customer_dashboard');
 
 Route::get('/checkout_payment','CheckoutController@index');
 Route::post('/checkout','CheckoutController@checkout');
+Route::post('/checkout_gateway/{res_name}/{res_id}','CheckoutController@checkout_process');
+
 
 //Admin Backend
 Route::middleware(['isadmin'])->group(function () {
@@ -39,6 +46,13 @@ Route::middleware(['isadmin'])->group(function () {
         Route::post('location/{state}/add_city','LocationsController@add_city');
         Route::post('location/city/is_available', 'CityController@availability');
         Route::get('location/delete/city/{city_id}','CityController@destroy');
+
+        //Admin Orders View
+        Route::get('orders','OrdersController@index')->name('all_orders');
+        Route::get('all_pending_orders','OrdersController@all_pending_orders')->name('all_pending_orders');
+        Route::get('all_completed_orders','OrdersController@all_completed_orders')->name('all_completed_orders');
+        Route::get('view_order_details/{order_id}','OrdersController@view_order_details')->name('admin_view_order_details');
+        Route::get('set_delivered/{order_id}','OrdersController@set_delivered')->name('set_delivered');
 
         //Admin Restuarants View
         Route::get('restaurants','RestaurantsController@index')->name('restaurants');
@@ -89,6 +103,12 @@ Route::middleware(['isvendor'])->group(function () {
         Route::get('restaurant/edit','RestaurantsController@edit')->name('edit_restaurant');
         Route::patch('restaurant/{id}','RestaurantsController@update');
         Route::post('restaurant/cities','LocationsController@getCities');
+
+        //Vendor Orders View
+        Route::get('restaurant_orders','OrdersController@restaurant_order')->name('this_orders');
+        Route::get('pending_orders','OrdersController@pending_orders')->name('pending_orders');
+        Route::get('completed_orders','OrdersController@completed_orders')->name('completed_orders');
+        Route::get('view_order_details/{order_id}','OrdersController@view_order_details')->name('view_order_details');
 
         //Vendor Menu View
         Route::get('menu','MenuController@index')->name('sort_menu');

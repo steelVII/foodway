@@ -4,8 +4,15 @@
             <div class="left-sidebar-content">
                 <ul class="sidebar-elements">
                     <li class="divider">Menu</li>
-                <li><a href="{{ Auth::user()->acc_type == '1' ? route('admin') : route('main') }}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
-                    <li><a href="#"><i class="icon mdi mdi-plus-circle"></i><span>Orders</span></a></li>
+                    <li><a href="{{ Auth::user()->acc_type == '1' ? route('admin') : route('main') }}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
+                    <li class="parent">
+                        <a href="#"><i class="icon mdi mdi-plus-circle"></i><span>Orders</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="{{ Auth::check() && Auth::user()->acc_type == '1' ? route('all_orders') : route('this_orders') }}">All Orders</a></li>
+                            <li><a href="{{ Auth::check() && Auth::user()->acc_type == '1' ? route('all_pending_orders') : route('pending_orders') }}">Pending Orders</a></li>
+                            <li><a href="{{ Auth::check() && Auth::user()->acc_type == '1' ? route('all_completed_orders') : route('completed_orders') }}">Completed Orders</a></li>
+                        </ul>
+                    </li>
                     <li class="parent">
                         <a href="#"><i class="icon mdi mdi-local-dining"></i><span>Restaurants</a>
                         <ul class="sub-menu">

@@ -21,33 +21,20 @@
 <section class="section">
     <div class="container is-fullhd">
 
-        <form action="/checkout_gateway" class="form columns is-variable is-8">
+        <form method="POST" action="/checkout_gateway/{{$res_name}}/{{$id}}" class="form columns is-variable is-8">
+
+            {{ csrf_field() }}
 
             <div class="column is-7">
+            @if (Auth::check())
 
-                <checkout-form></checkout-form>
+                <checkout-form :info="{{ $user }}"></checkout-form>
+            @else 
 
-                <div class="content" style="margin-top:32px;">
-                    <h3 class="title is-4 has-text-weight-semibold">Payment</h3>
-                    <div class="block">
-                            <div class="field">
-                                <b-radio v-model="radio" native-value="default">
-                                    Default
-                                </b-radio>
-                            </div>
-                            <div class="field">
-                                <b-radio v-model="radio" native-value="default">
-                                    Default
-                                </b-radio>
-                            </div>
-                            <div class="field">
-                                <b-radio v-model="radio" native-value="default">
-                                    Default
-                                </b-radio>
-                            </div>
-                        </div>
-                </div>
-            
+                <checkout-form info=""></checkout-form>
+
+            @endif
+
             </div>
 
             <div class="column box">
@@ -75,6 +62,10 @@
                                 </tbody>
                             </table>
 
+                            @php $test = json_encode($items); @endphp
+
+                            <input type="hidden" name="order_item" value="{{$test}}">
+
                             <hr>
 
                             <div class="columns is-mobile">
@@ -91,7 +82,7 @@
                                 </div>
                             </div>
 
-                            <div class="columns is-mobile">
+                            <!-- <div class="columns is-mobile">
                                 <div class="column is-7">
 
                                     <h4>GST(6%):</h4>
@@ -100,10 +91,10 @@
                                 
                                 <div class="column has-text-right">
 
-                                    <h4>RM{{$gst}}</h4>
+                                    <h4>RM{{--$gst--}}</h4>
 
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="columns is-mobile">
                                 <div class="column is-7">
@@ -115,6 +106,7 @@
                                 <div class="column has-text-right">
 
                                     <h4>RM{{$total}}</h4>
+                                    <input type="hidden" name="order_total" value="{{$total}}">
 
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top be-top-header" style="position:relative;">
+<nav class="navbar navbar-default navbar-fixed-top be-top-header">
     <div class="container-fluid">
       <div class="navbar-header"><a href="{{ route('main') }}" class="navbar-brand"></a>
       </div>

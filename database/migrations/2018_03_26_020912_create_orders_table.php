@@ -15,15 +15,24 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_id');
+            $table->string('order_id');
+            $table->string('order_status');
+            $table->string('delivery_time');
             $table->integer('restaurant_id')->unsigned();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->text('dish_items'); // ID and Food name
-            $table->integer('total');
-            $table->text('shipping_details');
-            $table->text('billing_details')->nullable();
-            $table->string('delivery_time');
+            $table->text('restaurant_name');
+            $table->text('dish_items'); // ID, Name, Quantity, Price
+            $table->decimal('total',5,2);
             $table->string('payment_method');
-            $table->string('order_id');
+            $table->string('shipping_name');
+            $table->string('shipping_phone_number');
+            $table->string('shipping_email');
+            $table->text('shipping_address');
+            $table->string('billing_name')->nullable();
+            $table->string('billing_phone_number')->nullable();
+            $table->string('billing_email')->nullable();
+            $table->text('billing_address')->nullable();
             $table->timestamps();
         });
     }

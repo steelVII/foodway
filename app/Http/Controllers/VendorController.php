@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Vendor;
 use App\Restaurants;
+use App\Orders;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -21,9 +22,33 @@ class VendorController extends Controller
         return view('backend.Vendor.vendor', compact('vendors'));
     }
 
-    public function owner() {
+    public function owner(Request $request, Restaurants $restaurants) {
 
-        return view('backend.Vendor.vendor_owner');
+        $user = $request->user();
+
+        $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
+        $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
+
+        $orders = $restaurants::find($restaurant_id);
+
+        $all_orders = $orders->orders()->get();
+        //dd( $all_orders);
+        $all_orders_count = $all_orders->count();
+        $order_total = 0;
+
+        foreach($all_orders as $order) {
+
+            $total = $order->total;
+            $total = number_format((float)$total, 2, '.', '');
+            $order_total += $total;
+
+        }
+
+        $pending_orders = $orders->orders()->where('order_status','Pending')->count();
+        $delivered_orders = $orders->orders()->where('order_status','Delivered')->count();
+        $order_total = number_format((float)$order_total, 2, '.', '');;
+
+        return view('backend.Vendor.vendor_owner',compact('all_orders_count','pending_orders','delivered_orders','order_total'));
 
     }
 
