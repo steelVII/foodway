@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id' => '472458186506859',
         'client_secret' => 'b08a8960399ab88d4262af6f7adf41e4',
-        'redirect' => 'http://foodway.naxpansion.com/facebook-callback',
+        'redirect' => 'https://foodway.naxpansion.com/facebook-callback',
     ],
 
 ];
