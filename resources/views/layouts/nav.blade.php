@@ -8,7 +8,7 @@ nav-wrapper-fixed @endif">
       @if (Auth::check())
         @if (!Request::is('restaurant/*')) 
 
-          <link-restaurant class="is-hidden-desktop" style="margin-left: auto;"></link-restaurant>
+          <link-restaurant class="navbar-item is-hidden-desktop" style="margin-left: auto;"></link-restaurant>
 
         @else
 
@@ -24,7 +24,7 @@ nav-wrapper-fixed @endif">
         </a>
 
       @else
-        <modal-login class="is-hidden-desktop"></modal-login>
+        <modal-login class="navbar-item is-hidden-desktop" style="margin-left: auto;"></modal-login>
       @endif
 
     </div>
