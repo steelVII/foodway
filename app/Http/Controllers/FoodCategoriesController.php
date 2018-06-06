@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Vendor;
 use App\FoodCategories;
 use App\Restaurants;
+use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 
 class FoodCategoriesController extends Controller
@@ -17,16 +18,37 @@ class FoodCategoriesController extends Controller
     public function index(Request $request, Restaurants $restaurants)
     {
 
+        return view('backend.Food_Category.food_categories');
+
+    }
+
+    public function menuData(Request $request, Restaurants $restaurants)
+    {
+
         $user = $request->user();
 
         $vendor_id = Vendor::select('id')->where('user_id', $user->id)->value('id');
         $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
         $restaurant = $restaurants::find($restaurant_id);
-        $restaurant_category = $restaurant->menu_category()->paginate(10);
+        $restaurant_category = $restaurant->menu_category();
 
-        return view('backend.Food_Category.food_categories', compact('restaurant_category'));
+        return Datatables::of($restaurant_category)->addColumn('action', function ($cat) {
 
+            if($cat->is_available == 1) {
+
+            return '<input class="is_available" type="checkbox" data-id="'.$cat->id.'" checked data-toggle="toggle" data-size="small">';
+            
+            }
+
+            else {
+
+                return '<input class="is_available" type="checkbox" data-id="'.$cat->id.'" data-toggle="toggle" data-size="small">';
+
+            }
+
+        })
+        ->make(true);
     }
 
     /**

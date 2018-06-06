@@ -377,33 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -507,6 +480,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -1082,8 +1082,8 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-__webpack_require__(54);
-module.exports = __webpack_require__(55);
+__webpack_require__(57);
+module.exports = __webpack_require__(58);
 
 
 /***/ }),
@@ -1123,6 +1123,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a, {
 Vue.component('example', __webpack_require__(42));
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Collapse.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Collapse);
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Dropdown.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Dropdown);
+Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Modal.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Modal);
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tabs.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tabs);
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tooltip.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Tooltip);
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Field.name, __WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Field);
@@ -1135,6 +1136,7 @@ Vue.component(__WEBPACK_IMPORTED_MODULE_0_buefy___default.a.Table.name, __WEBPAC
 Vue.component('restaurants', __webpack_require__(45));
 Vue.component('checkout-form', __webpack_require__(48));
 Vue.component('table-info', __webpack_require__(51));
+Vue.component('modal-login', __webpack_require__(54));
 
 /***/ }),
 /* 13 */
@@ -18297,7 +18299,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
 
 /***/ }),
 /* 15 */
@@ -43414,7 +43416,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(40).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(40).setImmediate))
 
 /***/ }),
 /* 40 */
@@ -43481,7 +43483,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 41 */
@@ -43674,14 +43676,14 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
 
 /***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
@@ -43815,7 +43817,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(46)
 /* template */
@@ -44011,7 +44013,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(49)
 /* template */
@@ -44473,7 +44475,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(52)
 /* template */
@@ -44770,12 +44772,196 @@ if (false) {
 
 /***/ }),
 /* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\LoginModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7b17fd7b", Component.options)
+  } else {
+    hotAPI.reload("data-v-7b17fd7b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var ModalForm = {
+    props: ['token', 'url', 'testUrl'],
+    template: '\n        <form method="POST" :action="testUrl">\n            <input type="hidden" name="_token" :value="token">\n            <div class="modal-card" style="width: auto">\n                <header class="modal-card-head has-text-centered">\n                    <img src="/assets/img/logo.png" width="50%" alt="">\n                    <p class="modal-card-title">Login</p>\n                </header>\n                <section class="modal-card-body">\n\n                <div class="buttons is-centered">\n                    <a href="/facebook-redirect" class="button is-medium facebook-login">\n                        <span class="icon is-small">\n                        <i class="fab fa-facebook"></i>\n                        </span>\n                        <span>Login with Facebook</span>\n                    </a>\n                </div>\n\n                <h5 class="subtitle is-6 has-text-centered">OR</h5>\n\n                <b-field label="Email">\n                    <b-input\n                        type="email"\n                        placeholder="Your email"\n                        name="email"\n                        required>\n                    </b-input>\n                </b-field>\n\n                <b-field label="Password">\n                    <b-input\n                        type="password"\n                        password-reveal\n                        placeholder="Your password"\n                        name="password"\n                        required>\n                    </b-input>\n                </b-field>\n\n                <b-checkbox>Remember me</b-checkbox>\n                </section>\n                <footer class="modal-card-foot buttons is-centered">\n                    <button class="button is-primary is-medium">                            \n                        <span class="icon is-small">\n                            <i class="fas fa-sign-in-alt"></i>\n                        </span>\n                        <span>Login</span>\n                    </button>\n                    <p class="has-text-centered"><span><a href="/password/reset">Forgot Password?</a></span></p>\n                    <p class="has-text-centered"><span>Not a registered user? <a href="/register">Sign Up Here</a></span></p>\n                </footer>\n            </div>\n        </form>\n    '
+
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        ModalForm: ModalForm
+    },
+    data: function data() {
+        return {
+            isComponentModalActive: false
+        };
+    },
+
+    computed: {
+
+        getToken: function getToken() {
+
+            var csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            return csrf;
+        },
+
+        getBaseUrl: function getBaseUrl() {
+
+            var url = window.location.protocol + "//" + window.location.host;
+
+            return url;
+        },
+
+        loginUrl: function loginUrl() {
+
+            var action_url = window.location.protocol + "//" + window.location.host + "/login";
+
+            return action_url;
+        }
+    }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("keep-alive", [
+    _c(
+      "section",
+      [
+        _c(
+          "button",
+          {
+            staticClass: "button is-primary",
+            on: {
+              click: function($event) {
+                _vm.isComponentModalActive = true
+              }
+            }
+          },
+          [
+            _c("span", { staticClass: "icon" }, [
+              _c("i", { staticClass: "fas fa-sign-in-alt" })
+            ]),
+            _vm._v(" "),
+            _c("span", [_vm._v("Login")])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: {
+              active: _vm.isComponentModalActive,
+              "has-modal-card": "",
+              parent: ""
+            },
+            on: {
+              "update:active": function($event) {
+                _vm.isComponentModalActive = $event
+              }
+            }
+          },
+          [
+            _c("modal-form", {
+              attrs: {
+                token: _vm.getToken,
+                url: _vm.getBaseUrl,
+                "test-url": _vm.loginUrl
+              }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7b17fd7b", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -6,6 +6,7 @@ use App\User;
 use App\Vendor;
 use App\Restaurants;
 use App\Orders;
+use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -17,9 +18,21 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::paginate(10);
+        return view('backend.Vendor.vendor');
+    }
 
-        return view('backend.Vendor.vendor', compact('vendors'));
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function vendorData()
+    {
+
+        return Datatables::of(Vendor::query())->addColumn('action', function ($vendor) {
+            return '<a href="vendor/'.$vendor->id.'" class="btn btn-primary">Edit</a>';
+        })
+        ->make(true);
     }
 
     public function owner(Request $request, Restaurants $restaurants) {
@@ -32,11 +45,12 @@ class VendorController extends Controller
         $orders = $restaurants::find($restaurant_id);
 
         $all_orders = $orders->orders()->get();
+        $delivered_orders_total = $orders->orders()->where('order_status','Delivered')->get();
         //dd( $all_orders);
         $all_orders_count = $all_orders->count();
         $order_total = 0;
 
-        foreach($all_orders as $order) {
+        foreach($delivered_orders_total as $order) {
 
             $total = $order->total;
             $total = number_format((float)$total, 2, '.', '');

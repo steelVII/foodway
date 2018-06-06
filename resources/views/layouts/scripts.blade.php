@@ -4,6 +4,7 @@
 <script src="/assets/lib/moment.js/min/moment.min.js" type="text/javascript"></script>
 <script src="/assets/js/main.js" type="text/javascript"></script>
 <script src="/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
       //initialize the javascript

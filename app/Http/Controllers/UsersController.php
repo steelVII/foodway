@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Restaurants;
 use App\Vendor;
+use Yajra\Datatables\Facades\Datatables;
 
 use Illuminate\Http\Request;
 
@@ -12,10 +13,22 @@ class UsersController extends Controller
 {
     public function index() {
 
-        $users = User::paginate(10);
+        return view('backend.Users.users');
 
-        return view('backend.Users.users', compact('users'));
+    }
 
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function userData()
+    {
+
+        return Datatables::of(User::query())->addColumn('action', function ($user) {
+            return '<a href="user/'.$user->id.'" class="btn btn-primary">Edit</a>';
+        })
+        ->make(true);
     }
 
     public function edit($id) {

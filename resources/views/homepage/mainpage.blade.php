@@ -133,10 +133,52 @@
             </section>
     </section>
 
+    <!--<div id="login-form" class="modal">
+        <div class="animation-content" style="max-width: 960px;">
+            <form method="POST" action="{{route('login')}}">
+                {{ csrf_field() }}
+                <div class="modal-card" style="width: auto;">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Login</p>
+                    </header>
+                    <section class="modal-card-body">
+                        <a href="/facebook-redirect" class="btn btn-primary">Login with Facebook</a>
+                        <div class="field">
+                            <label class="label">
+                                        Email
+                                    </label>
+                            <div class="control is-clearfix">
+                                <input type="email" autocomplete="on" placeholder="Your email" required="required" class="input">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">
+                                        Password
+                                    </label>
+                            <div class="control has-icons-right is-clearfix">
+                                <input type="password" autocomplete="on" placeholder="Your password" required="required" class="input">
+                                <span class="icon is-right has-text-primary is-clickable"><i class="fas fa-eye fa-lg"></i></span>
+                            </div>
+                        </div>
+                        <label tabindex="0" class="b-checkbox checkbox">
+                            <input type="checkbox" true-value="true" value="false"> 
+                            <span class="check"></span> <span class="control-label">Remember me</span></label>
+                    </section>
+                    <footer class="modal-card-foot has-text-centered text-center">
+                        <button type="button" class="button">Close</button>
+                        <button class="button is-primary">Login</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div> -->
+
 @endsection
 
 @section('footer')
+
     @include('layouts.footer')
+
 @endsection
 
 @section('script')

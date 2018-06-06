@@ -129,4 +129,22 @@ h1.order_chart {
 
 }
 
+div#bookings-table_length, div#bookings-table_filter, div#bookings-table_info, div#bookings-table_paginate {
+    padding: 12px 20px;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.current {
+    background: #4285f4 !important;
+    border-color: #4285f4 !important;
+    color: #fff !important;
+}
+
+div.dataTables_wrapper div.dataTables_length label select {
+    padding: 6px;
+}
+
+div.dataTables_wrapper div.dataTables_filter input[type="search"] {
+    border: 1px solid rgb(169, 169, 169);
+}
+
   

@@ -62,12 +62,7 @@ nav-wrapper-fixed @endif">
         <div class="navbar-item">
           <div class="field is-grouped">
             <p class="control">
-              <a class="button is-primary" href="{{ route('login') }}">
-                <span class="icon">
-                  <i class="fas fa-sign-in-alt"></i>
-                </span>
-                <span>Login</span>
-              </a>
+              <modal-login></modal-login>
             </p>
           </div>
         </div>

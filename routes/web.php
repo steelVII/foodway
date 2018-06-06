@@ -53,6 +53,9 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('all_completed_orders','OrdersController@all_completed_orders')->name('all_completed_orders');
         Route::get('view_order_details/{order_id}','OrdersController@view_order_details')->name('admin_view_order_details');
         Route::get('set_delivered/{order_id}','OrdersController@set_delivered')->name('set_delivered');
+        Route::get('admin_all_orders.data', 'OrdersController@admin_allOrderData')->name('admin_all_orders.data');
+        Route::get('admin_pending_orders.data', 'OrdersController@admin_allPendingData')->name('admin_pending_orders.data');
+        Route::get('admin_completed_orders.data', 'OrdersController@admin_allCompletedData')->name('admin_completed_orders.data');
 
         //Admin Restuarants View
         Route::get('restaurants','RestaurantsController@index')->name('restaurants');
@@ -70,6 +73,7 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('restaurant/{res_id}/food_list/{id}', 'FoodListsController@admin_edit');
         Route::patch('restaurant/{res_id}/food_list/{id}', 'FoodListsController@admin_update');
         Route::post('food_list/is_available', 'FoodListsController@availability');
+        Route::get('foodlist.data', 'FoodListsController@foodlistData')->name('foodlist.data');
 
         //Admin Food Categories View
         Route::get('food_categories', 'FoodCategoriesController@index')->name('admin_foodcategories');
@@ -81,11 +85,13 @@ Route::middleware(['isadmin'])->group(function () {
         Route::get('vendor/restaurant/{id}','VendorController@show');
         Route::get('add_vendor','VendorController@admin_vendor_creation')->name('admin_add_vendor');
         Route::post('makevendor','VendorController@store');
+        Route::get('vendor.data', 'VendorController@vendorData')->name('vendor.data');
 
         //Admin Registered Users
         Route::get('users', 'UsersController@index')->name('users');
         Route::get('user/{id}','UsersController@edit')->name('user');
         Route::patch('user/{id}','UsersController@update');
+        Route::get('user.data', 'UsersController@userData')->name('user.data');
 
     });  
 
@@ -109,6 +115,10 @@ Route::middleware(['isvendor'])->group(function () {
         Route::get('pending_orders','OrdersController@pending_orders')->name('pending_orders');
         Route::get('completed_orders','OrdersController@completed_orders')->name('completed_orders');
         Route::get('view_order_details/{order_id}','OrdersController@view_order_details')->name('view_order_details');
+        Route::get('set_delivered/{order_id}','OrdersController@set_delivered')->name('vendor_set_delivered');
+        Route::get('all_orders.data', 'OrdersController@allOrderData')->name('all_orders.data');
+        Route::get('pending_orders.data', 'OrdersController@allPendingOrderData')->name('pending_orders.data');
+        Route::get('completed_orders.data', 'OrdersController@allCompletedOrderData')->name('completed_orders.data');
 
         //Vendor Menu View
         Route::get('menu','MenuController@index')->name('sort_menu');
@@ -121,6 +131,7 @@ Route::middleware(['isvendor'])->group(function () {
         Route::get('food_categories/add', 'FoodCategoriesController@create')->name('add_foodcategories');
         Route::post('{res_id}/food_categories/add_category','FoodCategoriesController@store');
         Route::post('food_categories/is_available', 'FoodCategoriesController@availability');
+        Route::get('menu.data', 'FoodCategoriesController@menuData')->name('menu.data');
 
         //Vendor Food Listing
         Route::get('food_list', 'FoodListsController@singlelist')->name('foodlist');
@@ -130,6 +141,7 @@ Route::middleware(['isvendor'])->group(function () {
         Route::patch('food_list/{id}', 'FoodListsController@update');
         Route::post('food_list/sort', 'FoodListsController@sort');
         Route::post('food_list/is_available', 'FoodListsController@availability');
+        Route::get('vendor_foodlist.data', 'FoodListsController@vendorfoodlistData')->name('vendor_foodlist.data');
 
     });
 

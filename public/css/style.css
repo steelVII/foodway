@@ -400,7 +400,7 @@ font-size: 13px;
 
 }
 
-footer {
+footer:not(.modal-card-foot) {
 
     min-height: 40vh;
     background: url(https://www.foodway.my/wp-content/themes/foodpicky/images/foodpicky/dark-pattern.jpg);
@@ -471,6 +471,42 @@ span.select2.select2-container span.selection span.select2-selection.select2-sel
 
 #home-search {
     display: none;
+}
+
+.modal-card section.modal-card-body .field {
+
+margin-left: 0 !important;
+
+}
+
+.modal .animation-content {
+    width: 360px;
+}
+
+.modal h5.subtitle.is-6.has-text-centered {
+
+    color:#000;
+
+}
+
+.modal .button {
+
+    width: 100%;
+
+}
+
+.button.facebook-login {
+
+    background:#3B5998;
+    border-color: transparent;
+    color: #fff;
+
+}
+
+.button.facebook-login:hover {
+
+    color: #fff;
+
 }
 
 @media (min-width: 992px) {

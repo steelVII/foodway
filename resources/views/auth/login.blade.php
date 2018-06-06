@@ -16,7 +16,7 @@
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                     <span class="login100-form-title p-b-33">
-                        Account Login
+                        Login
                     </span>
     
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
@@ -47,32 +47,22 @@
                     </div>
                      @endif
     
-                     <div class="container-login100-form-btn m-t-20">
+                     <!-- <div class="container-login100-form-btn m-t-20">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                                     </label>
                                 </div>
-                    </div>
+                    </div> -->
     
                     <div class="container-login100-form-btn m-t-20">
                         <button class="login100-form-btn">
                             Sign in
                         </button>
-                        <a href="{{url('/facebook-redirect')}}" class="btn btn-primary">Login with Facebook</a>
+                        <!--<a href="{{url('/facebook-redirect')}}" class="btn btn-primary">Login with Facebook</a>-->
                     </div>
     
-                    <div class="text-center p-t-45 p-b-4">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-    
-                        <a href="{{ route('password.request') }}" class="txt2 hov1">
-                            Password?
-                        </a>
-                    </div>
-    
-                    <div class="text-center">
+                    <!--<div class="text-center">
                         <span class="txt1">
                             Create an account?
                         </span>
@@ -80,7 +70,7 @@
                         <a href="{{ route('register') }}" class="txt2 hov1">
                             Sign up
                         </a>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>

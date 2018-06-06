@@ -25,6 +25,7 @@ Vue.use(Buefy, {
 Vue.component('example', require('./components/Example.vue'));
 Vue.component(Buefy.Collapse.name, Buefy.Collapse);
 Vue.component(Buefy.Dropdown.name,Buefy.Dropdown);
+Vue.component(Buefy.Modal.name,Buefy.Modal);
 Vue.component(Buefy.Tabs.name,Buefy.Tabs);
 Vue.component(Buefy.Tooltip.name,Buefy.Tooltip);
 Vue.component(Buefy.Field.name,Buefy.Field);
@@ -37,6 +38,7 @@ Vue.component(Buefy.Table.name,Buefy.Table);
 Vue.component('restaurants', require('./components/RestaurantInfo.vue'));
 Vue.component('checkout-form', require('./components/CheckoutForm.vue'));
 Vue.component('table-info', require('./components/TableInfo.vue'));
+Vue.component('modal-login', require('./components/LoginModal.vue'));
 
 
 

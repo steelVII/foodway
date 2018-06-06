@@ -6,6 +6,7 @@ use App\FoodLists;
 use App\FoodCategories;
 use App\Restaurants;
 use App\Vendor;
+use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 
 class FoodListsController extends Controller
@@ -17,12 +18,37 @@ class FoodListsController extends Controller
      */
     public function index()
     {
-        $food_lists = FoodLists::paginate(10);
+        return view('backend.Food_List.food_list');
+    }
 
-        return view('backend.Food_List.food_list',compact('food_lists'));
+    public function foodlistData()
+    {
+
+        return Datatables::of(FoodLists::query())->addColumn('action', function ($foodList) {
+
+             if($foodList->is_available == 1) {
+                return '<a href="restaurant/'.$foodList->restaurant_id.'/food_list/'.$foodList->id.'" class="btn btn-primary">Edit</a>
+                <input class="is_available" type="checkbox" data-id="'.$foodList->id.'" checked data-toggle="toggle" data-size="small">';
+            }
+
+            else {
+
+                return '<a href="restaurant/'.$foodList->restaurant_id.'/food_list/'.$foodList->id.'" class="btn btn-primary">Edit</a>
+                <input class="is_available" type="checkbox" data-id="'.$foodList->id.'" data-toggle="toggle" data-size="small">';
+
+            }
+        })
+        ->make(true);
     }
 
     public function singlelist(Restaurants $restaurants, Request $request)
+    {
+
+        return view('backend.Food_List.food_list');
+        
+    }
+
+    public function vendorfoodlistData(Restaurants $restaurants, Request $request)
     {
 
         $user = $request->user();
@@ -31,10 +57,23 @@ class FoodListsController extends Controller
         $restaurant_id = Restaurants::select('id')->where('vendor_id', $vendor_id)->value('id');
 
         $restaurant = $restaurants::find($restaurant_id);
-        $food_lists = $restaurant->menu()->paginate(10);
+        $food_lists = $restaurant->menu();
 
-        return view('backend.Food_List.food_list',compact('food_lists'));
-        
+        return Datatables::of($food_lists)->addColumn('action', function ($foodList) {
+
+             if($foodList->is_available == 1) {
+                return '<a href="food_list/'.$foodList->id.'" class="btn btn-primary">Edit</a>
+                <input class="is_available" type="checkbox" data-id="'.$foodList->id.'" checked data-toggle="toggle" data-size="small">';
+            }
+
+            else {
+
+                return '<a href="food_list/'.$foodList->id.'" class="btn btn-primary">Edit</a>
+                <input class="is_available" type="checkbox" data-id="'.$foodList->id.'" data-toggle="toggle" data-size="small">';
+
+            }
+        })
+        ->make(true);
     }
 
     /**

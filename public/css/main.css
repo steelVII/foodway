@@ -409,6 +409,12 @@ input.input100 {
   opacity: 1;
 }
 
+span.help-block {
+  font-size: 12px;
+  padding-left: 12px;
+  color: #ff0000;
+}
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;

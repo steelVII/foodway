@@ -13,11 +13,13 @@ class AdminController extends Controller
 
         $all_orders = Orders::all();
 
+        $delivered_orders_total = Orders::where('order_status','Delivered')->get();
+
         $all_orders_count = $all_orders->count();
 
         $order_total = 0;
 
-        foreach($all_orders as $order) {
+        foreach($delivered_orders_total as $order) {
 
             $total = $order->total;
             $total = number_format((float)$total, 2, '.', '');

@@ -94,7 +94,11 @@
                 </div>
                 <div class="panel-body">
                     <p class="xs-mt-5 xs-mb-5 full-button-width">
-                        <a class="btn btn-space btn-success" href="{{ route('set_delivered',$order_details->id) }}">Set to Delivered</a>
+                        @if(Auth::check() && Auth::user()->acc_type == '1')
+                            <a class="btn btn-space btn-success" href="{{ route('set_delivered',$order_details->id) }}">Set to Delivered</a>
+                        @else
+                            <a class="btn btn-space btn-success" href="{{ route('vendor_set_delivered',$order_details->id) }}">Set to Delivered</a>
+                        @endif
                         <!--<a class="btn btn-space btn-danger">Delete</a>-->
                     </p>
                 </div>
