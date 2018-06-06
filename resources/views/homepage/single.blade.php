@@ -41,7 +41,7 @@
 
                         <hr>
 
-                        <div class="container is-fluid">
+                        <div class="container is-fluid menu-holder">
 
                         <h2>Menu</h2>
 
@@ -75,8 +75,8 @@
                                                                 <span class="is-4">RM {{$menuitem->price}}</span>
                                                             @endif
                                                         </div>
-                                                        <div class="column is-2 has-text-centered">
-                                                        <i v-on:click="addDish({{$menuitem}},{{ $single->id }})" class="far fa-plus-square"></i>
+                                                        <div class="column is-2 has-text-centered icon-button button-is-centered">
+                                                            <i v-on:click="addDish({{$menuitem}},{{ $single->id }})" class="far fa-plus-square"></i>
                                                         </div>
                                                     </div>                
 

@@ -10,7 +10,7 @@
                         <li><a>Work with Foodway</a></li>
                         <li><a>Partner With Us</a></li>
                         <li><a>Terms & Conditions</a></li>
-                        <li><a>Privacy Policy</a></li>
+                        <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="column">

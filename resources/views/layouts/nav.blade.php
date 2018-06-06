@@ -4,28 +4,45 @@ nav-wrapper-fixed @endif">
 
   <div class="container">
     <div class="navbar-brand">
-        <a class="navbar-item" href="{{url('/')}}"><img src="/assets/img/logo.png" alt=""></a>
-      <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <a class="navbar-item" href="{{url('/')}}"><img src="/assets/img/logo.png" alt=""></a>
+      @if (Auth::check())
+        @if (!Request::is('restaurant/*')) 
+
+          <link-restaurant class="is-hidden-desktop" style="margin-left: auto;"></link-restaurant>
+
+        @else
+
+          <a v-cloak v-on:click="show = !show" class="navbar-item is-hidden-desktop" style="margin-left: auto;" href="#">
+              <i class="fas fa-shopping-basket"></i> <badge-quantity :badge="rows"></badge-quantity>
+          </a>
+
+        @endif
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+
+      @else
+        <modal-login class="is-hidden-desktop"></modal-login>
+      @endif
+
     </div>
   
-    <div id="navbarExampleTransparentExample" class="navbar-menu" v-cloak>
+    <div id="navMenu" class="navbar-menu" v-cloak>
       <div class="navbar-end">
         <a class="navbar-item" href="{{url('/')}}">
           Home
         </a>
-        <!-- <a href="{{ route('front_restaurants') }}" class="navbar-item">Restaurants</a> -->
+        <!-- <a href="{{--route('front_restaurants')--}}" class="navbar-item">Restaurants</a> -->
 
         @if (!Request::is('restaurant/*')) 
 
-        <link-restaurant></link-restaurant>
+          <link-restaurant class="is-hidden-mobile">></link-restaurant>
 
         @else
 
-          <a v-cloak v-on:click="show = !show" class="navbar-item" href="#">
+          <a v-cloak v-on:click="show = !show" class="navbar-item is-hidden-mobile" href="#">
               <i class="fas fa-shopping-basket"></i> <badge-quantity :badge="rows"></badge-quantity>
           </a>
 
@@ -59,7 +76,7 @@ nav-wrapper-fixed @endif">
 
         @else
 
-        <div class="navbar-item">
+        <div class="navbar-item is-hidden-mobile">
           <div class="field is-grouped">
             <p class="control">
               <modal-login></modal-login>

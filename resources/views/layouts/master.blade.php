@@ -25,7 +25,7 @@ template: `
 
     <a class="navbar-item" v-on:click="goUrl()">
         <i class="fas fa-shopping-basket"></i>
-        <div>
+        <div style="display:inline-block;">
             <div class="badge">@{{quantity}}</div>
         </div>
     </a>

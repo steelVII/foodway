@@ -31,6 +31,13 @@ Route::get('/checkout_payment','CheckoutController@index');
 Route::post('/checkout','CheckoutController@checkout');
 Route::post('/checkout_gateway/{res_name}/{res_id}','CheckoutController@checkout_process');
 
+//Others
+Route::get('/privacy-policy', function() {
+
+    return view('homepage.others.privacy_policy');
+
+})->name('privacy_policy');
+
 
 //Admin Backend
 Route::middleware(['isadmin'])->group(function () {
